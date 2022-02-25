@@ -1,0 +1,91 @@
+Data since 2014 annexation
+Europe, Nato, EU
+share of specific country trade on all of russias trades -> profit??? -> russias military budget eacht year -> all investions into it since 2014 (annexation) and Feb 2022 (invasion)
+
+Disclaimers old data usage -> projection
+
+
+Übersicht	Tabelle		Über
+current sanctions and consequences for trade
+
+UN Comtrade API
+format
+	availability
+		http://comtrade.un.org/api//refs/da/view?parameters
+	request
+		http://comtrade.un.org/api/get?parameters
+		http://comtrade.un.org/api/get?max=502&type=C&freq=M&px=HS&ps=202111&r=276&p=643&rg=1%2C2&cc=AG2&fmt=json
+		
+		freq=m&ps=YYYY&px=hs&p=643&rg=1,2&cc=AG3&fmt=json&token=[token]
+	categories 
+		00 - 97
+	
+
+software organisation
+backend java, with postgres tables -> 
+	refreshes data each day
+	
+	postgres
+		table of groups
+		table of countries
+		table of groups_and_countries (connection)
+		table of general monthly data (2d) <- field for kind of sanction, 2nd sanction, relation
+		table of extended monthly data (3d)
+		table of custom monthly data (2d)
+		table of sanctions
+frontend typescript -> 
+	imports postgres data, visualizes data
+	option to manually update data tables (custom data, regarding sanctions)
+	frontend get-request to backend. Java methods reads information and creates postgres request. Jave creates new html site 			based on html template
+	
+libraries
+	jackson
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.13.1</version>
+		</dependency>
+
+	
+Gruppen
+
+				Nato	EU
+ 826   Vereinigtes Königreich	x
+ 842   USA 			x
+  56   Belgien 			x	x
+ 124   Kanada			x
+ 208   Dänemark			x	x
+ 251   Frankreich			x	x
+ 352   Island			x
+ 139   Luxemburg			x	x
+ 528   Niederlande			x	x
+ 381   Italien			x	x
+ 579   Norwegen			x
+ 620   Portugal			x	x
+ 300   Griechenland		x	x
+    Türkei			x
+    Deutschland			x	x
+    Spanien			x	x
+    Ungarn			x	x
+    Polen			x	x
+    Tschechien			x	x
+    Rumänien			x	x
+    Slowakei			x	x
+    Slowenien			x	x
+    Bulgarien			x	x
+    Estland			x	x
+    Lettland			x	x
+    Litauen			x	x
+ 08   Albanien			x
+    Kroatien			x	x
+    Montenegro			x
+    Nordmazedonien		x
+    Finnland				x
+    Irland				x
+    Malta				x
+    Oesterreich				x
+    Schweden				x
+    Zypern				x
+ 643   Russian Federation 
+
