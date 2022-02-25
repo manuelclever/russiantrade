@@ -38,14 +38,6 @@ frontend typescript ->
 	option to manually update data tables (custom data, regarding sanctions)
 	frontend get-request to backend. Java methods reads information and creates postgres request. Jave creates new html site 			based on html template
 	
-libraries
-	jackson
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-		    <version>2.13.1</version>
-		</dependency>
 
 	
 Gruppen

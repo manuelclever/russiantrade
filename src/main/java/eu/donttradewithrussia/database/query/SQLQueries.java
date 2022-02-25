@@ -1,6 +1,6 @@
 package eu.donttradewithrussia.database.query;
 
-public class SQLQueries extends DataDesignations {
+public abstract class SQLQueries  {
 
     //keywords
     public static final String SELECT = "SELECT ";
