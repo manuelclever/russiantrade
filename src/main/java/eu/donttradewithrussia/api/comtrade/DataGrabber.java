@@ -12,7 +12,7 @@ public class DataGrabber {
 
     public static void main(String[] args) {
         ComtradeParametersAvailability availability = new ComtradeParametersAvailability('M', 56, 201908);
-        ComtradeParametersRequest request = new ComtradeParametersRequest('M', 56, 201908, 251, "All", "TOTAL", 10000);
+        ComtradeParametersRequest request = new ComtradeParametersRequest('M', 56, 201908, 643, "All", "TOTAL", 10000);
 
         APICall apiCall = new APICall(availability);
         String jsonAvailability = apiCall.call();
@@ -23,6 +23,8 @@ public class DataGrabber {
         ComtradeResponse comtradeResponse = parseResponse(jsonRequest);
 
         System.out.println(comtradeResponse);
+        System.out.println(comtradeResponse.getDatasets().get(0).getRgDesc());
+
     }
 
     private static ComtradeResponse parseResponse(String json) {

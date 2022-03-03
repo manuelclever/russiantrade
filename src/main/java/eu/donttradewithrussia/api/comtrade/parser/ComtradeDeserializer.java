@@ -35,27 +35,32 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
     private Validation createValidation(JsonNode node) {
         Validation validation = new Validation();
 
-        JsonNode validationNode = node.findValue("validation");
+        try {
+            JsonNode validationNode = node.findValue("validation");
 
-        JsonNode status = validationNode.findValue("status");
-        validation.setName(status.get("name").asText());
-        validation.setValue(status.get("value").asInt());
-        validation.setCategory(status.get("category").asInt());
-        validation.setDescription(status.get("description").asText());
-        validation.setHelpUrl(status.get("helpUrl").asText());
+            JsonNode status = validationNode.findValue("status");
+            validation.setName(status.get("name").asText());
+            validation.setValue(status.get("value").asInt());
+            validation.setCategory(status.get("category").asInt());
+            validation.setDescription(status.get("description").asText());
+            validation.setHelpUrl(status.get("helpUrl").asText());
 
-        validation.setMessage(validationNode.get("message").asText());
+            validation.setMessage(validationNode.get("message").asText());
 
-        JsonNode count = validationNode.findValue("count");
-        validation.setCountValue(count.get("value").asInt());
-        validation.setCountStarted(count.get("started").asText());
-        validation.setCountFinished(count.get("finished").asText());
-        validation.setCountDurationSeconds(count.get("durationSeconds").asDouble());
+            JsonNode count = validationNode.findValue("count");
+            validation.setCountValue(count.get("value").asInt());
+            validation.setCountStarted(count.get("started").asText());
+            validation.setCountFinished(count.get("finished").asText());
+            validation.setCountDurationSeconds(count.get("durationSeconds").asDouble());
 
-        JsonNode datasetTimer = validationNode.findValue("datasetTimer");
-        validation.setDatasetTimerStarted(datasetTimer.get("started").asText());
-        validation.setDatasetTimerFinished(datasetTimer.get("finished").asText());
-        validation.setDatasetTimerDurationSeconds(datasetTimer.get("durationSeconds").asDouble());
+            JsonNode datasetTimer = validationNode.findValue("datasetTimer");
+            validation.setDatasetTimerStarted(datasetTimer.get("started").asText());
+            validation.setDatasetTimerFinished(datasetTimer.get("finished").asText());
+            validation.setDatasetTimerDurationSeconds(datasetTimer.get("durationSeconds").asDouble());
+
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
 
         return validation;
     }
