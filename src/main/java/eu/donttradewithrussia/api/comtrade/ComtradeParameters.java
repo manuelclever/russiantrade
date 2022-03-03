@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ComtradeParameters {
+public abstract class ComtradeParameters {
     private static final String TRADE_DATA_TYPE = "type=";
     private static final String FREQUENCY = "freq=";
     private static final String REPORTER = "r=";
@@ -34,7 +34,7 @@ public class ComtradeParameters {
     private String imts;
 
     public ComtradeParameters(char tradeDataType, char frequency, int reporter, long period,
-                              String classification, String token, int partner, int tradeRegime,
+                              String classification, String token, int partner, String tradeRegime,
                               String classificationCode, String outputFormat, int max, char head, int imts) {
         setTradeDataType(tradeDataType);
         setFrequency(frequency);
@@ -139,8 +139,8 @@ public class ComtradeParameters {
         return tradeRegime;
     }
 
-    public void setTradeRegime(int tradeRegime) {
-        if (tradeRegime != -1) {
+    public void setTradeRegime(String tradeRegime) {
+        if (tradeRegime != null) {
             this.tradeRegime = TRADE_REGIME + tradeRegime;
         } else {
             this.tradeRegime = null;
@@ -187,8 +187,8 @@ public class ComtradeParameters {
         return head;
     }
 
-    public void setHead(int head) {
-        if (head != -1) {
+    public void setHead(char head) {
+        if (head != Character.MIN_VALUE) {
             this.head = HEAD + head;
         } else {
             this.head = null;

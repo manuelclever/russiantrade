@@ -5,19 +5,26 @@ import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 
 public class APICall {
-    private static final String URL_AVAILABILITY = "http://comtrade.un.org/api//refs/da/view\\?";
-    private static final String URL_REQUEST = "http://comtrade.un.org/api/get\\?";
+    private static final String URL_AVAILABILITY = "http://comtrade.un.org/api//refs/da/view?";
+    private static final String URL_REQUEST = "http://comtrade.un.org/api/get?";
 
     ComtradeParameters comtradeParameters;
     private StringBuilder requestUrl;
 
-    public APICall(ComtradeParametersRequest comtradeParametersRequest) {
+    public APICall(ComtradeParameters comtradeParametersRequest) {
         this.comtradeParameters = comtradeParametersRequest;
     }
 
-    public boolean call() {
+    public String call() {
+        System.out.println(getRequestUrl());
         HttpResponse<JsonNode> httpResponse = Unirest.get(getRequestUrl()).asJson();
-        return true;
+        return httpResponse.getBody().toString();
+    }
+
+    public static String call(String request) {
+        System.out.println(URL_REQUEST + request);
+        HttpResponse<JsonNode> httpResponse = Unirest.get(URL_REQUEST + request).asJson();
+        return httpResponse.getBody().toString();
     }
 
     private String getRequestUrl() {
@@ -34,7 +41,7 @@ public class APICall {
                 requestUrl.append(param).append("&");
             }
         });
-        requestUrl.replace(requestUrl.length()-1, requestUrl.length(), "");
+        requestUrl.replace(requestUrl.length()-1, requestUrl.length(), ""); //remove last &
 
         return requestUrl.toString();
     }

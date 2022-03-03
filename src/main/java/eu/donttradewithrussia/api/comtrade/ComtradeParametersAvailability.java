@@ -17,7 +17,7 @@ public class ComtradeParametersAvailability extends ComtradeParameters {
     public ComtradeParametersAvailability(char tradeDataType, char frequency, int reporter, long period,
                                           String classification, String token) {
         super(tradeDataType, frequency, reporter, period, classification, token,
-                -1, -1, null, null, -1, Character.MIN_VALUE, -1);
+                -1, null, null, null, -1, Character.MIN_VALUE, -1);
     }
 
     /**
@@ -30,6 +30,6 @@ public class ComtradeParametersAvailability extends ComtradeParameters {
      */
     public ComtradeParametersAvailability(char frequency, int reporter, long period) {
         super(Character.MIN_VALUE, frequency, reporter, period, null, null,
-                -1, -1, null, null, -1, Character.MIN_VALUE, -1);
+                -1, null, null, null, -1, Character.MIN_VALUE, -1);
     }
 }

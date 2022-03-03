@@ -81,3 +81,5 @@ Gruppen
     Zypern				x
  643   Russian Federation 
 
+https://comtrade.un.org/api/get?freq=M&r=56&ps=201908&p=251&rg=0&cc=TOTAL&max=10000
+https://comtrade.un.org//api/get?max=502&type=C&freq=M&px=HS&ps=201908&r=251&p=643&rg=all&cc=TOTAL
