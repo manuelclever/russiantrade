@@ -3,3 +3,4 @@
 /workspace.xml
 src/main/webapp/WEB-INF/classes/
 target/
+*.class
