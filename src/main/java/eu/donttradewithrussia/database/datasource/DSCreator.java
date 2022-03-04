@@ -2,6 +2,7 @@ package eu.donttradewithrussia.database.datasource;
 
 import eu.donttradewithrussia.database.datasource.util.CreateUrl;
 import eu.donttradewithrussia.database.query.DataDesignations;
+import eu.donttradewithrussia.database.query.PSQL.PSQLQueries;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
@@ -197,46 +198,48 @@ public class DSCreator {
 
     public void createSchemaIfNotExist(BasicDataSource basicDS) {
         printDatasource(basicDS);
-        DataDesignations dataDesignations = new DataDesignations(properties.getProperty("schema"));
         String statement =
                 "CREATE SCHEMA " + properties.getProperty("schema") +
                         " AUTHORIZATION " + properties.getProperty("user") + "\n" +
-                        "CREATE TABLE " + DataDesignations.GROUP + "(\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_GROUP + "(\n" +
                         DataDesignations.GROUP_ID + " serial PRIMARY KEY,\n" +
                         DataDesignations.GROUP_NAME + " text NOT NULL)\n" +
-                        "CREATE TABLE " + DataDesignations.COUNTRY + "(\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_COUNTRY + "(\n" +
                         DataDesignations.COUNTRY_ID + " serial PRIMARY KEY,\n" +
                         DataDesignations.COUNTRY_NAME + " text NOT NULL,\n" +
                         DataDesignations.COUNTRY_ABBREV + " text NOT NULL,\n" +
                         DataDesignations.COUNTRY_COMTRADE_CODE + " smallint )\n" +
-                        "CREATE TABLE " + DataDesignations.UNION_GROUP_COUNTRY + "(\n" +
-                        DataDesignations.UNION_GROUP_COUNTRY_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.GROUP_ID + " int REFERENCES " + dataDesignations.TABLE_GROUP + ",\n" +
-                        DataDesignations.COUNTRY_ID + " int REFERENCES " + dataDesignations.TABLE_COUNTRY + " )\n" +
-                        "CREATE TABLE " + DataDesignations.SANCTION + "(\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_UNION + "(\n" +
+                        DataDesignations.UNION_ID + " serial PRIMARY KEY,\n" +
+                        DataDesignations.GROUP_ID + " int REFERENCES " + DataDesignations.TABLE_GROUP + ",\n" +
+                        DataDesignations.COUNTRY_ID + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + " )\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_SANCTION + "(\n" +
                         DataDesignations.SANCTION_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.SANCTION_DESIGNATION + " text NOT NULL,\n" +
+                        DataDesignations.GROUP + " int REFERENCES " + DataDesignations.TABLE_UNION + ",\n" +
+                        DataDesignations.COUNTRY + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + ",\n" +
+                        DataDesignations.SANCTION_PERIOD_START + " int NOT NULL,\n" +
+                        DataDesignations.SANCTION_PERIOD_END + " int NOT NULL,\n" +
                         DataDesignations.SANCTION_CONTENT + " text NOT NULL )\n" +
-                        "CREATE TABLE " + DataDesignations.MONTHLY_TRADE + "(\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_MONTHLY_TRADE + "(\n" +
                         DataDesignations.MONTHLY_TRADE_ID + " serial PRIMARY KEY,\n" +
                         DataDesignations.PERIOD + " int NOT NULL,\n" +
                         DataDesignations.MONTHLY_TRADE_FLOW + " text NOT NULL,\n" +
-                        DataDesignations.MONTHLY_TRADE_REPORTER + " int REFERENCES " + dataDesignations.TABLE_COUNTRY + ",\n" +
-                        DataDesignations.MONTHLY_TRADE_PARTNER + " int REFERENCES " + dataDesignations.TABLE_COUNTRY + ",\n" +
+                        DataDesignations.MONTHLY_TRADE_REPORTER + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + ",\n" +
+                        DataDesignations.MONTHLY_TRADE_PARTNER + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + ",\n" +
                         DataDesignations.MONTHLY_TRADE_COMMODITY_CODE + " smallint NOT NULL,\n" +
                         DataDesignations.MONTHLY_TRADE_VALUE + " bigint,\n" +
-                        DataDesignations.MONTHLY_TRADE_SANCTION_GLOBAL + " int REFERENCES " + dataDesignations.TABLE_SANCTION + ",\n" +
-                        DataDesignations.MONTHLY_TRADE_SANCTION_LOCAL + " int REFERENCES " + dataDesignations.TABLE_SANCTION + " )\n" +
-                        "CREATE TABLE " + DataDesignations.CUSTOM_MONTHLY_TRADE + "(\n" +
+                        DataDesignations.MONTHLY_TRADE_SANCTION_GLOBAL + " int REFERENCES " + DataDesignations.TABLE_SANCTION + ",\n" +
+                        DataDesignations.MONTHLY_TRADE_SANCTION_LOCAL + " int REFERENCES " + DataDesignations.TABLE_SANCTION + " )\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_CUSTOM_MONTHLY_TRADE + "(\n" +
                         DataDesignations.CUSTOM_MONTHLY_TRADE_ID + " serial PRIMARY KEY,\n" +
                         DataDesignations.PERIOD + " int NOT NULL,\n" +
                         DataDesignations.MONTHLY_TRADE_FLOW + " text NOT NULL,\n" +
-                        DataDesignations.MONTHLY_TRADE_REPORTER + " int REFERENCES " + dataDesignations.TABLE_COUNTRY + ",\n" +
-                        DataDesignations.MONTHLY_TRADE_PARTNER + " int REFERENCES " + dataDesignations.TABLE_COUNTRY + ",\n" +
+                        DataDesignations.MONTHLY_TRADE_REPORTER + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + ",\n" +
+                        DataDesignations.MONTHLY_TRADE_PARTNER + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + ",\n" +
                         DataDesignations.MONTHLY_TRADE_COMMODITY_CODE + " smallint NOT NULL,\n" +
                         DataDesignations.MONTHLY_TRADE_VALUE + " bigint,\n" +
-                        DataDesignations.MONTHLY_TRADE_SANCTION_GLOBAL + " int REFERENCES " + dataDesignations.TABLE_SANCTION + ",\n" +
-                        DataDesignations.MONTHLY_TRADE_SANCTION_LOCAL + " int REFERENCES " + dataDesignations.TABLE_SANCTION + " );";
+                        DataDesignations.MONTHLY_TRADE_SANCTION_GLOBAL + " int REFERENCES " + DataDesignations.TABLE_SANCTION + ",\n" +
+                        DataDesignations.MONTHLY_TRADE_SANCTION_LOCAL + " int REFERENCES " + DataDesignations.TABLE_SANCTION + " );";
         execute(basicDS, statement);
     }
 }

@@ -13,11 +13,18 @@ public abstract class SQLQueries  {
     public static final String FROM_START = " FROM (";
     public static final String FROM_END = ")";
     public static final String WHERE = " WHERE ";
+    public static final String BETWEEN = " BETWEEN ";
+    public static final String SMALLER = " <= ";
+    public static final String BIGGER = " >= ";
+    public static final String ROW = "row";
     public static final String INNER_JOIN = " INNER JOIN ";
     public static final String PARAMETER = " = ?";
+    public static final String V = "?";
     public static final String AND = " AND ";
     public static final String OR = " OR ";
     public static final String ON = " ON ";
     public static final String AS = " AS ";
+    public static final String P = ".";
+    public static final String C = ", ";
     public static final String END = ";";
 }

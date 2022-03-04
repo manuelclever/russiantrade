@@ -1,6 +1,13 @@
 package eu.donttradewithrussia.database.readAndWrite;
 
-public class PSQLDatasetRead implements DatasetDataRead {
+import javax.sql.DataSource;
+
+public class PSQLDatasetReader implements DatasetDataReader {
+    DataSource datasource;
+
+    public PSQLDatasetReader(DataSource dataSource) {
+        this.datasource = dataSource;
+    }
 
     @Override
     public String getDataset(int reporter, int partner, int period) {
