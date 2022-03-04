@@ -8,7 +8,7 @@ public abstract class DataDesignations extends SQLQueries {
     //global
     public static final String ID = "_id";
     public static final String PERIOD = "period";
-    public static final String GROUP = "group";
+    public static final String GROUP = "collection";
     public static final String COUNTRY = "country";
 
     //local
@@ -27,8 +27,8 @@ public abstract class DataDesignations extends SQLQueries {
 
     public static final String TABLE_SANCTION = "sanction";
     public static final String SANCTION_ID = TABLE_SANCTION + ID;
-    public static final String SANCTION_PERIOD_START = "start";
-    public static final String SANCTION_PERIOD_END = "end";
+    public static final String SANCTION_PERIOD_START = "periodStart";
+    public static final String SANCTION_PERIOD_END = "periodEnd";
     public static final String SANCTION_CONTENT = "content";
 
     public static final String TABLE_MONTHLY_TRADE = "monthly_trade";
