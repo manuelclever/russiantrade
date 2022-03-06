@@ -4,27 +4,28 @@ public class Dataset {
     private String pfCode;
     private int year;
     private int period;
+    private int periodDesc;
 
     private int aggrLevel;
     private int isLeaf;
 
-    private int rgCode;
-    private String rgDesc;
-    private int rtCode;
+    private int dataTypeCode;
+    private String dataType;
 
-    private String rtTitle;
+    private int reporterCode;
+    private String reporterDesc;
     private String rt3iso;
 
-    private int ptCode;
-    private String ptTitle;
+    private int partnerCode;
+    private String partnerDesc;
     private String pt3iso;
 
-    private int ptCode2;
-    private String ptTitle2;
+    private int partnerCode2;
+    private String partnerDesc2;
     private String pt3iso2;
 
-    private int cmdCode;
-    private String cmdDesc;
+    private int commodityCode;
+    private String commodityDesc;
 
     private int qtCode;
     private String qtDesc;
@@ -67,6 +68,14 @@ public class Dataset {
         this.period = period;
     }
 
+    public int getPeriodDesc() {
+        return periodDesc;
+    }
+
+    public void setPeriodDesc(int periodDesc) {
+        this.periodDesc = periodDesc;
+    }
+
     public int getAggrLevel() {
         return aggrLevel;
     }
@@ -83,36 +92,36 @@ public class Dataset {
         this.isLeaf = isLeaf;
     }
 
-    public int getRgCode() {
-        return rgCode;
+    public int getDataTypeCode() {
+        return dataTypeCode;
     }
 
-    public void setRgCode(int rgCode) {
-        this.rgCode = rgCode;
+    public void setDataTypeCode(int dataTypeCode) {
+        this.dataTypeCode = dataTypeCode;
     }
 
-    public String getRgDesc() {
-        return rgDesc;
+    public String getDataType() {
+        return dataType;
     }
 
-    public void setRgDesc(String rgDesc) {
-        this.rgDesc = rgDesc;
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
-    public int getRtCode() {
-        return rtCode;
+    public int getReporterCode() {
+        return reporterCode;
     }
 
-    public void setRtCode(int rtCode) {
-        this.rtCode = rtCode;
+    public void setReporterCode(int rtCode) {
+        this.reporterCode = rtCode;
     }
 
-    public String getRtTitle() {
-        return rtTitle;
+    public String getReporterDesc() {
+        return reporterDesc;
     }
 
-    public void setRtTitle(String rtTitle) {
-        this.rtTitle = rtTitle;
+    public void setReporterDesc(String rtTitle) {
+        this.reporterDesc = rtTitle;
     }
 
     public String getRt3iso() {
@@ -123,20 +132,20 @@ public class Dataset {
         this.rt3iso = rt3iso;
     }
 
-    public int getPtCode() {
-        return ptCode;
+    public int getPartnerCode() {
+        return partnerCode;
     }
 
-    public void setPtCode(int ptCode) {
-        this.ptCode = ptCode;
+    public void setPartnerCode(int ptCode) {
+        this.partnerCode = ptCode;
     }
 
-    public String getPtTitle() {
-        return ptTitle;
+    public String getPartnerDesc() {
+        return partnerDesc;
     }
 
-    public void setPtTitle(String ptTitle) {
-        this.ptTitle = ptTitle;
+    public void setPartnerDesc(String ptTitle) {
+        this.partnerDesc = ptTitle;
     }
 
     public String getPt3iso() {
@@ -147,20 +156,20 @@ public class Dataset {
         this.pt3iso = pt3iso;
     }
 
-    public int getPtCode2() {
-        return ptCode2;
+    public int getPartnerCode2() {
+        return partnerCode2;
     }
 
-    public void setPtCode2(int ptCode2) {
-        this.ptCode2 = ptCode2;
+    public void setPartnerCode2(int ptCode2) {
+        this.partnerCode2 = ptCode2;
     }
 
-    public String getPtTitle2() {
-        return ptTitle2;
+    public String getPartnerDesc2() {
+        return partnerDesc2;
     }
 
-    public void setPtTitle2(String ptTitle2) {
-        this.ptTitle2 = ptTitle2;
+    public void setPartnerDesc2(String ptTitle2) {
+        this.partnerDesc2 = ptTitle2;
     }
 
     public String getPt3iso2() {
@@ -171,20 +180,20 @@ public class Dataset {
         this.pt3iso2 = pt3iso2;
     }
 
-    public int getCmdCode() {
-        return cmdCode;
+    public int getCommodityCode() {
+        return commodityCode;
     }
 
-    public void setCmdCode(int cmdCode) {
-        this.cmdCode = cmdCode;
+    public void setCommodityCode(int commodityCode) {
+        this.commodityCode = commodityCode;
     }
 
-    public String getCmdDesc() {
-        return cmdDesc;
+    public String getCommodityDesc() {
+        return commodityDesc;
     }
 
-    public void setCmdDesc(String cmdDesc) {
-        this.cmdDesc = cmdDesc;
+    public void setCommodityDesc(String commodityDesc) {
+        this.commodityDesc = commodityDesc;
     }
 
     public int getQtCode() {
@@ -269,6 +278,6 @@ public class Dataset {
 
     @Override
     public String toString() {
-        return "[" + period + ", " + rgDesc + ", " + rtTitle + ", " + ptTitle + ", " + tradeValue + "]";
+        return "[" + period + ", " + dataType + ", " + reporterDesc + ", " + partnerDesc + ", " + tradeValue + "]";
     }
 }

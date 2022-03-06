@@ -22,23 +22,20 @@ public class PSQLQSanction extends PSQLQueries {
             SANCTION_PERIOD_START + BIGGER + V + AND +
             SANCTION_PERIOD_END + SMALLER + V;
 
-    //insert
-    public static final String INSERT_GROUP = INSERT_INTO + TABLE_SANCTION + "(" +
+    //delete
+    public static final String SANCTION_DELETE = DELETE + FROM + TABLE_SANCTION;
+
+    //queries
+    public static final String QUERY_INSERT_GROUP = INSERT_INTO + TABLE_SANCTION + "(" +
             TABLE_SANCTION + P + GROUP + C +
             SANCTION_PERIOD_START + C +
             SANCTION_PERIOD_END + C +
             SANCTION_CONTENT + ") VALUES (?,?,?,?)"  + RETURNING + SANCTION_ID + END;
-    public static final String INSERT_COUNTRY = INSERT_INTO + TABLE_SANCTION + "(" +
+    public static final String QUERY_INSERT_COUNTRY = INSERT_INTO + TABLE_SANCTION + "(" +
             TABLE_SANCTION + P + COUNTRY + C +
             SANCTION_PERIOD_START + C +
             SANCTION_PERIOD_END + C +
             SANCTION_CONTENT + ") VALUES (?,?,?,?)"  + RETURNING + SANCTION_ID + END;
-
-    //delete
-    public static final String SANCTION_DELETE = DELETE + FROM + TABLE_SANCTION;
-
-
-    //queries
     public static final String QUERY_DELETE_WHERE_GROUP = SANCTION_DELETE + WHERE +
             PARAMETER_GROUP + AND +
             PARAMETER_PERIOD_START + END;

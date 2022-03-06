@@ -14,15 +14,13 @@ public class PSQLQUnion extends PSQLQueries {
     public static final String PARAMETER_GROUP =  TABLE_UNION + P + GROUP + PARAMETER;
     public static final String PARAMETER_COUNTRY = TABLE_UNION + P + COUNTRY + PARAMETER;
 
-    //insert
-    public static final String INSERT = INSERT_INTO + TABLE_UNION + "(" +
-            TABLE_UNION + P + GROUP + C +
-            TABLE_UNION + P + COUNTRY +  ") VALUES (?,?)"  + RETURNING + UNION_ID + END;
-
     //delete
     public static final String UNION_DELETE = DELETE + FROM + TABLE_UNION;
 
     //queries
+    public static final String QUERY_INSERT = INSERT_INTO + TABLE_UNION + "(" +
+            TABLE_UNION + P + GROUP + C +
+            TABLE_UNION + P + COUNTRY +  ") VALUES (?,?)"  + RETURNING + UNION_ID + END;
     public static final String QUERY_DELETE = UNION_DELETE + WHERE +
             TABLE_UNION + P + GROUP + AND +
             TABLE_UNION + P + COUNTRY + END;

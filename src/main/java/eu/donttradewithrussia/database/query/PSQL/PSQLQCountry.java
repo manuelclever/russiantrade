@@ -15,16 +15,14 @@ public class PSQLQCountry extends PSQLQueries {
     public static final String PARAMETER_ABBREV = COUNTRY_ABBREV + PARAMETER;
     public static final String PARAMETER_COMTRADE_CODE = COUNTRY_COMTRADE_CODE + PARAMETER;
 
-    //insert
-    public static final String INSERT = INSERT_INTO + TABLE_SANCTION + "(" +
-            COUNTRY_NAME + C +
-            COUNTRY_ABBREV + C +
-            COUNTRY_COMTRADE_CODE +  ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
-
     //delete
     public static final String COUNTRY_DELETE = DELETE + FROM + TABLE_COUNTRY;
 
     //queries
+    public static final String QUERY_INSERT = INSERT_INTO + TABLE_SANCTION + "(" +
+            COUNTRY_NAME + C +
+            COUNTRY_ABBREV + C +
+            COUNTRY_COMTRADE_CODE +  ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
     public static final String QUERY_DELETE_WHERE_NAME = COUNTRY_DELETE + WHERE +
             PARAMETER_NAME + END;
 

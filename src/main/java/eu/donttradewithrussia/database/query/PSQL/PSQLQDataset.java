@@ -21,8 +21,11 @@ public class PSQLQDataset extends PSQLQueries {
     public static final String PARAMETER_PERIOD_BETWEEN =
             TABLE_MONTHLY_TRADE + P + PERIOD + BETWEEN + V + AND + V;
 
-    //insert
-    public static final String INSERT = INSERT_INTO + TABLE_MONTHLY_TRADE + "(" +
+    //delete
+    public static final String MONTHLY_TRADE_DELETE = DELETE + FROM + TABLE_MONTHLY_TRADE;
+
+    //queries
+    public static final String QUERY_INSERT = INSERT_INTO + TABLE_MONTHLY_TRADE + "(" +
             TABLE_MONTHLY_TRADE +  P + PERIOD + C +
             MONTHLY_TRADE_REPORTER + C +
             MONTHLY_TRADE_PARTNER + C +
@@ -30,12 +33,6 @@ public class PSQLQDataset extends PSQLQueries {
             MONTHLY_TRADE_VALUE + C +
             MONTHLY_TRADE_SANCTION_GLOBAL + C +
             MONTHLY_TRADE_SANCTION_LOCAL + ") VALUES (?,?,?,?,?,?,?)"  + RETURNING + MONTHLY_TRADE_ID + END;
-
-    //delete
-    public static final String MONTHLY_TRADE_DELETE = DELETE + FROM + TABLE_MONTHLY_TRADE;
-
-
-    //queries
     public static final String QUERY_DELETE = MONTHLY_TRADE_DELETE + WHERE +
             PARAMETER_REPORTER + AND +
             PARAMETER_PERIOD + END;

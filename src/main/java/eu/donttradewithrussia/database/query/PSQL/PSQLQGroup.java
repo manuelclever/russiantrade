@@ -11,15 +11,12 @@ public class PSQLQGroup extends PSQLQueries {
     public static final String PARAMETER_ID = SANCTION_ID + PARAMETER;
     public static final String PARAMETER_NAME =  GROUP_NAME + PARAMETER;
 
-    //insert
-    public static final String INSERT = INSERT_INTO + TABLE_GROUP + "(" +
-            GROUP_NAME + ") VALUES (?)"  + RETURNING + GROUP_ID + END;
-
     //delete
     public static final String GROUP_DELETE = DELETE + FROM + TABLE_GROUP;
 
-
     //queries
+    public static final String QUERY_INSERT = INSERT_INTO + TABLE_GROUP + "(" +
+            GROUP_NAME + ") VALUES (?)"  + RETURNING + GROUP_ID + END;
     public static final String QUERY_DELETE_WHERE_NAME = GROUP_DELETE + WHERE +
             PARAMETER_NAME + END;
 
