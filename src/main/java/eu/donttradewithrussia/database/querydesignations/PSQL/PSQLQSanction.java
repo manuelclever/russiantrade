@@ -1,11 +1,11 @@
-package eu.donttradewithrussia.database.query.PSQL;
+package eu.donttradewithrussia.database.querydesignations.PSQL;
 
 public class PSQLQSanction extends PSQLQueries {
 
     //select
     public static final String SELECT_SANCTION = SELECT +
             SANCTION_ID + C +
-            TABLE_SANCTION + P + GROUP + C +
+            TABLE_SANCTION + P + COALITION + C +
             TABLE_SANCTION + P + COUNTRY + C +
             SANCTION_PERIOD_START + C +
             SANCTION_PERIOD_END + C +
@@ -13,7 +13,7 @@ public class PSQLQSanction extends PSQLQueries {
 
     //parameter
     public static final String PARAMETER_ID = SANCTION_ID + PARAMETER;
-    public static final String PARAMETER_GROUP =  TABLE_SANCTION + P + GROUP + PARAMETER;
+    public static final String PARAMETER_GROUP =  TABLE_SANCTION + P + COALITION + PARAMETER;
     public static final String PARAMETER_COUNTRY = TABLE_SANCTION + P + COUNTRY + PARAMETER;
     public static final String PARAMETER_PERIOD_START = SANCTION_PERIOD_START + PARAMETER;
     public static final String PARAMETER_PERIOD_END = SANCTION_PERIOD_END + PARAMETER;
@@ -27,7 +27,7 @@ public class PSQLQSanction extends PSQLQueries {
 
     //queries
     public static final String QUERY_INSERT_GROUP = INSERT_INTO + TABLE_SANCTION + "(" +
-            TABLE_SANCTION + P + GROUP + C +
+            TABLE_SANCTION + P + COALITION + C +
             SANCTION_PERIOD_START + C +
             SANCTION_PERIOD_END + C +
             SANCTION_CONTENT + ") VALUES (?,?,?,?)"  + RETURNING + SANCTION_ID + END;

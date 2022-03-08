@@ -1,19 +1,19 @@
-package eu.donttradewithrussia.database.query.PSQL;
+package eu.donttradewithrussia.database.querydesignations.PSQL;
 
 public class PSQLQCountry extends PSQLQueries {
 
     //select
-    public static final String SELECT_Country = SELECT +
+    public static final String SELECT_COUNTRY = SELECT +
             COUNTRY_ID + C +
             COUNTRY_NAME + C +
             COUNTRY_ABBREV + C +
-            COUNTRY_COMTRADE_CODE + FROM + TABLE_COUNTRY;
+            COUNTRY_COMTRADE_ID + FROM + TABLE_COUNTRY;
 
     //parameter
     public static final String PARAMETER_ID = COUNTRY_ID + PARAMETER;
     public static final String PARAMETER_NAME =  COUNTRY_NAME + PARAMETER;
     public static final String PARAMETER_ABBREV = COUNTRY_ABBREV + PARAMETER;
-    public static final String PARAMETER_COMTRADE_CODE = COUNTRY_COMTRADE_CODE + PARAMETER;
+    public static final String PARAMETER_COMTRADE_ID = COUNTRY_COMTRADE_ID + PARAMETER;
 
     //delete
     public static final String COUNTRY_DELETE = DELETE + FROM + TABLE_COUNTRY;
@@ -22,9 +22,11 @@ public class PSQLQCountry extends PSQLQueries {
     public static final String QUERY_INSERT = INSERT_INTO + TABLE_SANCTION + "(" +
             COUNTRY_NAME + C +
             COUNTRY_ABBREV + C +
-            COUNTRY_COMTRADE_CODE +  ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
+            COUNTRY_COMTRADE_ID +  ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
     public static final String QUERY_DELETE_WHERE_NAME = COUNTRY_DELETE + WHERE +
             PARAMETER_NAME + END;
+    public static final String QUERY_DELETE_WHERE_COMTRADE_ID = COUNTRY_DELETE + WHERE +
+            COUNTRY_COMTRADE_ID + END;
 
 
     public static String queryWhereName(String select) {
@@ -34,7 +36,7 @@ public class PSQLQCountry extends PSQLQueries {
     }
     public static String queryWhereComtradeCode(String select) {
         return CREATE_JSON + FROM_START + select + WHERE +
-                PARAMETER_COMTRADE_CODE + ORDER_BY +
-                COUNTRY_COMTRADE_CODE + FROM_END + AS + ROW + END;
+                PARAMETER_COMTRADE_ID + ORDER_BY +
+                COUNTRY_COMTRADE_ID + FROM_END + AS + ROW + END;
     }
 }

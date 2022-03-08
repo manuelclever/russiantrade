@@ -1,6 +1,6 @@
-package eu.donttradewithrussia.database.query.PSQL;
+package eu.donttradewithrussia.database.querydesignations.PSQL;
 
-import eu.donttradewithrussia.database.query.DataDesignations;
+import eu.donttradewithrussia.database.querydesignations.DataDesignations;
 
 public abstract class PSQLQueries extends DataDesignations {
 
