@@ -1,15 +1,12 @@
 package eu.donttradewithrussia.api.comtrade.parser;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
@@ -91,23 +88,23 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         dataset.setAggrLevel(node.findValue("aggrLevel").asInt());
         dataset.setIsLeaf(node.findValue("IsLeaf").asInt());
 
-        dataset.setRgCode(node.findValue("rgCode").asInt());
-        dataset.setRgDesc(node.findValue("rgDesc").asText())
+        dataset.setDataTypeCode(node.findValue("rgCode").asInt());
+        dataset.setDataType(node.findValue("rgDesc").asText())
         ;
-        dataset.setRtCode(node.findValue("rtCode").asInt());
-        dataset.setRtTitle(node.findValue("rtTitle").asText());
+        dataset.setReporterCode(node.findValue("rtCode").asInt());
+        dataset.setReporterDesc(node.findValue("rtTitle").asText());
         dataset.setRt3iso(node.findValue("rt3ISO").asText());
 
-        dataset.setPtCode(node.findValue("ptCode").asInt());
-        dataset.setPtTitle(node.findValue("ptTitle").asText());
+        dataset.setPartnerCode(node.findValue("ptCode").asInt());
+        dataset.setPartnerDesc(node.findValue("ptTitle").asText());
         dataset.setPt3iso(node.findValue("pt3ISO").asText());
 
-        dataset.setPtCode2(node.findValue("ptCode2").asInt());
-        dataset.setPtTitle2(node.findValue("ptTitle2").asText());
+        dataset.setPartnerCode2(node.findValue("ptCode2").asInt());
+        dataset.setPartnerDesc2(node.findValue("ptTitle2").asText());
         dataset.setPt3iso2(node.findValue("pt3ISO2").asText());
 
-        dataset.setCmdCode(node.findValue("cmdCode").asInt());
-        dataset.setCmdDesc(node.findValue("cmdDescE").asText());
+        dataset.setCommodityCode(node.findValue("cmdCode").asText());
+        dataset.setCommodityDesc(node.findValue("cmdDescE").asText());
 
         dataset.setQtCode(node.findValue("qtCode").asInt());
         dataset.setQtDesc(node.findValue("qtDesc").asText());

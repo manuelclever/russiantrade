@@ -1,8 +1,7 @@
 package eu.donttradewithrussia.database.datasource;
 
 import eu.donttradewithrussia.database.datasource.util.CreateUrl;
-import eu.donttradewithrussia.database.query.DataDesignations;
-import eu.donttradewithrussia.database.query.PSQL.PSQLQueries;
+import eu.donttradewithrussia.database.querydesignations.DataDesignations;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
@@ -201,21 +200,21 @@ public class DSCreator {
         String statement =
                 "CREATE SCHEMA " + properties.getProperty("schema") +
                         " AUTHORIZATION " + properties.getProperty("user") + "\n" +
-                        "CREATE TABLE " + DataDesignations.TABLE_GROUP + "(\n" +
-                        DataDesignations.GROUP_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.GROUP_NAME + " text NOT NULL)\n" +
+                        "CREATE TABLE " + DataDesignations.TABLE_COALITION + "(\n" +
+                        DataDesignations.COALITION_ID + " serial PRIMARY KEY,\n" +
+                        DataDesignations.COALITION_NAME + " text NOT NULL)\n" +
                         "CREATE TABLE " + DataDesignations.TABLE_COUNTRY + "(\n" +
                         DataDesignations.COUNTRY_ID + " serial PRIMARY KEY,\n" +
                         DataDesignations.COUNTRY_NAME + " text NOT NULL,\n" +
                         DataDesignations.COUNTRY_ABBREV + " text NOT NULL,\n" +
-                        DataDesignations.COUNTRY_COMTRADE_CODE + " smallint )\n" +
+                        DataDesignations.COUNTRY_COMTRADE_ID + " smallint )\n" +
                         "CREATE TABLE " + DataDesignations.TABLE_UNION + "(\n" +
                         DataDesignations.UNION_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.GROUP_ID + " int REFERENCES " + DataDesignations.TABLE_GROUP + ",\n" +
+                        DataDesignations.COALITION_ID + " int REFERENCES " + DataDesignations.TABLE_COALITION + ",\n" +
                         DataDesignations.COUNTRY_ID + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + " )\n" +
                         "CREATE TABLE " + DataDesignations.TABLE_SANCTION + "(\n" +
                         DataDesignations.SANCTION_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.GROUP + " int REFERENCES " + DataDesignations.TABLE_UNION + ",\n" +
+                        DataDesignations.COALITION + " int REFERENCES " + DataDesignations.TABLE_UNION + ",\n" +
                         DataDesignations.COUNTRY + " int REFERENCES " + DataDesignations.TABLE_COUNTRY + ",\n" +
                         DataDesignations.SANCTION_PERIOD_START + " int NOT NULL,\n" +
                         DataDesignations.SANCTION_PERIOD_END + " int NOT NULL,\n" +

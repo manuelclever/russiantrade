@@ -24,7 +24,7 @@ public class Dataset {
     private String partnerDesc2;
     private String pt3iso2;
 
-    private int commodityCode;
+    private String commodityCode;
     private String commodityDesc;
 
     private int qtCode;
@@ -180,11 +180,11 @@ public class Dataset {
         this.pt3iso2 = pt3iso2;
     }
 
-    public int getCommodityCode() {
+    public String getCommodityCode() {
         return commodityCode;
     }
 
-    public void setCommodityCode(int commodityCode) {
+    public void setCommodityCode(String commodityCode) {
         this.commodityCode = commodityCode;
     }
 

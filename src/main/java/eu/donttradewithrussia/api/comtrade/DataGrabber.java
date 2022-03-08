@@ -23,7 +23,7 @@ public class DataGrabber {
         ComtradeResponse comtradeResponse = parseResponse(jsonRequest);
 
         System.out.println(comtradeResponse);
-        System.out.println(comtradeResponse.getDatasets().get(0).getRgDesc());
+        System.out.println(comtradeResponse.getDatasets().get(0).getDataType());
 
     }
 
