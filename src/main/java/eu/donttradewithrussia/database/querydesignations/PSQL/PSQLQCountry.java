@@ -19,10 +19,10 @@ public class PSQLQCountry extends PSQLQueries {
     public static final String COUNTRY_DELETE = DELETE + FROM + TABLE_COUNTRY;
 
     //queries
-    public static final String QUERY_INSERT = INSERT_INTO + TABLE_SANCTION + "(" +
+    public static final String QUERY_INSERT = INSERT_INTO + TABLE_COUNTRY + "(" +
+            COUNTRY_ID + C +
             COUNTRY_NAME + C +
-            COUNTRY_ABBREV + C +
-            COUNTRY_COMTRADE_ID +  ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
+            COUNTRY_ABBREV + ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
     public static final String QUERY_DELETE_WHERE_NAME = COUNTRY_DELETE + WHERE +
             PARAMETER_NAME + END;
     public static final String QUERY_DELETE_WHERE_COMTRADE_ID = COUNTRY_DELETE + WHERE +

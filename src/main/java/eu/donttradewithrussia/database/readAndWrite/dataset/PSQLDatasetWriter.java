@@ -29,10 +29,11 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
             query.setInt(1, dataset.getPeriod());
             query.setInt(2, dataset.getReporterCode());
             query.setInt(3, dataset.getPartnerCode());
-            query.setString(4, dataset.getCommodityCode());
-            query.setInt(5, dataset.getTradeValue());
-            query.setInt(6, dataset.getReporterCode()); //global sanction id
-            query.setInt(7, dataset.getReporterCode()); //local sanction id
+            query.setInt(4, dataset.getTradeFlowCode());
+            query.setString(5, dataset.getCommodityCode());
+            query.setLong(6, dataset.getTradeValue());
+//            query.setInt(6, dataset.getReporterCode()); //global sanction id
+//            query.setInt(7, dataset.getReporterCode()); //local sanction id
 
             ResultSet rs = query.executeQuery();
             if(rs.next()) {
@@ -60,7 +61,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
     public boolean removeDataset(Dataset dataset) {
 
         try(Connection conn = datasource.getConnection();
-            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMOTIDY)) {
+            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
 
             query.setInt(1, dataset.getReporterCode());
             query.setInt(2, dataset.getPeriod());
@@ -99,7 +100,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
     public boolean removeDataset(int reporter, int period, String commotidyCode) {
 
         try(Connection conn = datasource.getConnection();
-            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMOTIDY)) {
+            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
 
             query.setInt(1, reporter);
             query.setInt(2, period);
@@ -141,7 +142,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query =
-                    conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMOTIDY_BETWEEN)) {
+                    conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY_BETWEEN)) {
 
             query.setInt(1, reporter);
             query.setInt(2, periodStart);

@@ -1,7 +1,7 @@
 package eu.donttradewithrussia.database.readAndWrite.coalition;
 
 public interface CoalitionDataWriter {
-    int addGroup(String name);
-    boolean removeGroup(String name);
-    boolean removeGroup(int groupID);
+    int addCoalition(String name);
+    boolean removeCoalition(String name);
+    boolean removeCoalition(int groupID);
 }

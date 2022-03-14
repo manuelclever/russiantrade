@@ -23,9 +23,9 @@ public class PSQLCountryWriter implements CountryDataWriter {
         try(Connection conn = datasource.getConnection();
             PreparedStatement query = conn.prepareStatement(PSQLQCountry.QUERY_INSERT)) {
 
-            query.setString(1, name);
-            query.setString(2, abbrev);
-            query.setInt(3, comtradeId);
+            query.setInt(1, comtradeId);
+            query.setString(2, name);
+            query.setString(3, abbrev);
 
             ResultSet rs = query.executeQuery();
             if(rs.next()) {

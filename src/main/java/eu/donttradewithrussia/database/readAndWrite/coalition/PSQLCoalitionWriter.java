@@ -18,7 +18,7 @@ public class PSQLCoalitionWriter implements CoalitionDataWriter {
     }
 
     @Override
-    public int addGroup(String name) {
+    public int addCoalition(String name) {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query = conn.prepareStatement(PSQLQCoalition.QUERY_INSERT)) {
@@ -38,7 +38,7 @@ public class PSQLCoalitionWriter implements CoalitionDataWriter {
     }
 
     @Override
-    public boolean removeGroup(String name) {
+    public boolean removeCoalition(String name) {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query =
@@ -57,7 +57,7 @@ public class PSQLCoalitionWriter implements CoalitionDataWriter {
     }
 
     @Override
-    public boolean removeGroup(int groupID) {
+    public boolean removeCoalition(int groupID) {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query =
