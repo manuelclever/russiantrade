@@ -31,10 +31,12 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
             query.setInt(3, dataset.getPartnerCode());
             query.setInt(4, dataset.getTradeFlowCode());
             query.setString(5, dataset.getCommodityCode());
-            query.setLong(6, dataset.getTradeValue());
+            query.setString(6, dataset.getCommodityDesc());
+            query.setLong(7, dataset.getTradeValue());
 //            query.setInt(6, dataset.getReporterCode()); //global sanction id
 //            query.setInt(7, dataset.getReporterCode()); //local sanction id
 
+            System.out.println(query);
             ResultSet rs = query.executeQuery();
             if(rs.next()) {
                 conn.commit();

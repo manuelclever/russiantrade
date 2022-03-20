@@ -5,23 +5,51 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.donttradewithrussia.api.comtrade.parser.ComtradeDeserializer;
 import eu.donttradewithrussia.api.comtrade.parser.ComtradeResponse;
+import eu.donttradewithrussia.api.comtrade.parser.Dataset;
+import eu.donttradewithrussia.database.datasource.DSCreator;
+import eu.donttradewithrussia.database.readAndWrite.country.PSQLCountryWriter;
+import eu.donttradewithrussia.database.readAndWrite.dataset.PSQLDatasetWriter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DataGrabber {
+    private final static Path DB_PROPERTIES = FileSystems.getDefault().getPath(
+            "src", "test", "resources", "database", "testDatabase.properties");
+    private final static Path API_LOG = FileSystems.getDefault().getPath(
+            "src", "main", "resources", "database", "successfulApiResponses.txt");
+    private final static Path COUNTRIES_TXT = FileSystems.getDefault()
+            .getPath("src", "main", "resources", "countries.txt");
 
     public static void main(String[] args) {
         try {
-            List<Integer> countries = getCountries();
+
+
+            File file = new File(API_LOG.toString());
+            if(!file.exists()) {
+                if(!file.createNewFile()) {
+                    System.out.println("File could not be created.");
+                    return;
+                }
+            }
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+            DSCreator ds = new DSCreator(DB_PROPERTIES);
+            PSQLDatasetWriter dw = new PSQLDatasetWriter(ds.getDataSourceTradeDB());
+            PSQLCountryWriter cw = new PSQLCountryWriter(ds.getDataSourceTradeDB());
+
+
+            List<String[]> countriesTest = getCountries();
+            addCountriesToDB(cw, countriesTest);
             List<Integer> periods = getPeriods();
+
+            List<Integer> countries = Arrays.asList(139,528);
 
             for(Integer country : countries) {
                 ComtradeParametersRequest request = new ComtradeParametersRequest('M', country, 201504, 643
@@ -30,37 +58,58 @@ public class DataGrabber {
 
                 APICall apiCall = new APICall(request);
                 String jsonRequest = apiCall.call();
-                ComtradeResponse comtradeResponse = parseResponse(jsonRequest);
-                System.out.println(comtradeResponse);
-            }
-        } catch (IOException e) {
 
+                if(jsonRequest == null) {
+
+                } else {
+                    ComtradeResponse comtradeResponse = parseResponse(jsonRequest);
+
+                    if(comtradeResponse != null && comtradeResponse.isValid()) {
+                        // write log
+                        bw.write(LocalDateTime.now() + ": " + country);
+                        bw.newLine();
+
+                        // write to Database
+                        for(Dataset dataset : comtradeResponse.getDatasets()) {
+                            dw.addDataset(dataset);
+                        }
+                    }
+                    System.out.println(comtradeResponse);
+                }
+            }
+            bw.close();
+        } catch (IOException e) {
         }
 
 //        String jsonAvailability = apiCall.call();
 //
 //        System.out.println(jsonAvailability);
-
-
     }
 
-    private static List<Integer> getCountries() throws IOException {
-        List<Integer> countries = new ArrayList<>();
+    private static List<String[]> getCountries() throws IOException {
+        List<String[]> countries = new ArrayList<>();
+        File file = new File(COUNTRIES_TXT.toString());
+        BufferedReader br = new BufferedReader(new FileReader(file));
 
-        File file = new File(FileSystems.getDefault()
-                .getPath("src", "main", "resources", "countries.txt").toString());
-
-            BufferedReader br = new BufferedReader(new FileReader(file));
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                if(line.charAt(0) != '#') {
-                    String[] country = line.split("_");
-                    countries.add(Integer.parseInt(country[0]));
-                }
+        String line;
+        while ((line = br.readLine()) != null) {
+            if(line.charAt(0) != '#') {
+                String[] country = line.split("_");
+                countries.add(country);
             }
+        }
+        return countries;
+    }
 
-            return countries;
+    private static void addCountriesToDB(PSQLCountryWriter cw, List<String[]> countries) {
+        for(String[] country : countries) {
+            int code = Integer.parseInt(country[0]);
+            String name = country[1];
+            String abbr = country[2];
+
+            cw.addCountry(name, abbr, code);
+        }
+        cw.addCountry("Russian Federation", "RUS", 643);
     }
 
     private static List<Integer> getPeriods() {
@@ -90,6 +139,7 @@ public class DataGrabber {
     private static ComtradeResponse parseResponse(String json) {
         try {
             ObjectMapper mapper = prepareMapper(ComtradeResponse.class, new ComtradeDeserializer());
+            System.out.println("reading: " + json);
             return mapper.readValue(json, ComtradeResponse.class);
         } catch (IOException e) {
             return null;

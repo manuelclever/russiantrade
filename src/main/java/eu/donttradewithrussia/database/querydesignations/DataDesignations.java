@@ -40,6 +40,7 @@ public abstract class DataDesignations extends SQLQueries {
     public static final String MONTHLY_TRADE_REPORTER = "reporter";
     public static final String MONTHLY_TRADE_PARTNER = "partner";
     public static final String MONTHLY_TRADE_COMMODITY_CODE = "commodity_code";
+    public static final String MONTHLY_TRADE_COMMODITY_DESC = "commodity_desc";
     public static final String MONTHLY_TRADE_VALUE = "value";
     public static final String MONTHLY_TRADE_SANCTION_GLOBAL = "union_sanction";
     public static final String MONTHLY_TRADE_SANCTION_LOCAL = "custom_sanction";

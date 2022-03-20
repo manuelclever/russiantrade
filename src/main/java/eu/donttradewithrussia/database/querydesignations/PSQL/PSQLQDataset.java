@@ -44,7 +44,8 @@ public class PSQLQDataset extends PSQLQueries {
             MONTHLY_TRADE_PARTNER + C +
             MONTHLY_TRADE_FLOW + C +
             MONTHLY_TRADE_COMMODITY_CODE + C +
-            MONTHLY_TRADE_VALUE + ") VALUES (?,?,?,?,?, ?)"  + RETURNING + MONTHLY_TRADE_ID + END;
+            MONTHLY_TRADE_COMMODITY_DESC + C +
+            MONTHLY_TRADE_VALUE + ") VALUES (?,?,?,?,?,?,?)"  + RETURNING + MONTHLY_TRADE_ID + END;
     public static final String QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY = MONTHLY_TRADE_DELETE + WHERE +
             PARAMETER_REPORTER + AND +
             PARAMETER_PERIOD + AND +

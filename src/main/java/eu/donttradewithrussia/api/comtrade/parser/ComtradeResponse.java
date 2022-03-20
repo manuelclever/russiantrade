@@ -27,6 +27,13 @@ public class ComtradeResponse {
         this.datasets = datasets;
     }
 
+    public boolean isValid() {
+        if(validation != null) {
+            return validation.isValid();
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         if(validation.isValid()) {

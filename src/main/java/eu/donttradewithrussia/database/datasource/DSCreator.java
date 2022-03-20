@@ -219,6 +219,7 @@ public class DSCreator {
                         DataDesignations.MONTHLY_TRADE_REPORTER + " int REFERENCES " + DataDesignations.COUNTRY + "," + "\n" +
                         DataDesignations.MONTHLY_TRADE_PARTNER + " int REFERENCES " + DataDesignations.COUNTRY + ",\n" +
                         DataDesignations.MONTHLY_TRADE_COMMODITY_CODE + " text NOT NULL,\n" +
+                        DataDesignations.MONTHLY_TRADE_COMMODITY_DESC + " text,\n" +
                         DataDesignations.MONTHLY_TRADE_VALUE + " bigint)\n" +
                         "CREATE TABLE " + DataDesignations.CUSTOM_MONTHLY_TRADE + "(\n" +
                         DataDesignations.CUSTOM_MONTHLY_TRADE_ID + " serial PRIMARY KEY,\n" +
@@ -227,6 +228,7 @@ public class DSCreator {
                         DataDesignations.MONTHLY_TRADE_REPORTER + " int REFERENCES " + DataDesignations.COUNTRY + ",\n" +
                         DataDesignations.MONTHLY_TRADE_PARTNER + " int REFERENCES " + DataDesignations.COUNTRY + ",\n" +
                         DataDesignations.MONTHLY_TRADE_COMMODITY_CODE + " smallint NOT NULL,\n" +
+                        DataDesignations.MONTHLY_TRADE_COMMODITY_DESC + " text,\n" +
                         DataDesignations.MONTHLY_TRADE_VALUE + " bigint);";
 
 //        depreciated table sanction
