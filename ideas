@@ -38,7 +38,7 @@ frontend typescript ->
 	option to manually update data tables (custom data, regarding sanctions)
 	frontend get-request to backend. Java methods reads information and creates postgres request. Jave creates new html site 			based on html template
 	
-
+https://correctiv.org/en/latest-stories/2022/03/01/sanctions-tracker-live-monitoring-of-all-sanctions-against-russia/
 	
 Gruppen
 

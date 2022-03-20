@@ -26,7 +26,7 @@ public abstract class ComtradeParameters {
     private String classification;
     private String token;
     private String partner;
-    private String tradeRegime;
+    private String tradeFlow;
     private String classificationCode;
     private String outputFormat;
     private String max;
@@ -34,8 +34,8 @@ public abstract class ComtradeParameters {
     private String imts;
 
     public ComtradeParameters(char tradeDataType, char frequency, int reporter, long period,
-                              String classification, String token, int partner, String tradeRegime,
-                              String classificationCode, String outputFormat, int max, char head, int imts) {
+                              String classification, String token, int partner, int[] tradeFlow,
+                              String[] classificationCode, String outputFormat, int max, char head, int imts) {
         setTradeDataType(tradeDataType);
         setFrequency(frequency);
         setReporter(reporter);
@@ -43,7 +43,7 @@ public abstract class ComtradeParameters {
         setClassification(classification);
         setToken(token);
         setPartner(partner);
-        setTradeRegime(tradeRegime);
+        setTradeFlow(tradeFlow);
         setClassificationCode(classificationCode);
         setOutputFormat(outputFormat);
         setMax(max);
@@ -135,15 +135,21 @@ public abstract class ComtradeParameters {
         }
     }
 
-    public String getTradeRegime() {
-        return tradeRegime;
+    public String getTradeFlow() {
+        return tradeFlow;
     }
 
-    public void setTradeRegime(String tradeRegime) {
-        if (tradeRegime != null) {
-            this.tradeRegime = TRADE_REGIME + tradeRegime;
+    public void setTradeFlow(int[] tradeFlow) {
+        if (tradeFlow != null) {
+            StringBuilder sb = new StringBuilder(TRADE_REGIME);
+
+            for(int regime : tradeFlow) {
+                sb.append(regime).append("%2C");
+            }
+            sb.replace(sb.length()-3, sb.length(), "");
+            this.tradeFlow = sb.toString();
         } else {
-            this.tradeRegime = null;
+            this.tradeFlow = null;
         }
     }
 
@@ -151,9 +157,15 @@ public abstract class ComtradeParameters {
         return classificationCode;
     }
 
-    public void setClassificationCode(String classificationCode) {
-        if (classificationCode != null) {
-            this.classificationCode = CLASSIFICATION_CODE + classificationCode;
+    public void setClassificationCode(String[] classificationCodes) {
+        if (classificationCodes != null) {
+            StringBuilder sb = new StringBuilder(CLASSIFICATION_CODE);
+
+            for(String classificationCode : classificationCodes) {
+                sb.append(classificationCode).append("%2C");
+            }
+            sb.replace(sb.length()-3, sb.length(), "");
+            this.classificationCode = sb.toString();
         } else {
             this.classificationCode = null;
         }
@@ -216,7 +228,7 @@ public abstract class ComtradeParameters {
         list.add(classification);
         list.add(token);
         list.add(partner);
-        list.add(tradeRegime);
+        list.add(tradeFlow);
         list.add(classificationCode);
         list.add(outputFormat);
         list.add(max);

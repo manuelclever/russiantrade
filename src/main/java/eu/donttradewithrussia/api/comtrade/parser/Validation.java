@@ -124,6 +124,10 @@ public class Validation {
         this.datasetTimerDurationSeconds = datasetTimerDurationSeconds;
     }
 
+    public boolean isValid() {
+        return countValue != 0;
+    }
+
     @Override
     public String toString() {
         return "[" + name + ", " + value + ", " + category + ", " + description + ", " + helpUrl + ", " + message +

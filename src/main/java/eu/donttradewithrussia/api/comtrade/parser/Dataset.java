@@ -9,8 +9,8 @@ public class Dataset {
     private int aggrLevel;
     private int isLeaf;
 
-    private int dataTypeCode;
-    private String dataType;
+    private int tradeFlowCode;
+    private String tradeFlowType;
 
     private int reporterCode;
     private String reporterDesc;
@@ -35,7 +35,7 @@ public class Dataset {
 
     private int tradeQuantity;
     private int altQuantity;
-    private int tradeValue;
+    private long tradeValue;
 
     private int cifValue;
     private int fobValue;
@@ -92,20 +92,20 @@ public class Dataset {
         this.isLeaf = isLeaf;
     }
 
-    public int getDataTypeCode() {
-        return dataTypeCode;
+    public int getTradeFlowCode() {
+        return tradeFlowCode;
     }
 
-    public void setDataTypeCode(int dataTypeCode) {
-        this.dataTypeCode = dataTypeCode;
+    public void setTradeFlowCode(int tradeFlowCode) {
+        this.tradeFlowCode = tradeFlowCode;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getTradeFlowType() {
+        return tradeFlowType;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setTradeFlowType(String tradeFlowType) {
+        this.tradeFlowType = tradeFlowType;
     }
 
     public int getReporterCode() {
@@ -244,11 +244,11 @@ public class Dataset {
         this.altQuantity = altQuantity;
     }
 
-    public int getTradeValue() {
+    public long getTradeValue() {
         return tradeValue;
     }
 
-    public void setTradeValue(int tradeValue) {
+    public void setTradeValue(long tradeValue) {
         this.tradeValue = tradeValue;
     }
 
@@ -278,6 +278,7 @@ public class Dataset {
 
     @Override
     public String toString() {
-        return "[" + period + ", " + dataType + ", " + reporterDesc + ", " + partnerDesc + ", " + tradeValue + "]";
+        return "[" + period + ", " + tradeFlowType + ", " + reporterDesc + ", " + partnerDesc + ", " + commodityCode +
+                ", " + commodityDesc + ", " + tradeValue + "]";
     }
 }

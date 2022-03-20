@@ -1,0 +1,6 @@
+# countries to read from api
+8_Albania
+40_Austria
+56_Belgium
+100_Bulgaria
+124_Canada

@@ -29,6 +29,9 @@ public class ComtradeResponse {
 
     @Override
     public String toString() {
-        return "[" + validation.toString() + ", " + datasets.toString() + "]";
+        if(validation.isValid()) {
+            return "[" + validation.toString() + ", " + datasets.toString() + "]";
+        }
+        return "[" + validation.toString() + ", [null]]";
     }
 }

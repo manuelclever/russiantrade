@@ -18,7 +18,11 @@ public class APICall {
     public String call() {
         System.out.println(getRequestUrl());
         HttpResponse<JsonNode> httpResponse = Unirest.get(getRequestUrl()).asJson();
-        return httpResponse.getBody().toString();
+        try {
+            return httpResponse.getBody().toString();
+        }catch (NullPointerException e) {
+            return null;
+        }
     }
 
     public static String call(String request) {

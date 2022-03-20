@@ -14,7 +14,6 @@ public class ComtradeParametersRequest extends ComtradeParameters {
      * @param token individual token if abonnement
      *
      * @param partner 0 - All, country code (default is 0)
-     * @param tradeRegime 0 - All, 1 - Import, 2 - Export, 3 - re-Import, 4 - re-Export (default 0)
      * @param classificationCode TOTAL - total Trade, All - all Codes, AG[digit] - detailed code at specified digit (1-6, depends on classification) (default AG2)
      * @param outputFormat json, cvs (default json)
      * @param max maximum records returned (default 500, free tier caps 10 000)
@@ -23,9 +22,9 @@ public class ComtradeParametersRequest extends ComtradeParameters {
      *
      */
     public ComtradeParametersRequest(char tradeDataType, char frequency, int reporter, long period,
-                                     String classification, String token, int partner, String tradeRegime,
-                                     String classificationCode, String outputFormat, int max, char head, int imts) {
-        super(tradeDataType, frequency, reporter, period, classification, token, partner, tradeRegime,
+                                     String classification, String token, int partner,
+                                     String[] classificationCode, String outputFormat, int max, char head, int imts) {
+        super(tradeDataType, frequency, reporter, period, classification, token, partner, new int[]{1,2},
                 classificationCode, outputFormat, max, head, imts);
     }
 
@@ -38,15 +37,13 @@ public class ComtradeParametersRequest extends ComtradeParameters {
      * @param period now - most recent (year or month), YYYY - if Annual or Monthly, YYYYMM - if Monthly (default now)
      *
      * @param partner 0 - All, country code (default is 0)
-     * @param tradeRegime All - All, 1 - Import, 2 - Export, 3 - re-Import, 4 - re-Export (default 0)
      * @param classificationCode TOTAL - total Trade, All - all Codes, AG[digit] - detailed code at specified digit (1-6, depends on classification) (default AG2)
      * @param max maximum records returned (default 500, free tier caps 10 000)
      *
      */
-    public ComtradeParametersRequest(char frequency, int reporter, long period, int partner, String tradeRegime,
-                                     String classificationCode, int max) {
-
-        super(Character.MIN_VALUE, frequency, reporter, period, null, null, partner, tradeRegime,
+    public ComtradeParametersRequest(char frequency, int reporter, long period, int partner,
+                                     String[] classificationCode, int max) {
+        super(Character.MIN_VALUE, frequency, reporter, period, null, null, partner, new int[]{1,2},
                 classificationCode, null, max, Character.MIN_VALUE, -1);
     }
 }
