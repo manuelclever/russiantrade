@@ -1,6 +1,36 @@
 # countries to read from api
-8_Albania
+08_Albania
+36_Australia
 40_Austria
 56_Belgium
 100_Bulgaria
 124_Canada
+139_Luxembourg
+191_Croatia
+203_Czechia
+208_Denmark
+210_Slovakia
+211_Slovenia
+233_Estonia
+246_Finland
+251_France
+276_Germany
+300_Greece
+348_Hungary
+352_Iceland
+372_Ireland
+381_Italy
+428_Latvia
+470_Malta
+499_Montenegro
+528_Netherlands
+579_Norway
+616_Poland
+620_Portugal
+642_Romania
+724_Spain
+752_Sweden
+792_Turkey
+807_North Macedonia
+826_United Kingdom
+842_USA
