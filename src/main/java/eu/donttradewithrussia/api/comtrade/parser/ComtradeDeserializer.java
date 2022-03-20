@@ -24,39 +24,40 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
         Validation validation = createValidation(node);
-        List<Dataset> datasets = createDatasets(node);
 
-        return new ComtradeResponse(validation, datasets);
+        if(validation.isValid()) {
+            List<Dataset> datasets = createDatasets(node);
+            return new ComtradeResponse(validation, datasets);
+        }
+        return new ComtradeResponse(validation, null);
+
     }
 
     private Validation createValidation(JsonNode node) {
         Validation validation = new Validation();
 
-        try {
-            JsonNode validationNode = node.findValue("validation");
+        JsonNode validationNode = node.findValue("validation");
 
-            JsonNode status = validationNode.findValue("status");
-            validation.setName(status.get("name").asText());
-            validation.setValue(status.get("value").asInt());
-            validation.setCategory(status.get("category").asInt());
-            validation.setDescription(status.get("description").asText());
-            validation.setHelpUrl(status.get("helpUrl").asText());
+        JsonNode status = validationNode.findValue("status");
+        validation.setName(status.get("name").asText());
+        validation.setValue(status.get("value").asInt());
+        validation.setCategory(status.get("category").asInt());
+        validation.setDescription(status.get("description").asText());
+        validation.setHelpUrl(status.get("helpUrl").asText());
 
-            validation.setMessage(validationNode.get("message").asText());
+        validation.setMessage(validationNode.get("message").asText());
 
-            JsonNode count = validationNode.findValue("count");
-            validation.setCountValue(count.get("value").asInt());
-            validation.setCountStarted(count.get("started").asText());
-            validation.setCountFinished(count.get("finished").asText());
-            validation.setCountDurationSeconds(count.get("durationSeconds").asDouble());
+        JsonNode count = validationNode.findValue("count");
+        validation.setCountValue(count.get("value").asInt());
+        validation.setCountStarted(count.get("started").asText());
+        validation.setCountFinished(count.get("finished").asText());
+        validation.setCountDurationSeconds(count.get("durationSeconds").asDouble());
 
-            JsonNode datasetTimer = validationNode.findValue("datasetTimer");
+        JsonNode datasetTimer = validationNode.findValue("datasetTimer");
+        if(!datasetTimer.toString().equals("null")) { //datasetTimer could be null
             validation.setDatasetTimerStarted(datasetTimer.get("started").asText());
             validation.setDatasetTimerFinished(datasetTimer.get("finished").asText());
             validation.setDatasetTimerDurationSeconds(datasetTimer.get("durationSeconds").asDouble());
-
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
         }
 
         return validation;
@@ -88,9 +89,9 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         dataset.setAggrLevel(node.findValue("aggrLevel").asInt());
         dataset.setIsLeaf(node.findValue("IsLeaf").asInt());
 
-        dataset.setDataTypeCode(node.findValue("rgCode").asInt());
-        dataset.setDataType(node.findValue("rgDesc").asText())
-        ;
+        dataset.setTradeFlowCode(node.findValue("rgCode").asInt());
+        dataset.setTradeFlowType(node.findValue("rgDesc").asText());
+
         dataset.setReporterCode(node.findValue("rtCode").asInt());
         dataset.setReporterDesc(node.findValue("rtTitle").asText());
         dataset.setRt3iso(node.findValue("rt3ISO").asText());
