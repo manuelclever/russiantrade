@@ -5,3 +5,5 @@
 /target/
 *.class
 /todo.txt
+/src/main/resources/log.log
+/src/main/resources/database/successfulApiResponses.txt
