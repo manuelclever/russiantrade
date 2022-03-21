@@ -17,9 +17,9 @@ public class PSQLQDataset extends PSQLQueries {
             MONTHLY_TRADE_ID + C +
             TABLE_MONTHLY_TRADE + P + PERIOD + C +
             MONTHLY_TRADE_REPORTER + C +
-            TABLE_COUNTRY + P + COUNTRY_NAME + C +
+            TABLE_COUNTRY + P + COUNTRY_NAME + AS + "reporter_name" + C +
             MONTHLY_TRADE_PARTNER + C +
-            TABLE_COUNTRY + P + COUNTRY_NAME + C +
+            TABLE_COUNTRY + P + COUNTRY_NAME + AS + "partner_name" + C +
             MONTHLY_TRADE_COMMODITY_CODE + C +
             MONTHLY_TRADE_VALUE + C +
             MONTHLY_TRADE_SANCTION_GLOBAL + C +
@@ -63,15 +63,15 @@ public class PSQLQDataset extends PSQLQueries {
             PARAMETER_PERIOD_BETWEEN + END;
 
     public static String queryWhereReporterAndPartner(String select) {
-        return CREATE_JSON + FROM_START + select +
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_REPORTER + WHERE +
+                JOIN_COUNTRY_PARTNER + WHERE +
                 PARAMETER_REPORTER + AND +
                 PARAMETER_PARTNER + ORDER_BY +
                 TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
     }
     public static String queryWhereReporterPartnerAndPeriod(String select) {
-        return CREATE_JSON + FROM_START + select +
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
                 JOIN_COUNTRY_REPORTER + WHERE +
                 PARAMETER_REPORTER + AND +
@@ -80,7 +80,7 @@ public class PSQLQDataset extends PSQLQueries {
                 TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
     }
     public static String queryWhereCommodityReporterPartnerAndPeriod(String select) {
-        return CREATE_JSON + FROM_START + select +
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
                 JOIN_COUNTRY_REPORTER + WHERE +
                 PARAMETER_COMMODITY + AND +
@@ -90,7 +90,7 @@ public class PSQLQDataset extends PSQLQueries {
                 TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
     }
     public static String queryWhereReporterPartnerAndPeriodBetween(String select) {
-        return CREATE_JSON + FROM_START + select +
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
                 JOIN_COUNTRY_REPORTER + WHERE +
                 PARAMETER_REPORTER + AND +
@@ -99,7 +99,7 @@ public class PSQLQDataset extends PSQLQueries {
                 TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
     }
     public static String queryWhereCommodityReporterPartnerAndPeriodBetween(String select) {
-        return CREATE_JSON + FROM_START + select +
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
                 JOIN_COUNTRY_REPORTER + WHERE +
                 PARAMETER_COMMODITY + AND +

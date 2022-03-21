@@ -1,13 +1,14 @@
 package eu.donttradewithrussia.api.comtrade;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import eu.donttradewithrussia.api.comtrade.parser.ComtradeDeserializer;
 import eu.donttradewithrussia.api.comtrade.parser.ComtradeParser;
 import eu.donttradewithrussia.api.comtrade.parser.ComtradeResponse;
 import eu.donttradewithrussia.api.comtrade.parser.Dataset;
 import eu.donttradewithrussia.database.datasource.DSCreator;
+import eu.donttradewithrussia.database.parser.Country;
+import eu.donttradewithrussia.database.readAndWrite.country.PSQLCountryReader;
 import eu.donttradewithrussia.database.readAndWrite.country.PSQLCountryWriter;
 import eu.donttradewithrussia.database.readAndWrite.dataset.PSQLDatasetReader;
 import eu.donttradewithrussia.database.readAndWrite.dataset.PSQLDatasetWriter;
@@ -45,11 +46,11 @@ public class DataGrabber {
             DSCreator ds = new DSCreator(DB_PROPERTIES);
             PSQLDatasetReader dr = new PSQLDatasetReader(ds.getDataSourceTradeDB());
             PSQLDatasetWriter dw = new PSQLDatasetWriter(ds.getDataSourceTradeDB());
+            PSQLCountryReader cr = new PSQLCountryReader(ds.getDataSourceTradeDB());
             PSQLCountryWriter cw = new PSQLCountryWriter(ds.getDataSourceTradeDB());
 
-
             List<String[]> countriesTest = getCountries();
-            addCountriesToDB(cw, countriesTest);
+            addCountriesToDB(cr, cw, countriesTest);
             List<Integer> periods = getPeriods();
 
             List<Integer> countries = Arrays.asList(139,528);
@@ -65,9 +66,7 @@ public class DataGrabber {
                 APICall apiCall = new APICall(request);
                 String jsonRequest = apiCall.call();
 
-                if(jsonRequest == null) {
-
-                } else {
+                if(jsonRequest != null) {
                     ComtradeResponse comtradeResponse = ComtradeParser.parseResponse(jsonRequest);
 
                     if(comtradeResponse != null && comtradeResponse.isValid()) {
@@ -107,15 +106,24 @@ public class DataGrabber {
         return countries;
     }
 
-    private static void addCountriesToDB(PSQLCountryWriter cw, List<String[]> countries) {
-        for(String[] country : countries) {
-            int code = Integer.parseInt(country[0]);
-            String name = country[1];
-            String abbr = country[2];
-
-            cw.addCountry(name, abbr, code);
+    private static void addCountriesToDB(PSQLCountryReader cr, PSQLCountryWriter cw, List<String[]> countries) {
+        for(String[] countryArr : countries) {
+            addCountryToDB(cr, cw, new Country(Integer.parseInt(countryArr[0]), countryArr[1], countryArr[2]));
         }
-        cw.addCountry("Russian Federation", "RUS", RUSSIA);
+        addCountryToDB(cr, cw, new Country(RUSSIA, "Russian Federation", "RUS"));
+    }
+
+    private static void addCountryToDB(PSQLCountryReader cr, PSQLCountryWriter cw, Country country) {
+        try {
+            Country countryDB = new ObjectMapper().readValue(cr.getCountry(
+                    country.getCountry_id()), Country.class);
+
+            if (countryDB == null) {
+                cw.addCountry(country);
+            }
+        } catch (JsonMappingException e) {
+            cw.addCountry(country);
+        } catch (JsonProcessingException ignore) {}
     }
 
     private static List<Integer> getPeriods() {
@@ -128,7 +136,7 @@ public class DataGrabber {
 
         List<Integer> periods = new ArrayList<>();
         String period = year + String.format("%02d", month);
-        for(; Integer.parseInt(period) <= Integer.parseInt(end);) {
+        while(Integer.parseInt(period) <= Integer.parseInt(end)) {
             periods.add(Integer.parseInt(period));
 
             if(month < 12) {

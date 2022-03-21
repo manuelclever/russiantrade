@@ -22,7 +22,7 @@ public class PSQLCountryReader implements CountryDataReader {
     @Override
     public String getCountry(int comtradeId) {
         return Query.queryWhereInt(datasource,
-                PSQLQCountry.queryWhereName(PSQLQCountry.SELECT_COUNTRY),
+                PSQLQCountry.queryWhereComtradeCode(PSQLQCountry.SELECT_COUNTRY),
                 comtradeId);
     }
 }

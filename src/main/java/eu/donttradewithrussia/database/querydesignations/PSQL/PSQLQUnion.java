@@ -31,13 +31,13 @@ public class PSQLQUnion extends PSQLQueries {
             TABLE_UNION + P + COUNTRY + END;
 
     public static String queryWhereCoalitionName(String select) {
-        return CREATE_JSON + FROM_START + select +
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COALITION + WHERE +
                 PARAMETER_COALITION + ORDER_BY +
                 COUNTRY + FROM_END + AS + ROW + END;
     }
     public static String queryWhereCoalitionID(String select) {
-        return CREATE_JSON + FROM_START + select + WHERE +
+        return CREATE_JSON_MULTIPLE + FROM_START + select + WHERE +
                 PARAMETER_COALITION + ORDER_BY +
                 COUNTRY + FROM_END + AS + ROW + END;
     }

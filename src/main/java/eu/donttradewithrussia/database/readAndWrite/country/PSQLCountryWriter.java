@@ -1,5 +1,6 @@
 package eu.donttradewithrussia.database.readAndWrite.country;
 
+import eu.donttradewithrussia.database.parser.Country;
 import eu.donttradewithrussia.database.querydesignations.PSQL.PSQLQCountry;
 import eu.donttradewithrussia.util.LogGenerator;
 
@@ -37,6 +38,11 @@ public class PSQLCountryWriter implements CountryDataWriter {
             LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return 0;
+    }
+
+    @Override
+    public int addCountry(Country country) {
+        return addCountry(country.getName(), country.getAbbrev(), country.getCountry_id());
     }
 
     @Override

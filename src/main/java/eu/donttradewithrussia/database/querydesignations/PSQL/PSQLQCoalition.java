@@ -23,11 +23,11 @@ public class PSQLQCoalition extends PSQLQueries {
             PARAMETER_ID + END;
 
     public static String queryAll(String select) {
-        return CREATE_JSON + FROM_START + select + ORDER_BY +
+        return CREATE_JSON_MULTIPLE + FROM_START + select + ORDER_BY +
                 COALITION_NAME + FROM_END + AS + ROW + END;
     }
     public static String queryWhereName(String select) {
-        return CREATE_JSON + FROM_START + select + WHERE +
+        return CREATE_JSON_MULTIPLE + FROM_START + select + WHERE +
                 PARAMETER_NAME+ ORDER_BY +
                 COALITION_NAME + FROM_END + AS + ROW + END;
     }

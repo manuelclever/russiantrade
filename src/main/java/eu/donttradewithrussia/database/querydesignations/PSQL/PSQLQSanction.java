@@ -44,13 +44,13 @@ public class PSQLQSanction extends PSQLQueries {
             SANCTION_PERIOD_START + END;
 
     public static String queryWhereGroupAndPeriod(String select) {
-        return CREATE_JSON + FROM_START + select + WHERE +
+        return CREATE_JSON_MULTIPLE + FROM_START + select + WHERE +
                 PARAMETER_GROUP + AND +
                 PARAMETER_PERIOD_BETWEEN + ORDER_BY +
                 SANCTION_PERIOD_START + FROM_END + AS + ROW + END;
     }
     public static String queryWhereCountryAndPeriod(String select) {
-        return CREATE_JSON + FROM_START + select + WHERE +
+        return CREATE_JSON_MULTIPLE + FROM_START + select + WHERE +
                 PARAMETER_COUNTRY + AND +
                 PARAMETER_PERIOD_BETWEEN + ORDER_BY +
                 SANCTION_PERIOD_START + FROM_END + AS + ROW + END;
