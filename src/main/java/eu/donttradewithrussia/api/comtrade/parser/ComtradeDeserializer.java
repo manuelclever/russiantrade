@@ -20,8 +20,8 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
     }
 
     @Override
-    public ComtradeResponse deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        JsonNode node = jsonParser.getCodec().readTree(jsonParser);
+    public ComtradeResponse deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        JsonNode node = p.getCodec().readTree(p);
 
         Validation validation = createValidation(node);
 
@@ -30,7 +30,6 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
             return new ComtradeResponse(validation, datasets);
         }
         return new ComtradeResponse(validation, null);
-
     }
 
     private Validation createValidation(JsonNode node) {
