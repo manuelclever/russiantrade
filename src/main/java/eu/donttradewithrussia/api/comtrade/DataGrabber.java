@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.donttradewithrussia.api.comtrade.parser.ComtradeDeserializer;
+import eu.donttradewithrussia.api.comtrade.parser.ComtradeParser;
 import eu.donttradewithrussia.api.comtrade.parser.ComtradeResponse;
 import eu.donttradewithrussia.api.comtrade.parser.Dataset;
 import eu.donttradewithrussia.database.datasource.DSCreator;
 import eu.donttradewithrussia.database.readAndWrite.country.PSQLCountryWriter;
+import eu.donttradewithrussia.database.readAndWrite.dataset.PSQLDatasetReader;
 import eu.donttradewithrussia.database.readAndWrite.dataset.PSQLDatasetWriter;
 
 import java.io.*;
@@ -21,16 +23,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DataGrabber {
-    private final static Path DB_PROPERTIES = FileSystems.getDefault().getPath(
+    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
             "src", "test", "resources", "database", "testDatabase.properties");
-    private final static Path API_LOG = FileSystems.getDefault().getPath(
+    private  static final Path API_LOG = FileSystems.getDefault().getPath(
             "src", "main", "resources", "database", "successfulApiResponses.txt");
-    private final static Path COUNTRIES_TXT = FileSystems.getDefault()
+    private static final Path COUNTRIES_TXT = FileSystems.getDefault()
             .getPath("src", "main", "resources", "countries.txt");
+    public static final int RUSSIA = 643;
 
     public static void main(String[] args) {
         try {
-
 
             File file = new File(API_LOG.toString());
             if(!file.exists()) {
@@ -41,6 +43,7 @@ public class DataGrabber {
             }
             BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
             DSCreator ds = new DSCreator(DB_PROPERTIES);
+            PSQLDatasetReader dr = new PSQLDatasetReader(ds.getDataSourceTradeDB());
             PSQLDatasetWriter dw = new PSQLDatasetWriter(ds.getDataSourceTradeDB());
             PSQLCountryWriter cw = new PSQLCountryWriter(ds.getDataSourceTradeDB());
 
@@ -52,9 +55,12 @@ public class DataGrabber {
             List<Integer> countries = Arrays.asList(139,528);
 
             for(Integer country : countries) {
-                ComtradeParametersRequest request = new ComtradeParametersRequest('M', country, 201504, 643
+                ComtradeParametersRequest request = new ComtradeParametersRequest('M', country, 201504, RUSSIA
                         , new String[]{"TOTAL", "AG2"},
                         10000);
+
+                //check before requesting
+                String result = dr.getDataset(country, RUSSIA, 201504);
 
                 APICall apiCall = new APICall(request);
                 String jsonRequest = apiCall.call();
@@ -62,7 +68,7 @@ public class DataGrabber {
                 if(jsonRequest == null) {
 
                 } else {
-                    ComtradeResponse comtradeResponse = parseResponse(jsonRequest);
+                    ComtradeResponse comtradeResponse = ComtradeParser.parseResponse(jsonRequest);
 
                     if(comtradeResponse != null && comtradeResponse.isValid()) {
                         // write log
@@ -109,7 +115,7 @@ public class DataGrabber {
 
             cw.addCountry(name, abbr, code);
         }
-        cw.addCountry("Russian Federation", "RUS", 643);
+        cw.addCountry("Russian Federation", "RUS", RUSSIA);
     }
 
     private static List<Integer> getPeriods() {
@@ -134,24 +140,5 @@ public class DataGrabber {
             period = year + String.format("%02d", month);
         }
         return periods;
-    }
-
-    private static ComtradeResponse parseResponse(String json) {
-        try {
-            ObjectMapper mapper = prepareMapper(ComtradeResponse.class, new ComtradeDeserializer());
-            System.out.println("reading: " + json);
-            return mapper.readValue(json, ComtradeResponse.class);
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    private static ObjectMapper prepareMapper(Class cl, StdDeserializer deserializer) {
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(cl, deserializer);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(module);
-        return mapper;
     }
 }
