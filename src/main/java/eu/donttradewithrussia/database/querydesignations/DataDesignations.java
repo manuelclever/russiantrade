@@ -16,6 +16,8 @@ public abstract class DataDesignations extends SQLQueries {
     public static final String COALITION_NAME = "coalition";
 
     public static final String COUNTRY = "country";
+    public static final String COUNTRY_AS_REPORTER = "countryReporter";
+    public static final String COUNTRY_AS_PARTNER = "countryPartner";
     public static final String TABLE_COUNTRY = SCHEMA + P + COUNTRY;
     public static final String COUNTRY_ID = COUNTRY + ID;
     public static final String COUNTRY_NAME = "name";
