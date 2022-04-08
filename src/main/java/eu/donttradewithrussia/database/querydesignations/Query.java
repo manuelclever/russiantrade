@@ -16,7 +16,6 @@ public class Query {
             for(int arg : args) {
                 query.setInt(i++, arg);
             }
-            System.out.println(query);
             ResultSet rs = query.executeQuery();
 
             if(rs.next()) {
