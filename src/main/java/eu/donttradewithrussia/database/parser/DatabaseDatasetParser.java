@@ -1,18 +1,20 @@
-package eu.donttradewithrussia.api.comtrade.parser;
+package eu.donttradewithrussia.database.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import eu.donttradewithrussia.api.comtrade.parser.Dataset;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class ComtradeParser {
+public class DatabaseDatasetParser {
 
-    public static ComtradeResponse parseResponse(String json) {
+    public static ArrayList<Dataset> parseResponse(String json) {
         try {
-            ObjectMapper mapper = prepareMapper(ComtradeResponse.class, new ComtradeDeserializer());
+            ObjectMapper mapper = prepareMapper(ArrayList.class, new DatabaseDatasetDeserializer());
             if(json != null) {
-                return mapper.readValue(json, ComtradeResponse.class);
+                return mapper.readValue(json, ArrayList.class);
             } return null;
         } catch (IOException e) {
             return null;

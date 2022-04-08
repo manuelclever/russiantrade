@@ -27,7 +27,7 @@ public class DataGrabber {
     private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
             "src", "test", "resources", "database", "testDatabase.properties");
     private  static final Path API_LOG = FileSystems.getDefault().getPath(
-            "src", "main", "resources", "database", "successfulApiResponses.txt");
+            "src", "main", "resources", "database", "api.log");
     private static final Path COUNTRIES_TXT = FileSystems.getDefault()
             .getPath("src", "main", "resources", "countries.txt");
     public static final int RUSSIA = 643;
@@ -38,7 +38,7 @@ public class DataGrabber {
             File file = new File(API_LOG.toString());
             if(!file.exists()) {
                 if(!file.createNewFile()) {
-                    System.out.println("File could not be created.");
+                    System.out.println("api.log could not be created.");
                     return;
                 }
             }
@@ -61,25 +61,28 @@ public class DataGrabber {
                         10000);
 
                 //check before requesting
-                String result = dr.getDataset(country, RUSSIA, 201504);
+                List<Dataset> databaseEntry = dr.getDatasets(country, RUSSIA, 201504);
 
-                APICall apiCall = new APICall(request);
-                String jsonRequest = apiCall.call();
+                if(databaseEntry == null) {
+                    APICall apiCall = new APICall(request);
+                    String jsonRequest = apiCall.call();
 
-                if(jsonRequest != null) {
-                    ComtradeResponse comtradeResponse = ComtradeParser.parseResponse(jsonRequest);
+                    if (jsonRequest != null) {
+                        ComtradeResponse comtradeResponse = ComtradeParser.parseResponse(jsonRequest);
 
-                    if(comtradeResponse != null && comtradeResponse.isValid()) {
-                        // write log
-                        bw.write(LocalDateTime.now() + ": " + country);
-                        bw.newLine();
+                        if (comtradeResponse != null && comtradeResponse.isValid()) {
+                            // write log
+                            // TODO add period to log entry (can be done, after implementing call for several periods)
+                            bw.write(LocalDateTime.now() + ": " + country);
+                            bw.newLine();
 
-                        // write to Database
-                        for(Dataset dataset : comtradeResponse.getDatasets()) {
-                            dw.addDataset(dataset);
+                            // write to Database
+                            for (Dataset dataset : comtradeResponse.getDatasets()) {
+                                dw.addDataset(dataset);
+                            }
                         }
+                        System.out.println(comtradeResponse);
                     }
-                    System.out.println(comtradeResponse);
                 }
             }
             bw.close();
@@ -108,12 +111,12 @@ public class DataGrabber {
 
     private static void addCountriesToDB(PSQLCountryReader cr, PSQLCountryWriter cw, List<String[]> countries) {
         for(String[] countryArr : countries) {
-            addCountryToDB(cr, cw, new Country(Integer.parseInt(countryArr[0]), countryArr[1], countryArr[2]));
+            addCountryToDBIfNotExist(cr, cw, new Country(Integer.parseInt(countryArr[0]), countryArr[1], countryArr[2]));
         }
-        addCountryToDB(cr, cw, new Country(RUSSIA, "Russian Federation", "RUS"));
+        addCountryToDBIfNotExist(cr, cw, new Country(RUSSIA, "Russian Federation", "RUS"));
     }
 
-    private static void addCountryToDB(PSQLCountryReader cr, PSQLCountryWriter cw, Country country) {
+    private static void addCountryToDBIfNotExist(PSQLCountryReader cr, PSQLCountryWriter cw, Country country) {
         try {
             Country countryDB = new ObjectMapper().readValue(cr.getCountry(
                     country.getCountry_id()), Country.class);

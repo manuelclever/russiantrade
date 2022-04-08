@@ -1,9 +1,13 @@
 package eu.donttradewithrussia.database.readAndWrite.dataset;
 
+import eu.donttradewithrussia.api.comtrade.parser.Dataset;
+
+import java.util.List;
+
 public interface DatasetDataReader {
-    String getDataset(int reporter, int partner);
-    String getDataset(int reporter, int partner, int period);
-    String getDataset(int reporter, int partner, int period, String commodityCode);
-    String getDataset(int reporter, int partner, int periodStart, int periodEnd);
-    String getDataset(int reporter, int partner, int periodStart, int periodEnd, String commodityCode);
+    List<Dataset> getDatasets(int reporter, int partner);
+    List<Dataset> getDatasets(int reporter, int partner, int period);
+    List<Dataset> getDatasets(int reporter, int partner, int period, String commodityCode);
+    List<Dataset> getDatasets(int reporter, int partner, int periodStart, int periodEnd);
+    List<Dataset> getDatasets(int reporter, int partner, int periodStart, int periodEnd, String commodityCode);
 }

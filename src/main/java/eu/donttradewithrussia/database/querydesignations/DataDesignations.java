@@ -40,7 +40,9 @@ public abstract class DataDesignations extends SQLQueries {
     public static final String MONTHLY_TRADE_ID = MONTHLY_TRADE + ID;
     public static final String MONTHLY_TRADE_FLOW = "trade_flow";
     public static final String MONTHLY_TRADE_REPORTER = "reporter";
+    public static final String MONTHLY_TRADE_REPORTER_DESC = "reporter_desc";
     public static final String MONTHLY_TRADE_PARTNER = "partner";
+    public static final String MONTHLY_TRADE_PARTNER_DESC = "partner_desc";
     public static final String MONTHLY_TRADE_COMMODITY_CODE = "commodity_code";
     public static final String MONTHLY_TRADE_COMMODITY_DESC = "commodity_desc";
     public static final String MONTHLY_TRADE_VALUE = "value";

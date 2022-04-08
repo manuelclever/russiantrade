@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import eu.donttradewithrussia.api.comtrade.parser.Dataset;
+import eu.donttradewithrussia.database.querydesignations.DataDesignations;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,11 +51,13 @@ public class DatabaseDatasetDeserializer extends StdDeserializer<List<Dataset>> 
     private Dataset createDataset(JsonNode node) {
         Dataset dataset = new Dataset();
 
-        dataset.setTradeFlowType(node.get("trade_flow").asText());
-        dataset.setReporterCode(node.get("reporter").asInt());
-        dataset.setPartnerCode(node.get("partner").asInt());
-        dataset.setCommodityCode(node.get("commodity_code").asText());
-        dataset.setCommodityDesc(node.get("commodity_desc").asText());
+        dataset.setTradeFlowType(node.get(DataDesignations.MONTHLY_TRADE_FLOW).asText());
+        dataset.setReporterCode(node.get(DataDesignations.MONTHLY_TRADE_REPORTER).asInt());
+        dataset.setReporterDesc(node.get(DataDesignations.MONTHLY_TRADE_REPORTER_DESC).asText());
+        dataset.setPartnerCode(node.get(DataDesignations.MONTHLY_TRADE_PARTNER).asInt());
+        dataset.setPartnerDesc(node.get(DataDesignations.MONTHLY_TRADE_PARTNER_DESC).asText());
+        dataset.setCommodityCode(node.get(DataDesignations.MONTHLY_TRADE_COMMODITY_CODE).asText());
+        dataset.setCommodityDesc(node.get(DataDesignations.MONTHLY_TRADE_COMMODITY_DESC).asText());
         dataset.setTradeValue(node.get("value").asLong());
 
         return dataset;

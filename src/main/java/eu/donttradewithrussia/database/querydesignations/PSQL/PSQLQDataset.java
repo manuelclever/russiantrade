@@ -12,11 +12,13 @@ public class PSQLQDataset extends PSQLQueries {
     public static final String SELECT_DATASET = SELECT +
             MONTHLY_TRADE_ID + C +
             TABLE_MONTHLY_TRADE + P + PERIOD + C +
+            MONTHLY_TRADE_FLOW + C +
             MONTHLY_TRADE_REPORTER + C +
-            COUNTRY_AS_REPORTER + P + COUNTRY_NAME + AS + "reporter_name" + C +
+            COUNTRY_AS_REPORTER + P + COUNTRY_NAME + AS + MONTHLY_TRADE_REPORTER_DESC + C +
             MONTHLY_TRADE_PARTNER + C +
-            COUNTRY_AS_PARTNER + P + COUNTRY_NAME + AS + "partner_name" + C +
+            COUNTRY_AS_PARTNER + P + COUNTRY_NAME + AS + MONTHLY_TRADE_PARTNER_DESC + C +
             MONTHLY_TRADE_COMMODITY_CODE + C +
+            MONTHLY_TRADE_COMMODITY_DESC + C +
             MONTHLY_TRADE_VALUE + FROM + TABLE_MONTHLY_TRADE;
 
     //parameter
