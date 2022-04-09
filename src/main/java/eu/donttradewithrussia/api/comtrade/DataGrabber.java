@@ -96,7 +96,6 @@ public class DataGrabber {
     }
 
     private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, int country, int period) throws IOException {
-
         logWriter.write(LocalDateTime.now() + ": " + country + ", " + period);
         logWriter.newLine();
 
@@ -129,10 +128,15 @@ public class DataGrabber {
 
     private static void addCountryToDBIfNotExist(PSQLCountryReader cr, PSQLCountryWriter cw, Country country) {
         try {
-            Country countryDB = new ObjectMapper().readValue(cr.getCountry(
-                    country.getCountry_id()), Country.class);
+            String dbReturn = cr.getCountry(country.getCountry_id());
 
-            if (countryDB == null) {
+            if(dbReturn != null) {
+                Country countryDB = new ObjectMapper().readValue(dbReturn, Country.class);
+
+                if(!countryDB.equals(country)) {
+                    cw.addCountry(country);
+                }
+            } else {
                 cw.addCountry(country);
             }
         } catch (JsonMappingException e) {

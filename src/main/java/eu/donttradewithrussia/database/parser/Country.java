@@ -38,4 +38,22 @@ public class Country {
     public void setAbbrev(String abbrev) {
         this.abbrev = abbrev;
     }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(country_id) * 4 + name.hashCode() * 13 + abbrev.hashCode() *17;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() == this.getClass()) {
+            return obj.hashCode() == this.hashCode();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + country_id + ", " + name + ", " + abbrev + "]";
+    }
 }

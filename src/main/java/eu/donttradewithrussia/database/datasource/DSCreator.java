@@ -17,7 +17,6 @@ import java.util.Properties;
 
 public class DSCreator {
     private BasicDataSource dataSourceTradeDB;
-    //    private  BasicDataSource testDataSourceTradeDB;
     private Properties properties;
 
     public static final String ANSI_RESET = "\u001B[0m";
