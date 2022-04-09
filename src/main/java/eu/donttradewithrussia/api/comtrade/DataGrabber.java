@@ -103,7 +103,6 @@ public class DataGrabber {
         for (Dataset dataset : comtradeResponse.getDatasets()) {
             dw.addDataset(dataset);
         }
-        System.out.println(comtradeResponse);
     }
 
     private static File createAPILog() throws IOException {

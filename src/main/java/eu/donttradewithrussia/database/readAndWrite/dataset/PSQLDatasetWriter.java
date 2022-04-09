@@ -36,7 +36,6 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
 //            query.setInt(6, dataset.getReporterCode()); //global sanction id
 //            query.setInt(7, dataset.getReporterCode()); //local sanction id
 
-            System.out.println(query);
             ResultSet rs = query.executeQuery();
             if(rs.next()) {
                 conn.commit();
