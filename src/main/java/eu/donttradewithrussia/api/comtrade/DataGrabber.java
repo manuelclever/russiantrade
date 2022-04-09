@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DataGrabber {
@@ -32,28 +31,45 @@ public class DataGrabber {
             .getPath("src", "main", "resources", "countries.txt");
     public static final int RUSSIA = 643;
 
+    public static final int REQUEST_DELAY = 1000;
+    public static final int RATE_LIMIT_HOUR = 100;
+
     private static DSCreator dsC;
     private static BufferedWriter logWriter;
 
     public static void main(String[] args) {
         try {
             dsC = new DSCreator(DB_PROPERTIES);
-            logWriter = new BufferedWriter(new FileWriter(createAPILog(), true));
 
-            List<String[]> countries = getCountries();
+            List<Country> countries = getCountries();
             addCountriesToDBIfNotExist(countries);
             List<Integer> periods = getPeriods();
 
-            List<Integer> countriesTemp = Arrays.asList(139,528);
+            int c = 0;
+            for(Country country : countries) {
 
-            for(Integer country : countriesTemp) {
-                int period = 201504; //temp
+                for(int period : periods) {
 
-                if(entryDoesntExist(country, period)) {
-                    ComtradeResponse comtradeResponse = apiCall(country, period);
+                    if (entryDoesntExist(country, period)) {
+                        if(c >= RATE_LIMIT_HOUR) {
+                            try {
+                                Thread.sleep(60000);
+                            } catch(InterruptedException e) {
+                                writeToLog("Hour delay interrupted:\n" + e.getMessage());
+                            }
+                        }
 
-                    if (comtradeResponse != null && comtradeResponse.isValid()) {
-                        addComtradeResponseToDB(comtradeResponse, country, period);
+                        try {
+                            Thread.sleep(REQUEST_DELAY);
+                            ComtradeResponse comtradeResponse = apiCall(country, period);
+                            c++;
+
+                            if (comtradeResponse != null && comtradeResponse.isValid()) {
+                                addComtradeResponseToDB(comtradeResponse, country, period);
+                            }
+                        } catch (InterruptedException e){
+                            writeToLog("Minute delay interrupted:\n" + e.getMessage());
+                        }
                     }
                 }
             }
@@ -62,8 +78,8 @@ public class DataGrabber {
         }
     }
 
-    private static List<String[]> getCountries() throws IOException {
-        List<String[]> countries = new ArrayList<>();
+    private static List<Country> getCountries() throws IOException {
+        List<Country> countries = new ArrayList<>();
         File file = new File(COUNTRIES_TXT.toString());
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -71,21 +87,20 @@ public class DataGrabber {
         while ((line = br.readLine()) != null) {
             if(line.charAt(0) != '#') {
                 String[] country = line.split("_");
-                countries.add(country);
+                countries.add(new Country(Integer.parseInt(country[0]), country[1], country[2]));
             }
         }
         return countries;
     }
 
-    private static boolean entryDoesntExist(int country, int period) {
+    private static boolean entryDoesntExist(Country country, int period) {
         PSQLDatasetReader dr = new PSQLDatasetReader(dsC.getDataSourceTradeDB());
-        return dr.getDatasets(country, RUSSIA, period) == null;
+        return dr.getDatasets(country.getCountryID(), RUSSIA, period) == null;
     }
 
-    private static ComtradeResponse apiCall(int country, int period) {
-        ComtradeParametersRequest request = new ComtradeParametersRequest('M', country, period, RUSSIA
-                , new String[]{"TOTAL", "AG2"},
-                10000);
+    private static ComtradeResponse apiCall(Country country, int period) {
+        ComtradeParametersRequest request = new ComtradeParametersRequest(
+                'M', country.getCountryID(), period, RUSSIA, new String[]{"TOTAL", "AG2"}, 10000);
 
         APICall apiCall = new APICall(request);
         String jsonRequest = apiCall.call();
@@ -95,14 +110,24 @@ public class DataGrabber {
         } return null;
     }
 
-    private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, int country, int period) throws IOException {
-        logWriter.write(LocalDateTime.now() + ": " + country + ", " + period);
-        logWriter.newLine();
+    private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, Country country, int period) throws IOException {
+        writeToLog(country + ", " + period);
 
         PSQLDatasetWriter dw = new PSQLDatasetWriter(dsC.getDataSourceTradeDB());
         for (Dataset dataset : comtradeResponse.getDatasets()) {
             dw.addDataset(dataset);
         }
+    }
+
+    private static void writeToLog(String info) {
+        try {
+            if(logWriter == null) {
+                logWriter = new BufferedWriter(new FileWriter(createAPILog(), true));
+            }
+
+            logWriter.write(LocalDateTime.now() + ": " + info);
+            logWriter.newLine();
+        } catch(IOException ignore) {}
     }
 
     private static File createAPILog() throws IOException {
@@ -115,25 +140,25 @@ public class DataGrabber {
         return file;
     }
 
-    private static void addCountriesToDBIfNotExist(List<String[]> countries) {
+    private static void addCountriesToDBIfNotExist(List<Country> countries) {
         PSQLCountryReader cr = new PSQLCountryReader(dsC.getDataSourceTradeDB());
         PSQLCountryWriter cw = new PSQLCountryWriter(dsC.getDataSourceTradeDB());
 
-        for(String[] countryArr : countries) {
-            addCountryToDBIfNotExist(cr, cw, new Country(Integer.parseInt(countryArr[0]), countryArr[1], countryArr[2]));
+        for(Country country : countries) {
+            addCountryToDBIfNotExist(cr, cw, country);
         }
         addCountryToDBIfNotExist(cr, cw, new Country(RUSSIA, "Russian Federation", "RUS"));
     }
 
     private static void addCountryToDBIfNotExist(PSQLCountryReader cr, PSQLCountryWriter cw, Country country) {
         try {
-            String dbReturn = cr.getCountry(country.getCountry_id());
+            String dbReturn = cr.getCountry(country.getCountryID());
 
             if(dbReturn != null) {
                 Country countryDB = new ObjectMapper().readValue(dbReturn, Country.class);
 
                 if(!countryDB.equals(country)) {
-                    cw.insertCountry(country, countryDB.getCountry_id());
+                    cw.insertCountry(country, countryDB.getCountryID());
                 }
             } else {
                 cw.addCountry(country);

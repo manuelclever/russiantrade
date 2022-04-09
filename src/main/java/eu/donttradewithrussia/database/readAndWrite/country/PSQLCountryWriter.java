@@ -42,7 +42,7 @@ public class PSQLCountryWriter implements CountryDataWriter {
 
     @Override
     public int addCountry(Country country) {
-        return addCountry(country.getName(), country.getAbbrev(), country.getCountry_id());
+        return addCountry(country.getName(), country.getAbbrev(), country.getCountryID());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PSQLCountryWriter implements CountryDataWriter {
         try(Connection conn = datasource.getConnection();
             PreparedStatement query = conn.prepareStatement(PSQLQCountry.QUERY_UPDATE)) {
 
-            query.setInt(1, country.getCountry_id());
+            query.setInt(1, country.getCountryID());
             query.setString(2, country.getName());
             query.setString(3, country.getAbbrev());
             query.setInt(4, whereCountryID);

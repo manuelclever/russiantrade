@@ -15,7 +15,7 @@ public class Country {
         this.abbrev = abbrev;
     }
 
-    public int getCountry_id() {
+    public int getCountryID() {
         return country_id;
     }
 
