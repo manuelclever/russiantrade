@@ -20,7 +20,12 @@ public class PSQLQCountry extends PSQLQueries {
     public static final String QUERY_INSERT = INSERT_INTO + TABLE_COUNTRY + "(" +
             COUNTRY_ID + C +
             COUNTRY_NAME + C +
-            COUNTRY_ABBREV + ") VALUES (?,?,?)"  + RETURNING + COUNTRY_ID + END;
+            COUNTRY_ABBREV + ") VALUES (?,?,?)" + RETURNING + COUNTRY_ID + END;
+    // UPDATE tradetest_schema.country SET abbrev='TRO'  WHERE country_id = 36;
+    public static final String QUERY_UPDATE = UPDATE + TABLE_COUNTRY + SET +
+            PARAMETER_ID + C +
+            PARAMETER_NAME + C +
+            PARAMETER_ABBREV + WHERE + PARAMETER_ID + RETURNING + COUNTRY_ID + END;
     public static final String QUERY_DELETE_WHERE_NAME = COUNTRY_DELETE + WHERE +
             PARAMETER_NAME + END;
     public static final String QUERY_DELETE_WHERE_COMTRADE_ID = COUNTRY_DELETE + WHERE +

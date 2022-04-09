@@ -7,6 +7,7 @@ public abstract class SQLQueries  {
     public static final String ORDER_BY = " ORDER BY ";
     public static final String INSERT_INTO = "INSERT INTO ";
     public static final String UPDATE = "UPDATE ";
+    public static final String SET = " SET ";
     public static final String DELETE = "DELETE ";
     public static final String RETURNING = " RETURNING ";
     public static final String FROM = " FROM ";

@@ -46,6 +46,30 @@ public class PSQLCountryWriter implements CountryDataWriter {
     }
 
     @Override
+    public int insertCountry(Country country, int whereCountryID) {
+
+        try(Connection conn = datasource.getConnection();
+            PreparedStatement query = conn.prepareStatement(PSQLQCountry.QUERY_UPDATE)) {
+
+            query.setInt(1, country.getCountry_id());
+            query.setString(2, country.getName());
+            query.setString(3, country.getAbbrev());
+            query.setInt(4, whereCountryID);
+
+            System.out.println(query);
+            ResultSet rs = query.executeQuery();
+            if(rs.next()) {
+                conn.commit();
+                return rs.getInt(PSQLQCountry.COUNTRY_ID);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
     public boolean removeCountry(String name) {
 
         try(Connection conn = datasource.getConnection();

@@ -134,7 +134,7 @@ public class DataGrabber {
                 Country countryDB = new ObjectMapper().readValue(dbReturn, Country.class);
 
                 if(!countryDB.equals(country)) {
-                    cw.addCountry(country);
+                    cw.insertCountry(country, countryDB.getCountry_id());
                 }
             } else {
                 cw.addCountry(country);
