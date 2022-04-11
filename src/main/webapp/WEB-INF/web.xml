@@ -1,7 +1,15 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+  <display-name>Test Seite</display-name>
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>Datenabfrage</servlet-name>
+    <servlet-class>eu.donttradewithrussia.database.RequestServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RequestParam</servlet-name>
+    <url-pattern>/abfrage</url-pattern>
+  </servlet-mapping>
 </web-app>
