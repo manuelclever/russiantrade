@@ -5,7 +5,7 @@
 
   <servlet>
     <servlet-name>Datenabfrage</servlet-name>
-    <servlet-class>eu.donttradewithrussia.database.RequestServlet</servlet-class>
+    <servlet-class>eu.russiantrade.database.RequestServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
