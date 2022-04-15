@@ -3,16 +3,16 @@ package eu.russiantrade.database.parser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import eu.russiantrade.api.comtrade.parser.Dataset;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DatabaseDatasetParser {
+public class DatabaseTradeDataParser {
 
-    public static ArrayList<Dataset> parseResponse(String json) {
+    public static ArrayList<TradeData> parseResponse(String json) {
         try {
-            ObjectMapper mapper = prepareMapper(ArrayList.class, new DatabaseDatasetDeserializer());
+            ObjectMapper mapper = prepareMapper(ArrayList.class, new DatabaseTradeDataDeserializer());
             if(json != null) {
                 return mapper.readValue(json, ArrayList.class);
             } return null;

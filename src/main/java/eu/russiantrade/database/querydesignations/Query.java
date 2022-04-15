@@ -56,6 +56,33 @@ public class Query {
         return null;
     }
 
+    public static String queryWhereTwoStringAndInt(DataSource datasource, String statement, String s1,
+                                                   String s2, int ... args) {
+        try(Connection conn = datasource.getConnection();
+            PreparedStatement query = conn.prepareStatement(statement)) {
+
+            query.setString(1, s1);
+            query.setString(2, s2);
+            int i = 3;
+            for(int arg : args) {
+                query.setInt(i++, arg);
+            }
+
+            ResultSet rs = query.executeQuery();
+
+            if(rs.next()) {
+                String output = rs.getString(1);
+                rs.close();
+                return output;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            LogGenerator.log(Level.WARNING, statement, e.getMessage());
+        }
+        return null;
+    }
+
     public static String queryWhereOneString(DataSource datasource, String statement, String string) {
         try(Connection conn = datasource.getConnection();
             PreparedStatement query = conn.prepareStatement(statement)) {

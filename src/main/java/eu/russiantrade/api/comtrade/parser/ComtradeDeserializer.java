@@ -26,8 +26,8 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         Validation validation = createValidation(node);
 
         if(validation.isValid()) {
-            List<Dataset> datasets = createDatasets(node);
-            return new ComtradeResponse(validation, datasets);
+            List<TradeData> tradeData = createDatasets(node);
+            return new ComtradeResponse(validation, tradeData);
         }
         return new ComtradeResponse(validation, null);
     }
@@ -63,60 +63,60 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
     }
 
 
-    private List<Dataset> createDatasets(JsonNode node) {
+    private List<TradeData> createDatasets(JsonNode node) {
         JsonNode datasetNodes = node.findValue("dataset");
 
-        List<Dataset> datasets = new ArrayList<>();
+        List<TradeData> tradeData = new ArrayList<>();
         if(datasetNodes.isArray()) {
 
             for(JsonNode datasetNode : datasetNodes) {
-                datasets.add(createDataset(datasetNode));
+                tradeData.add(createDataset(datasetNode));
             }
         } else {
-            datasets.add(createDataset(datasetNodes));
+            tradeData.add(createDataset(datasetNodes));
         }
 
-        return datasets;
+        return tradeData;
     }
 
-    private Dataset createDataset(JsonNode node) {
-        Dataset dataset = new Dataset();
+    private TradeData createDataset(JsonNode node) {
+        TradeData tradeData = new TradeData();
 
-        dataset.setPfCode(node.findValue("pfCode").asText());
-        dataset.setYear(node.findValue("yr").asInt());
-        dataset.setPeriod(node.findValue("period").asInt());
-        dataset.setAggrLevel(node.findValue("aggrLevel").asInt());
-        dataset.setIsLeaf(node.findValue("IsLeaf").asInt());
+        tradeData.setPfCode(node.findValue("pfCode").asText());
+        tradeData.setYear(node.findValue("yr").asInt());
+        tradeData.setPeriod(node.findValue("period").asInt());
+        tradeData.setAggrLevel(node.findValue("aggrLevel").asInt());
+        tradeData.setIsLeaf(node.findValue("IsLeaf").asInt());
 
-        dataset.setTradeFlowCode(node.findValue("rgCode").asInt());
-        dataset.setTradeFlowType(node.findValue("rgDesc").asText());
+        tradeData.setTradeFlowCode(node.findValue("rgCode").asInt());
+        tradeData.setTradeFlowType(node.findValue("rgDesc").asText());
 
-        dataset.setReporterCode(node.findValue("rtCode").asInt());
-        dataset.setReporterDesc(node.findValue("rtTitle").asText());
-        dataset.setRt3iso(node.findValue("rt3ISO").asText());
+        tradeData.setReporterCode(node.findValue("rtCode").asInt());
+        tradeData.setReporterDesc(node.findValue("rtTitle").asText());
+        tradeData.setRt3iso(node.findValue("rt3ISO").asText());
 
-        dataset.setPartnerCode(node.findValue("ptCode").asInt());
-        dataset.setPartnerDesc(node.findValue("ptTitle").asText());
-        dataset.setPt3iso(node.findValue("pt3ISO").asText());
+        tradeData.setPartnerCode(node.findValue("ptCode").asInt());
+        tradeData.setPartnerDesc(node.findValue("ptTitle").asText());
+        tradeData.setPt3iso(node.findValue("pt3ISO").asText());
 
-        dataset.setPartnerCode2(node.findValue("ptCode2").asInt());
-        dataset.setPartnerDesc2(node.findValue("ptTitle2").asText());
-        dataset.setPt3iso2(node.findValue("pt3ISO2").asText());
+        tradeData.setPartnerCode2(node.findValue("ptCode2").asInt());
+        tradeData.setPartnerDesc2(node.findValue("ptTitle2").asText());
+        tradeData.setPt3iso2(node.findValue("pt3ISO2").asText());
 
-        dataset.setCommodityCode(node.findValue("cmdCode").asText());
-        dataset.setCommodityDesc(node.findValue("cmdDescE").asText());
+        tradeData.setCommodityCode(node.findValue("cmdCode").asText());
+        tradeData.setCommodityDesc(node.findValue("cmdDescE").asText());
 
-        dataset.setQtCode(node.findValue("qtCode").asInt());
-        dataset.setQtDesc(node.findValue("qtDesc").asText());
+        tradeData.setQtCode(node.findValue("qtCode").asInt());
+        tradeData.setQtDesc(node.findValue("qtDesc").asText());
 
-        dataset.setQtAltCode(node.findValue("qtAltCode").asInt());
-        dataset.setQtAltDesc(node.findValue("qtAltDesc").asText());
-        dataset.setTradeValue(node.findValue("TradeValue").asInt());
+        tradeData.setQtAltCode(node.findValue("qtAltCode").asInt());
+        tradeData.setQtAltDesc(node.findValue("qtAltDesc").asText());
+        tradeData.setTradeValue(node.findValue("TradeValue").asInt());
 
-        dataset.setCifValue(node.findValue("CIFValue").asInt());
-        dataset.setFobValue(node.findValue("FOBValue").asInt());
-        dataset.setEstCode(node.findValue("estCode").asInt());
+        tradeData.setCifValue(node.findValue("CIFValue").asInt());
+        tradeData.setFobValue(node.findValue("FOBValue").asInt());
+        tradeData.setEstCode(node.findValue("estCode").asInt());
 
-        return dataset;
+        return tradeData;
     }
 }

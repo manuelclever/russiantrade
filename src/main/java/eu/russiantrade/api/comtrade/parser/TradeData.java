@@ -1,6 +1,6 @@
 package eu.russiantrade.api.comtrade.parser;
 
-public class Dataset {
+public class TradeData {
     private String pfCode;
     private int year;
     private int period;
@@ -41,7 +41,7 @@ public class Dataset {
     private int fobValue;
     private int estCode;
 
-    public Dataset() {
+    public TradeData() {
     }
 
     public String getPfCode() {

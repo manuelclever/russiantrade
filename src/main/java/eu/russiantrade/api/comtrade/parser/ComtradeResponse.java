@@ -4,11 +4,11 @@ import java.util.List;
 
 public class ComtradeResponse {
     private Validation validation;
-    private List<Dataset> datasets;
+    private List<TradeData> tradeData;
 
-    public ComtradeResponse(Validation validation, List<Dataset> dataset) {
+    public ComtradeResponse(Validation validation, List<TradeData> tradeData) {
         this.validation = validation;
-        this.datasets = dataset;
+        this.tradeData = tradeData;
     }
 
     public Validation getValidation() {
@@ -19,12 +19,12 @@ public class ComtradeResponse {
         this.validation = validation;
     }
 
-    public List<Dataset> getDatasets() {
-        return datasets;
+    public List<TradeData> getDatasets() {
+        return tradeData;
     }
 
-    public void setDatasets(List<Dataset> datasets) {
-        this.datasets = datasets;
+    public void setDatasets(List<TradeData> tradeData) {
+        this.tradeData = tradeData;
     }
 
     public boolean isValid() {
@@ -37,7 +37,7 @@ public class ComtradeResponse {
     @Override
     public String toString() {
         if(validation.isValid()) {
-            return "[" + validation.toString() + ", " + datasets.toString() + "]";
+            return "[" + validation.toString() + ", " + tradeData.toString() + "]";
         }
         return "[" + validation.toString() + ", [null]]";
     }

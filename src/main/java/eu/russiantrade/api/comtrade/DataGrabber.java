@@ -5,14 +5,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.russiantrade.api.comtrade.parser.ComtradeParser;
 import eu.russiantrade.api.comtrade.parser.ComtradeResponse;
-import eu.russiantrade.api.comtrade.parser.Dataset;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.parser.Country;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryReader;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
-import eu.russiantrade.database.readAndWrite.dataset.PSQLDatasetReader;
-import eu.russiantrade.database.readAndWrite.dataset.PSQLDatasetWriter;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -74,7 +74,7 @@ public class DataGrabber {
                 }
             }
             logWriter.close();
-        } catch (IOException e) {
+        } catch (IOException ignore) {
         }
     }
 
@@ -94,7 +94,7 @@ public class DataGrabber {
     }
 
     private static boolean entryDoesntExist(Country country, int period) {
-        PSQLDatasetReader dr = new PSQLDatasetReader(dsC.getDataSourceTradeDB());
+        PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
         return dr.getDatasets(country.getCountryID(), DataDesignations.RUSSIA, null, period) == null;
     }
 
@@ -113,9 +113,9 @@ public class DataGrabber {
     private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, Country country, int period) throws IOException {
         writeToLog(country + ", " + period);
 
-        PSQLDatasetWriter dw = new PSQLDatasetWriter(dsC.getDataSourceTradeDB());
-        for (Dataset dataset : comtradeResponse.getDatasets()) {
-            dw.addDataset(dataset);
+        PSQLTradeWriter dw = new PSQLTradeWriter(dsC.getDataSourceTradeDB());
+        for (TradeData tradeData : comtradeResponse.getDatasets()) {
+            dw.addDataset(tradeData);
         }
     }
 

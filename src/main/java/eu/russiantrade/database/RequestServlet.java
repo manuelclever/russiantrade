@@ -1,7 +1,9 @@
 package eu.russiantrade.database;
 
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
-import eu.russiantrade.database.readAndWrite.dataset.PSQLDatasetReader;
+import eu.russiantrade.database.querydesignations.DataDesignations;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.List;
 
 public class RequestServlet extends HttpServlet {
     private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
@@ -23,13 +26,22 @@ public class RequestServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         try {
-            String country = req.getParameter("country");
+            int country = Integer.parseInt(req.getParameter("country"));
             String tradeFlow = req.getParameter("trade_flow");
+            int periodStart = Integer.parseInt(req.getParameter("periodStart"));
+            int periodEnd = Integer.parseInt(req.getParameter("periodEnd"));
             String commodity = req.getParameter("commodity");
 
             DSCreator dsC = new DSCreator(DB_PROPERTIES);
-            PSQLDatasetReader dr = new PSQLDatasetReader(dsC.getDataSourceTradeDB());
-//            dr.getDatasets(country, DataDesignations.RUSSIA, tradeFlow, commodity);
+            PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
+
+            List<TradeData> tradeData;
+            if(periodEnd == -1) {
+                tradeData = dr.getDatasets(country, DataDesignations.RUSSIA, tradeFlow, periodStart, commodity);
+            } else {
+                tradeData = dr.getDatasets(country, DataDesignations.RUSSIA, tradeFlow, periodStart, periodEnd,
+                        commodity);
+            }
 
 
 

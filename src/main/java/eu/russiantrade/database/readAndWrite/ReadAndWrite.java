@@ -1,10 +1,10 @@
 package eu.russiantrade.database.readAndWrite;
 
-import eu.russiantrade.api.comtrade.parser.Dataset;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.readAndWrite.coalition.PSQLCoalitionWriter;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
-import eu.russiantrade.database.readAndWrite.dataset.PSQLDatasetWriter;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
 import eu.russiantrade.database.readAndWrite.union.PSQLUnionWriter;
 
 import java.nio.file.FileSystems;
@@ -19,21 +19,21 @@ public class ReadAndWrite {
         PSQLCountryWriter psqlCountryWriter = new PSQLCountryWriter(dsCreator.getDataSourceTradeDB());
         PSQLCoalitionWriter psqlCoalitionWriter = new PSQLCoalitionWriter(dsCreator.getDataSourceTradeDB());
         PSQLUnionWriter psqlUnionWriter = new PSQLUnionWriter(dsCreator.getDataSourceTradeDB());
-        PSQLDatasetWriter psqlDatasetWriter = new PSQLDatasetWriter(dsCreator.getDataSourceTradeDB());
+        PSQLTradeWriter psqlDatasetWriter = new PSQLTradeWriter(dsCreator.getDataSourceTradeDB());
 
         psqlCountryWriter.addCountry("Denmark", "dk", 208);
         psqlCountryWriter.addCountry("France", "fr", 89);
         psqlCoalitionWriter.addCoalition("NATO");
 
-        Dataset dataset = new Dataset();
-        dataset.setPeriod(102021);
-        dataset.setReporterCode(208);
-        dataset.setPartnerCode(89);
-        dataset.setTradeFlowCode(1);
-        dataset.setCommodityCode("All");
-        dataset.setTradeValue(20000000000L);
+        TradeData tradeData = new TradeData();
+        tradeData.setPeriod(102021);
+        tradeData.setReporterCode(208);
+        tradeData.setPartnerCode(89);
+        tradeData.setTradeFlowCode(1);
+        tradeData.setCommodityCode("All");
+        tradeData.setTradeValue(20000000000L);
 
-        psqlDatasetWriter.addDataset(dataset);
+        psqlDatasetWriter.addDataset(tradeData);
 
     }
 }

@@ -1,6 +1,6 @@
 package eu.russiantrade.database.querydesignations.PSQL;
 
-public class PSQLQDataset extends PSQLQueries {
+public class PSQLQTradeData extends PSQLQueries {
 
     //join
     public static final String JOIN_COUNTRY_REPORTER = INNER_JOIN + TABLE_COUNTRY + " " + COUNTRY_AS_REPORTER +
@@ -37,7 +37,7 @@ public class PSQLQDataset extends PSQLQueries {
 
     //queries
     public static final String QUERY_INSERT = INSERT_INTO + TABLE_MONTHLY_TRADE + "(" +
-            PERIOD + C +
+            TABLE_MONTHLY_TRADE + P + PERIOD + C +
             MONTHLY_TRADE_REPORTER + C +
             MONTHLY_TRADE_PARTNER + C +
             MONTHLY_TRADE_FLOW + C +
@@ -63,74 +63,102 @@ public class PSQLQDataset extends PSQLQueries {
     public static String queryWhereTradeReporterAndPartner(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_PARTNER + WHERE +
-                PARAMETER_TRADE_FLOW + AND +
-                PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                JOIN_COUNTRY_PARTNER +
+                WHERE +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD + C +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
     public static String queryWhereTradeReporterPartnerAndPeriod(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
                 JOIN_COUNTRY_PARTNER +
-                PARAMETER_TRADE_FLOW + AND +
-                WHERE + PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + AND +
-                PARAMETER_PERIOD + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                WHERE +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER + AND +
+                    PARAMETER_PERIOD +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
     public static String queryWhereCommodityTradeReporterPartnerAndPeriod(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_REPORTER + WHERE +
-                PARAMETER_COMMODITY + AND +
-                PARAMETER_TRADE_FLOW + AND +
-                PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + AND +
-                PARAMETER_PERIOD + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                JOIN_COUNTRY_REPORTER +
+                WHERE +
+                    PARAMETER_COMMODITY + AND +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER + AND +
+                    PARAMETER_PERIOD +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
     public static String queryWhereTradeCommodityLengthReporterPartnerAndPeriod(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_REPORTER + WHERE +
-                PARAMETER_TRADE_FLOW + AND +
-                PARAMETER_COMMODITY_LENGTH + AND +
-                PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + AND +
-                PARAMETER_PERIOD + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                JOIN_COUNTRY_REPORTER +
+                WHERE +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_COMMODITY_LENGTH + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER + AND +
+                    PARAMETER_PERIOD +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
     public static String queryWhereTradeReporterPartnerAndPeriodBetween(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_REPORTER + WHERE +
-                PARAMETER_TRADE_FLOW + AND +
-                PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + AND +
-                PARAMETER_PERIOD_BETWEEN + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                JOIN_COUNTRY_REPORTER +
+                WHERE +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER + AND +
+                    PARAMETER_PERIOD_BETWEEN +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
     public static String queryWhereCommodityTradeReporterPartnerAndPeriodBetween(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_REPORTER + WHERE +
-                PARAMETER_COMMODITY + AND +
-                PARAMETER_TRADE_FLOW + AND +
-                PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + AND +
-                PARAMETER_PERIOD_BETWEEN + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                JOIN_COUNTRY_REPORTER +
+                WHERE +
+                    PARAMETER_COMMODITY + AND +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER + AND +
+                    PARAMETER_PERIOD_BETWEEN +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
     public static String queryWhereTradeCommodityLengthReporterPartnerAndPeriodBetween(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +
-                JOIN_COUNTRY_REPORTER + WHERE +
-                PARAMETER_TRADE_FLOW + AND +
-                PARAMETER_COMMODITY_LENGTH + AND +
-                PARAMETER_REPORTER + AND +
-                PARAMETER_PARTNER + AND +
-                PARAMETER_PERIOD_BETWEEN + ORDER_BY +
-                TABLE_MONTHLY_TRADE + P + PERIOD + FROM_END + AS + ROW + END;
+                JOIN_COUNTRY_REPORTER +
+                WHERE +
+                    PARAMETER_TRADE_FLOW + AND +
+                    PARAMETER_COMMODITY_LENGTH + AND +
+                    PARAMETER_REPORTER + AND +
+                    PARAMETER_PARTNER + AND +
+                    PARAMETER_PERIOD_BETWEEN +
+                ORDER_BY +
+                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
     }
 }

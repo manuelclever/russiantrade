@@ -1,7 +1,7 @@
-package eu.russiantrade.database.readAndWrite.dataset;
+package eu.russiantrade.database.readAndWrite.tradeData;
 
-import eu.russiantrade.api.comtrade.parser.Dataset;
-import eu.russiantrade.database.querydesignations.PSQL.PSQLQDataset;
+import eu.russiantrade.api.comtrade.parser.TradeData;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
 import eu.russiantrade.util.LogGenerator;
 
 import javax.sql.DataSource;
@@ -13,33 +13,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-public class PSQLDatasetWriter implements DatasetDataWriter {
+public class PSQLTradeWriter implements tradeDataWriter {
     DataSource datasource;
 
-    public PSQLDatasetWriter(DataSource dataSource) {
+    public PSQLTradeWriter(DataSource dataSource) {
         this.datasource = dataSource;
     }
 
     @Override
-    public int addDataset(Dataset dataset) {
+    public int addDataset(TradeData tradeData) {
 
         try(Connection conn = datasource.getConnection();
-            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_INSERT)) {
+            PreparedStatement query = conn.prepareStatement(PSQLQTradeData.QUERY_INSERT)) {
 
-            query.setInt(1, dataset.getPeriod());
-            query.setInt(2, dataset.getReporterCode());
-            query.setInt(3, dataset.getPartnerCode());
-            query.setInt(4, dataset.getTradeFlowCode());
-            query.setString(5, dataset.getCommodityCode());
-            query.setString(6, dataset.getCommodityDesc());
-            query.setLong(7, dataset.getTradeValue());
+            query.setInt(1, tradeData.getPeriod());
+            query.setInt(2, tradeData.getReporterCode());
+            query.setInt(3, tradeData.getPartnerCode());
+            query.setInt(4, tradeData.getTradeFlowCode());
+            query.setString(5, tradeData.getCommodityCode());
+            query.setString(6, tradeData.getCommodityDesc());
+            query.setLong(7, tradeData.getTradeValue());
 //            query.setInt(6, dataset.getReporterCode()); //global sanction id
 //            query.setInt(7, dataset.getReporterCode()); //local sanction id
 
             ResultSet rs = query.executeQuery();
             if(rs.next()) {
                 conn.commit();
-                return rs.getInt(PSQLQDataset.MONTHLY_TRADE_ID);
+                return rs.getInt(PSQLQTradeData.MONTHLY_TRADE_ID);
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -49,24 +49,24 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
     }
 
     @Override
-    public List<Integer> addDatasets(List<Dataset> datasets) {
+    public List<Integer> addDatasets(List<TradeData> tradeDataList) {
         List<Integer> datasetIDs = new ArrayList<>();
 
-        for(Dataset dataset : datasets) {
-            datasetIDs.add(addDataset(dataset));
+        for(TradeData tradeData : tradeDataList) {
+            datasetIDs.add(addDataset(tradeData));
         }
         return datasetIDs;
     }
 
     @Override
-    public boolean removeDataset(Dataset dataset) {
+    public boolean removeDataset(TradeData tradeData) {
 
         try(Connection conn = datasource.getConnection();
-            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
+            PreparedStatement query = conn.prepareStatement(PSQLQTradeData.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
 
-            query.setInt(1, dataset.getReporterCode());
-            query.setInt(2, dataset.getPeriod());
-            query.setString(3, dataset.getCommodityCode());
+            query.setInt(1, tradeData.getReporterCode());
+            query.setInt(2, tradeData.getPeriod());
+            query.setString(3, tradeData.getCommodityCode());
 
             boolean success = query.execute();
             conn.commit();
@@ -82,7 +82,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
     public boolean removeDataset(int reporter, int period) {
 
         try(Connection conn = datasource.getConnection();
-            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD)) {
+            PreparedStatement query = conn.prepareStatement(PSQLQTradeData.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD)) {
 
             query.setInt(1, reporter);
             query.setInt(2, period);
@@ -101,7 +101,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
     public boolean removeDataset(int reporter, int period, String commotidyCode) {
 
         try(Connection conn = datasource.getConnection();
-            PreparedStatement query = conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
+            PreparedStatement query = conn.prepareStatement(PSQLQTradeData.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
 
             query.setInt(1, reporter);
             query.setInt(2, period);
@@ -122,7 +122,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query =
-                    conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_BETWEEN)) {
+                    conn.prepareStatement(PSQLQTradeData.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_BETWEEN)) {
 
             query.setInt(1, reporter);
             query.setInt(2, periodStart);
@@ -143,7 +143,7 @@ public class PSQLDatasetWriter implements DatasetDataWriter {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query =
-                    conn.prepareStatement(PSQLQDataset.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY_BETWEEN)) {
+                    conn.prepareStatement(PSQLQTradeData.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY_BETWEEN)) {
 
             query.setInt(1, reporter);
             query.setInt(2, periodStart);
