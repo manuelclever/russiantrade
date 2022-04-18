@@ -89,7 +89,7 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         tradeData.setIsLeaf(node.findValue("IsLeaf").asInt());
 
         tradeData.setTradeFlowCode(node.findValue("rgCode").asInt());
-        tradeData.setTradeFlowType(node.findValue("rgDesc").asText());
+        tradeData.setTradeFlowDesc(node.findValue("rgDesc").asText());
 
         tradeData.setReporterCode(node.findValue("rtCode").asInt());
         tradeData.setReporterDesc(node.findValue("rtTitle").asText());

@@ -52,6 +52,7 @@ public class RequestServlet extends HttpServlet {
 
 
 
+
             out.println("<!DOCTYPE html");  // HTML 5
             out.println("<html><head>");
             out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");

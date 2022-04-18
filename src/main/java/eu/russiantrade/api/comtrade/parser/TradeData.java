@@ -10,7 +10,7 @@ public class TradeData {
     private int isLeaf;
 
     private int tradeFlowCode;
-    private String tradeFlowType;
+    private String tradeFlowDesc;
 
     private int reporterCode;
     private String reporterDesc;
@@ -100,12 +100,12 @@ public class TradeData {
         this.tradeFlowCode = tradeFlowCode;
     }
 
-    public String getTradeFlowType() {
-        return tradeFlowType;
+    public String getTradeFlowDesc() {
+        return tradeFlowDesc;
     }
 
-    public void setTradeFlowType(String tradeFlowType) {
-        this.tradeFlowType = tradeFlowType;
+    public void setTradeFlowDesc(String tradeFlowDesc) {
+        this.tradeFlowDesc = tradeFlowDesc;
     }
 
     public int getReporterCode() {
@@ -278,7 +278,7 @@ public class TradeData {
 
     @Override
     public String toString() {
-        return "[" + period + ", " + tradeFlowType + ", " + reporterDesc + ", " + partnerDesc + ", " + commodityCode +
+        return "[" + period + ", " + tradeFlowDesc + ", " + reporterDesc + ", " + partnerDesc + ", " + commodityCode +
                 ", " + commodityDesc + ", " + tradeValue + "]";
     }
 }
