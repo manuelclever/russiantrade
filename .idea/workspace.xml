@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08931442-bbc4-46f8-8087-16c8c889d713" name="Changes" comment="changed directory structure">
-      <change beforePath="$PROJECT_DIR$/webapp/webpage/.gitignore" beforeDir="false" />
-    </list>
+    <list default="true" id="08931442-bbc4-46f8-8087-16c8c889d713" name="Changes" comment="changed directory structure" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +43,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "last_opened_file_path": "/home/manuel/Nextcloud/Dokumente/Coding/Projects/www/russiantrade"
+    "last_opened_file_path": "/home/manuel/Nextcloud/Dokumente/Coding/Projects/www/russiantrade",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RecentsManager">
