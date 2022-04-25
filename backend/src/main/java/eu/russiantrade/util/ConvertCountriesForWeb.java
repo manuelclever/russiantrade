@@ -72,7 +72,7 @@ public class ConvertCountriesForWeb {
             String iso = country[2].toLowerCase();
 
             writer.write("import " + iso + "_flag from './../../resources/images/svg_flags/" +
-                fullName + ".svg;\n");
+                fullName + ".svg';\n");
         }
         writer.close();
     }
