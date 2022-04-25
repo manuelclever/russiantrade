@@ -11,6 +11,9 @@ public class ConvertCountriesForWeb {
     private static final String TARGET_PATH = FileSystems.getDefault()
             .getPath("webapp", "webpage", "src", "resources", "data", "countriesDropdown.txt")
             .toAbsolutePath().toString();
+    public static final String IMAGE_PATH = FileSystems.getDefault()
+            .getPath("webapp", "webpage", "src", "resources", "images", "svg_flags")
+            .toAbsolutePath().toString();
 
     public static void main(String[] args) {
         convert();
@@ -36,8 +39,8 @@ public class ConvertCountriesForWeb {
                 writer.write(
                         "\t{ value: '" + country[1] + "',label: (\n" +
                             "\t\t<div className='label'>\n" +
-                                "\t\t\t<img src={" + country[2].toLowerCase() + "_flag} alt='" + country[1] +
-                                    "_flag' style={style" + ".img}/>\n" +
+                                "\t\t\t<img src={" + country[2].toLowerCase() + "_flag} alt='" +
+                                    country[1].toLowerCase() + "_flag' style={style" + ".img}/>\n" +
                                 "\t\t\t<span>" + country[1] + "</span>\n" +
                             "\t\t</div>\n" +
                         "\t)},\n");

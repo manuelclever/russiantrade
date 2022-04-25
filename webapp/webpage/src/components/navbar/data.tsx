@@ -1,4 +1,5 @@
 import ua_flag from "./../../resources/images/flag_ukraine.png";
+import placeholder from "./../../resources/images/svg_flags/002-oman.svg"
 
 export interface CountryOption {
     value: String;
@@ -33,25 +34,13 @@ const associationOptions = [
     ) }
   ];
   
-const countryOptions: CountryOption[] = [
-{ value: 'germany', label: (
-    <div className="label">
-        <img src={ua_flag} alt="flag" style={style.img}/>
-        <span>Germany</span>
-    </div>
-) },
-{ value: 'italy', label: (
-    <div className="label">
-        <img src={ua_flag} alt="flag" style={style.img}/>
-        <span>Italy</span>
-    </div>
-) },
-{ value: 'france', label: (
-    <div className="label">
-        <img src={ua_flag} alt="flag" style={style.img}/>
-        <span>France</span>
-    </div>
-) }
+  const countryOptions: CountryOption[] = [
+	{ value: 'Albania',label: (
+		<div className='label'>
+			<img src={placeholder} alt='Albania_flag' style={style.img}/>
+			<span>Albania</span>
+		</div>
+	)},
 ];
 
 const dropwdownOptions: GroupedOptions[] = [

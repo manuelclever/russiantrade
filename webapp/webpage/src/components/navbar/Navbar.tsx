@@ -5,10 +5,6 @@ import ua_flag from "./../../resources/images/flag_ukraine.png";
 import { Collection } from "typescript";
 
 export default function navbar() {
-    
-
-    
-
 
     return (
         <div className="containerNavbar fixed-top">      
