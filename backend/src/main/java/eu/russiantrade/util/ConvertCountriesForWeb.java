@@ -22,7 +22,6 @@ public class ConvertCountriesForWeb {
             BufferedWriter writer = new BufferedWriter(new FileWriter(TARGET_PATH));
 
             List<String> countries = new ArrayList<>();
-
             while(reader.ready()) {
                 String[] country = reader.readLine().split("_");
                 if(country[0].charAt(0) != '#') {
@@ -38,7 +37,6 @@ public class ConvertCountriesForWeb {
                     writer.write(countries.get(i));
                 }
             }
-
             writer.close();
 
         } catch (IOException e) {
