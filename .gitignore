@@ -2,6 +2,7 @@
 
 #java
 /target/
+/.idea/
 /backend/src/main/resources/log.log
 /backend/src/main/resources/database/successfulApiResponses.txt
 *.class
