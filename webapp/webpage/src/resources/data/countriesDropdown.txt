@@ -1,217 +1,217 @@
 const countryOptions: CountryOption[] = [
-	{ value: 'Albania',label: (
+	{ value: 'albania',label: (
 		<div className='label'>
-			<img src={alb_flag} alt='Albania_flag' style={style.img}/>
+			<img src={alb_flag} alt='albania_flag' style={style.img}/>
 			<span>Albania</span>
 		</div>
 	)},
-	{ value: 'Australia',label: (
+	{ value: 'australia',label: (
 		<div className='label'>
-			<img src={aus_flag} alt='Australia_flag' style={style.img}/>
+			<img src={aus_flag} alt='australia_flag' style={style.img}/>
 			<span>Australia</span>
 		</div>
 	)},
-	{ value: 'Austria',label: (
+	{ value: 'austria',label: (
 		<div className='label'>
-			<img src={aut_flag} alt='Austria_flag' style={style.img}/>
+			<img src={aut_flag} alt='austria_flag' style={style.img}/>
 			<span>Austria</span>
 		</div>
 	)},
-	{ value: 'Belgium',label: (
+	{ value: 'belgium',label: (
 		<div className='label'>
-			<img src={bel_flag} alt='Belgium_flag' style={style.img}/>
+			<img src={bel_flag} alt='belgium_flag' style={style.img}/>
 			<span>Belgium</span>
 		</div>
 	)},
-	{ value: 'Bulgaria',label: (
+	{ value: 'bulgaria',label: (
 		<div className='label'>
-			<img src={bgr_flag} alt='Bulgaria_flag' style={style.img}/>
+			<img src={bgr_flag} alt='bulgaria_flag' style={style.img}/>
 			<span>Bulgaria</span>
 		</div>
 	)},
-	{ value: 'Canada',label: (
+	{ value: 'canada',label: (
 		<div className='label'>
-			<img src={can_flag} alt='Canada_flag' style={style.img}/>
+			<img src={can_flag} alt='canada_flag' style={style.img}/>
 			<span>Canada</span>
 		</div>
 	)},
-	{ value: 'Croatia',label: (
+	{ value: 'croatia',label: (
 		<div className='label'>
-			<img src={hrv_flag} alt='Croatia_flag' style={style.img}/>
+			<img src={hrv_flag} alt='croatia_flag' style={style.img}/>
 			<span>Croatia</span>
 		</div>
 	)},
-	{ value: 'Czechia',label: (
+	{ value: 'czechia',label: (
 		<div className='label'>
-			<img src={cze_flag} alt='Czechia_flag' style={style.img}/>
+			<img src={cze_flag} alt='czechia_flag' style={style.img}/>
 			<span>Czechia</span>
 		</div>
 	)},
-	{ value: 'Denmark',label: (
+	{ value: 'denmark',label: (
 		<div className='label'>
-			<img src={dnk_flag} alt='Denmark_flag' style={style.img}/>
+			<img src={dnk_flag} alt='denmark_flag' style={style.img}/>
 			<span>Denmark</span>
 		</div>
 	)},
-	{ value: 'Estonia',label: (
+	{ value: 'estonia',label: (
 		<div className='label'>
-			<img src={est_flag} alt='Estonia_flag' style={style.img}/>
+			<img src={est_flag} alt='estonia_flag' style={style.img}/>
 			<span>Estonia</span>
 		</div>
 	)},
-	{ value: 'Finland',label: (
+	{ value: 'finland',label: (
 		<div className='label'>
-			<img src={fin_flag} alt='Finland_flag' style={style.img}/>
+			<img src={fin_flag} alt='finland_flag' style={style.img}/>
 			<span>Finland</span>
 		</div>
 	)},
-	{ value: 'France',label: (
+	{ value: 'france',label: (
 		<div className='label'>
-			<img src={fta_flag} alt='France_flag' style={style.img}/>
+			<img src={fta_flag} alt='france_flag' style={style.img}/>
 			<span>France</span>
 		</div>
 	)},
-	{ value: 'Germany',label: (
+	{ value: 'germany',label: (
 		<div className='label'>
-			<img src={deu_flag} alt='Germany_flag' style={style.img}/>
+			<img src={deu_flag} alt='germany_flag' style={style.img}/>
 			<span>Germany</span>
 		</div>
 	)},
-	{ value: 'Greece',label: (
+	{ value: 'greece',label: (
 		<div className='label'>
-			<img src={grc_flag} alt='Greece_flag' style={style.img}/>
+			<img src={grc_flag} alt='greece_flag' style={style.img}/>
 			<span>Greece</span>
 		</div>
 	)},
-	{ value: 'Hungary',label: (
+	{ value: 'hungary',label: (
 		<div className='label'>
-			<img src={hun_flag} alt='Hungary_flag' style={style.img}/>
+			<img src={hun_flag} alt='hungary_flag' style={style.img}/>
 			<span>Hungary</span>
 		</div>
 	)},
-	{ value: 'Iceland',label: (
+	{ value: 'iceland',label: (
 		<div className='label'>
-			<img src={isl_flag} alt='Iceland_flag' style={style.img}/>
+			<img src={isl_flag} alt='iceland_flag' style={style.img}/>
 			<span>Iceland</span>
 		</div>
 	)},
-	{ value: 'Ireland',label: (
+	{ value: 'ireland',label: (
 		<div className='label'>
-			<img src={irl_flag} alt='Ireland_flag' style={style.img}/>
+			<img src={irl_flag} alt='ireland_flag' style={style.img}/>
 			<span>Ireland</span>
 		</div>
 	)},
-	{ value: 'Italy',label: (
+	{ value: 'italy',label: (
 		<div className='label'>
-			<img src={ita_flag} alt='Italy_flag' style={style.img}/>
+			<img src={ita_flag} alt='italy_flag' style={style.img}/>
 			<span>Italy</span>
 		</div>
 	)},
-	{ value: 'Latvia',label: (
+	{ value: 'latvia',label: (
 		<div className='label'>
-			<img src={lva_flag} alt='Latvia_flag' style={style.img}/>
+			<img src={lva_flag} alt='latvia_flag' style={style.img}/>
 			<span>Latvia</span>
 		</div>
 	)},
-	{ value: 'Luxembourg',label: (
+	{ value: 'luxembourg',label: (
 		<div className='label'>
-			<img src={lux_flag} alt='Luxembourg_flag' style={style.img}/>
+			<img src={lux_flag} alt='luxembourg_flag' style={style.img}/>
 			<span>Luxembourg</span>
 		</div>
 	)},
-	{ value: 'Malta',label: (
+	{ value: 'malta',label: (
 		<div className='label'>
-			<img src={mlt_flag} alt='Malta_flag' style={style.img}/>
+			<img src={mlt_flag} alt='malta_flag' style={style.img}/>
 			<span>Malta</span>
 		</div>
 	)},
-	{ value: 'Montenegro',label: (
+	{ value: 'montenegro',label: (
 		<div className='label'>
-			<img src={mne_flag} alt='Montenegro_flag' style={style.img}/>
+			<img src={mne_flag} alt='montenegro_flag' style={style.img}/>
 			<span>Montenegro</span>
 		</div>
 	)},
-	{ value: 'Netherlands',label: (
+	{ value: 'netherlands',label: (
 		<div className='label'>
-			<img src={nld_flag} alt='Netherlands_flag' style={style.img}/>
+			<img src={nld_flag} alt='netherlands_flag' style={style.img}/>
 			<span>Netherlands</span>
 		</div>
 	)},
-	{ value: 'North Macedonia',label: (
+	{ value: 'north_macedonia',label: (
 		<div className='label'>
-			<img src={mkd_flag} alt='North Macedonia_flag' style={style.img}/>
+			<img src={mkd_flag} alt='north_macedonia_flag' style={style.img}/>
 			<span>North Macedonia</span>
 		</div>
 	)},
-	{ value: 'Norway',label: (
+	{ value: 'norway',label: (
 		<div className='label'>
-			<img src={nor_flag} alt='Norway_flag' style={style.img}/>
+			<img src={nor_flag} alt='norway_flag' style={style.img}/>
 			<span>Norway</span>
 		</div>
 	)},
-	{ value: 'Poland',label: (
+	{ value: 'poland',label: (
 		<div className='label'>
-			<img src={pol_flag} alt='Poland_flag' style={style.img}/>
+			<img src={pol_flag} alt='poland_flag' style={style.img}/>
 			<span>Poland</span>
 		</div>
 	)},
-	{ value: 'Portugal',label: (
+	{ value: 'portugal',label: (
 		<div className='label'>
-			<img src={prt_flag} alt='Portugal_flag' style={style.img}/>
+			<img src={prt_flag} alt='portugal_flag' style={style.img}/>
 			<span>Portugal</span>
 		</div>
 	)},
-	{ value: 'Romania',label: (
+	{ value: 'romania',label: (
 		<div className='label'>
-			<img src={rou_flag} alt='Romania_flag' style={style.img}/>
+			<img src={rou_flag} alt='romania_flag' style={style.img}/>
 			<span>Romania</span>
 		</div>
 	)},
-	{ value: 'Slovakia',label: (
+	{ value: 'slovakia',label: (
 		<div className='label'>
-			<img src={svk_flag} alt='Slovakia_flag' style={style.img}/>
+			<img src={svk_flag} alt='slovakia_flag' style={style.img}/>
 			<span>Slovakia</span>
 		</div>
 	)},
-	{ value: 'Slovenia',label: (
+	{ value: 'slovenia',label: (
 		<div className='label'>
-			<img src={svn_flag} alt='Slovenia_flag' style={style.img}/>
+			<img src={svn_flag} alt='slovenia_flag' style={style.img}/>
 			<span>Slovenia</span>
 		</div>
 	)},
-	{ value: 'Spain',label: (
+	{ value: 'spain',label: (
 		<div className='label'>
-			<img src={esp_flag} alt='Spain_flag' style={style.img}/>
+			<img src={esp_flag} alt='spain_flag' style={style.img}/>
 			<span>Spain</span>
 		</div>
 	)},
-	{ value: 'Sweden',label: (
+	{ value: 'sweden',label: (
 		<div className='label'>
-			<img src={swe_flag} alt='Sweden_flag' style={style.img}/>
+			<img src={swe_flag} alt='sweden_flag' style={style.img}/>
 			<span>Sweden</span>
 		</div>
 	)},
-	{ value: 'Switzerland',label: (
+	{ value: 'switzerland',label: (
 		<div className='label'>
-			<img src={che_flag} alt='Switzerland_flag' style={style.img}/>
+			<img src={che_flag} alt='switzerland_flag' style={style.img}/>
 			<span>Switzerland</span>
 		</div>
 	)},
-	{ value: 'Turkey',label: (
+	{ value: 'turkey',label: (
 		<div className='label'>
-			<img src={tur_flag} alt='Turkey_flag' style={style.img}/>
+			<img src={tur_flag} alt='turkey_flag' style={style.img}/>
 			<span>Turkey</span>
 		</div>
 	)},
-	{ value: 'USA',label: (
+	{ value: 'usa',label: (
 		<div className='label'>
-			<img src={usa_flag} alt='USA_flag' style={style.img}/>
+			<img src={usa_flag} alt='usa_flag' style={style.img}/>
 			<span>USA</span>
 		</div>
 	)},
-	{ value: 'United Kingdom',label: (
+	{ value: 'united_kingdom',label: (
 		<div className='label'>
-			<img src={gbr_flag} alt='United Kingdom_flag' style={style.img}/>
+			<img src={gbr_flag} alt='united_kingdom_flag' style={style.img}/>
 			<span>United Kingdom</span>
 		</div>
 	)},
