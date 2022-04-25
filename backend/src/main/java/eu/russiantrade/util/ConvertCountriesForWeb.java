@@ -13,6 +13,10 @@ public class ConvertCountriesForWeb {
             .toAbsolutePath().toString();
 
     public static void main(String[] args) {
+        convert();
+    }
+
+    public static void convert() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(SOURCE_PATH));
             BufferedWriter writer = new BufferedWriter(new FileWriter(TARGET_PATH));
