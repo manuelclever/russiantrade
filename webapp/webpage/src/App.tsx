@@ -1,10 +1,9 @@
 import { ChartConfiguration, ChartType, ChartData, ChartOptions } from 'chart.js';
 import 'chart.js/auto';
 
-import WorldMap from './temp/worldMap';
-import Dropdown from './components/Dropdown';
+import Navbar from './components/navbar/Navbar';
+import WorldMap from './components/worldMap';
 
-import ua_flag from "./resources/images/flag_ukraine.png";
 import img_bar from "./resources/images/bar.png";
 import img_pie from "./resources/images/pie.png";
 
@@ -71,54 +70,47 @@ function App(this: any) {
     // <!--https://commons.wikimedia.org/wiki/File_talk:BlankMap-World.svg/Documentation#Territories_included-->
     // <!--<?xml version="1.0" encoding="UTF-8"?>-->
     <div>
-        <div className="containerNavbar fixed-top">      
-                <img id="navIMG" src={ua_flag} alt='flag_ukraine'/>
-                <nav className="navbar">
-                        <a className="navbar-brand" href="#">trade</a>
-                    <ul className="nav justify-content-start">
-                    </ul>
-                </nav>
-            </div>
-            <div className="container">
-                <div className="row firstRow">
-                    <div className="col-md exportCol">
-                        <div className="row export">
-                            <h1>Export</h1>
-                        </div>
-                        <div className="row overview-bar">
-                            <div className="col " style={styles.rebecca}>
-                                <img src={img_bar} style={styles.hundred}/>
-                            </div>
-                        </div>
-                        <div className="row specific-pie">
-                            <div className="col" style={styles.burly}>
-                                <img src={img_pie} style={styles.hundred}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md importCol">
-                        <div className="row import">
-                            <h1>Import</h1>
-                        </div>
-                        <div className="row overview-bar">
-                            <div className="col" style={styles.burly}>
-                                <img src={img_bar} style={styles.hundred}/>
-                            </div>
-                        </div>
-                        <div className="row specific-pie">
-                            <div className="col" style={styles.burly}>
-                                <img src={img_pie} style={styles.hundred}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col"> 
-                        <p id="curCountry" data-toggle="tooltip" data-placement="top" title="Tooltip">World</p>
-                    </div>
-                </div>
-                <WorldMap/>
-            </div>
+      <Navbar/>
+      <div className="container">
+          <div className="row firstRow">
+              <div className="col-md exportCol">
+                  <div className="row export">
+                      <h1>Export</h1>
+                  </div>
+                  <div className="row overview-bar">
+                      <div className="col " style={styles.rebecca}>
+                          <img src={img_bar} style={styles.hundred}/>
+                      </div>
+                  </div>
+                  <div className="row specific-pie">
+                      <div className="col" style={styles.burly}>
+                          <img src={img_pie} style={styles.hundred}/>
+                      </div>
+                  </div>
+              </div>
+              <div className="col-md importCol">
+                  <div className="row import">
+                      <h1>Import</h1>
+                  </div>
+                  <div className="row overview-bar">
+                      <div className="col" style={styles.burly}>
+                          <img src={img_bar} style={styles.hundred}/>
+                      </div>
+                  </div>
+                  <div className="row specific-pie">
+                      <div className="col" style={styles.burly}>
+                          <img src={img_pie} style={styles.hundred}/>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div className="row">
+              <div className="col"> 
+                  <p id="curCountry" data-toggle="tooltip" data-placement="top" title="Tooltip">World</p>
+              </div>
+          </div>
+          <WorldMap/>
+      </div>
             
     </div>
 
