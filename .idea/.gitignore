@@ -1,9 +1,0 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-/src/main/webapp/WEB-INF/classes/
-/target/
-*.class
-/todo.txt
-/src/main/resources/log.log
-/src/main/resources/database/successfulApiResponses.txt
