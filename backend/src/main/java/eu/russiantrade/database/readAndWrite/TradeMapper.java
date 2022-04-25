@@ -39,7 +39,7 @@ public class TradeMapper {
             labels[i] = tradeData.getCommodityCode() + " - " + tradeData.getCommodityDesc();
         }
 
-
+        return null;
     }
 
     public String getTradeDataYear(List<TradeData> tradeDataList) {

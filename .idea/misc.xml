@@ -9,6 +9,6 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/classes" />
+    <output url="file://$PROJECT_DIR$/backend/src/main/webapp/WEB-INF/classes" />
   </component>
 </project>
