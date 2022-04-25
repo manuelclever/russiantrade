@@ -21,22 +21,28 @@ public class ConvertCountriesForWeb {
             BufferedReader reader = new BufferedReader(new FileReader(SOURCE_PATH));
             BufferedWriter writer = new BufferedWriter(new FileWriter(TARGET_PATH));
 
-            List<String> countries = new ArrayList<>();
+            List<String[]> countries = new ArrayList<>();
             while(reader.ready()) {
                 String[] country = reader.readLine().split("_");
                 if(country[0].charAt(0) != '#') {
-                    countries.add(country[1]);
+                    countries.add(country);
                 }
             }
-            countries.sort(String::compareTo);
+            countries.sort((o1, o2) -> o1[1].compareTo(o2[1]));
 
+            writer.write("const countryOptions: CountryOption[] = [\n");
             for(int i = 0; i < countries.size(); i++) {
-                if(i < countries.size()-1) {
-                    writer.write(countries.get(i) + "\n");
-                } else {
-                    writer.write(countries.get(i));
-                }
+                String[] country = countries.get(i);
+                writer.write(
+                        "\t{ value: '" + country[1] + "',label: (\n" +
+                            "\t\t<div className='label'>\n" +
+                                "\t\t\t<img src={" + country[2].toLowerCase() + "_flag} alt='" + country[1] +
+                                    "_flag' style={style" + ".img}/>\n" +
+                                "\t\t\t<span>" + country[1] + "</span>\n" +
+                            "\t\t</div>\n" +
+                        "\t)},\n");
             }
+            writer.write("];");
             writer.close();
 
         } catch (IOException e) {
