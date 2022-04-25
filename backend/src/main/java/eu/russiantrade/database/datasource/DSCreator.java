@@ -75,7 +75,7 @@ public class DSCreator {
                 basicDS.getDriverClassName(),
                 properties.getProperty("server"),
                 properties.getProperty("port"),
-                properties.getProperty(type + "database")));
+                properties.getProperty(type + "backend/src/main/resources/database")));
 
         String tempProperty = properties.getProperty(type + "defaultAutoCommit");
         if (tempProperty != null) {
@@ -166,7 +166,7 @@ public class DSCreator {
     private void createDatabaseIfNotExist(BasicDataSource basicDS) {
         printDatasource(basicDS);
         String statement =
-                "CREATE DATABASE " + properties.getProperty("database") +
+                "CREATE DATABASE " + properties.getProperty("backend/src/main/resources/database") +
                         " OWNER " + properties.getProperty("user") +
                         " TABLESPACE " + properties.getProperty("tablespace") + ";";
         executeAuto(basicDS, statement);

@@ -13,7 +13,7 @@ import java.nio.file.Path;
 public class ReadAndWrite {
 
     public static void main(String[] args) {
-        Path path = FileSystems.getDefault().getPath("src", "test", "resources", "database", "testDatabase.properties");
+        Path path = FileSystems.getDefault().getPath("src", "test", "resources", "backend/src/main/resources/database", "testDatabase.properties");
         DSCreator dsCreator = new DSCreator(path.toAbsolutePath());
 
         PSQLCountryWriter psqlCountryWriter = new PSQLCountryWriter(dsCreator.getDataSourceTradeDB());

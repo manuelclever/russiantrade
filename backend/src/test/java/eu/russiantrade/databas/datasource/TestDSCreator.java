@@ -13,7 +13,7 @@ public class TestDSCreator {
     void create() {
         Path path = FileSystems
                 .getDefault()
-                .getPath("src", "test", "resources", "database", "testDatabase.properties")
+                .getPath("src", "test", "resources", "backend/src/main/resources/database", "testDatabase.properties")
                 .toAbsolutePath();
         DSCreator dsCreator = new DSCreator(path);
         dsCreator.getDataSourceTradeDB();

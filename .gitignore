@@ -1,8 +1,8 @@
 /shelf/
 /workspace.xml
-/src/main/webapp/WEB-INF/classes/
+/backend/src/main/webapp/WEB-INF/classes/
 /target/
 *.class
 /todo.txt
-/src/main/resources/log.log
-/src/main/resources/database/successfulApiResponses.txt
+/backend/src/main/resources/log.log
+/backend/src/main/resources/database/successfulApiResponses.txt

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class RequestServlet extends HttpServlet {
     private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "src", "test", "resources", "database", "testDatabase.properties");
+            "src", "test", "resources", "backend/src/main/resources/database", "testDatabase.properties");
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Set the response message's MIME type

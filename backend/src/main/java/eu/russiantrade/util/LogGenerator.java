@@ -8,7 +8,7 @@ import java.util.logging.*;
 public class LogGenerator {
     private static final Logger logger = Logger.getLogger("Cinema");
     public static final String ABSOLUTE_PATH = FileSystems.getDefault()
-            .getPath("src", "main", "resources", "log.log").toAbsolutePath().toString();
+            .getPath("src", "main", "resources", "backend/src/main/resources/log.log").toAbsolutePath().toString();
 
 
     static {
