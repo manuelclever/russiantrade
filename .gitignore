@@ -6,3 +6,5 @@
 /todo.txt
 /backend/src/main/resources/log.log
 /backend/src/main/resources/database/successfulApiResponses.txt
+/webapp/webpage/node_modules/.bin/
+/webapp/webpage/node_modules/.cache/
