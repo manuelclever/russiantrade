@@ -35,6 +35,12 @@
     text-decoration: none;
 }
 
+#selector {
+    margin-right: 1rem;
+    width: 12rem;
+    
+}
+
 .firstRow {
     padding-top:4rem
 }

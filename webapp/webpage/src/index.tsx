@@ -12,8 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'panzoom/dist/panzoom.js';
 
 import './App.css';
-import './standard.css';
-import './temp/worldMap.css';
+import './components/standard.css';
+import './components/worldMap.css';
 
 
 
