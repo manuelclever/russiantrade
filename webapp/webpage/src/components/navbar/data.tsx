@@ -1,3 +1,4 @@
+import world_flag from './../../resources/images/svg_flags/world.svg'; 
 import nato_flag from './../../resources/images/svg_flags/nato.svg';
 import european_union_flag from './../../resources/images/svg_flags/european-union.svg';
 
@@ -57,6 +58,12 @@ const style = {
 }
 
 const associationOptions = [
+	{ value: 'world', label: (
+        <div className="label">
+            <img src={world_flag} alt="flag" style={style.img}/>
+            <span>World</span>
+        </div>
+    )},
     { value: 'nato', label: (
         <div className="label">
             <img src={nato_flag} alt="flag" style={style.img}/>
