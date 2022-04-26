@@ -1,4 +1,4 @@
-// const isoCodes = require("./temp/iso_codes.json");
+import isoCodes from "./../../resources/data/iso_codes.json";
 
 
 export default function initialiseWorldMap() {
