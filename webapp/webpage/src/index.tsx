@@ -1,19 +1,21 @@
+//standard imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import 'jquery/dist/jquery.slim.min.js';
-
+//libraries
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//custom typescript
 import 'panzoom/dist/panzoom.js';
 
+//styling
+import './index.css';
 import './App.css';
 import './components/standard.css';
-import './components/worldMap.css';
+import './components/worldMap/worldMap.css';
 
 
 

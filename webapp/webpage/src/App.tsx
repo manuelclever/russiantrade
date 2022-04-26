@@ -2,7 +2,7 @@ import { ChartConfiguration, ChartType, ChartData, ChartOptions } from 'chart.js
 import 'chart.js/auto';
 
 import Navbar from './components/navbar/Navbar';
-import WorldMap from './components/worldMap';
+import WorldMap from './components/worldMap/WorldMap';
 
 import img_bar from "./resources/images/bar.png";
 import img_pie from "./resources/images/pie.png";

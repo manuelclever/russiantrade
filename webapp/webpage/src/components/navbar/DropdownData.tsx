@@ -57,28 +57,28 @@ const style = {
     },
 }
 
-const associationOptions = [
+export const associationOptions = [
 	{ value: 'world', label: (
         <div className="label">
-            <img src={world_flag} alt="flag" style={style.img}/>
+            <img src={world_flag} alt="world_flag" style={style.img}/>
             <span>World</span>
         </div>
     )},
     { value: 'nato', label: (
         <div className="label">
-            <img src={nato_flag} alt="flag" style={style.img}/>
+            <img src={nato_flag} alt="nato_flag" style={style.img}/>
             <span>Nato</span>
         </div>
     )},
     { value: 'eu', label: (
         <div className="label">
-            <img src={european_union_flag} alt="flag" style={style.img}/>
+            <img src={european_union_flag} alt="european_union_flag" style={style.img}/>
             <span>EU</span>
     </div>
     ) }
-  ];
+];
   
-  const countryOptions: CountryOption[] = [
+export const countryOptions: CountryOption[] = [
 	{ value: 'albania',label: (
 		<div className='label'>
 			<img src={alb_flag} alt='albania_flag' style={style.img}/>
@@ -296,16 +296,3 @@ const associationOptions = [
 		</div>
 	)},
 ];
-
-const dropwdownOptions: GroupedOptions[] = [
-{
-    label: "association",
-    options: associationOptions,
-},
-{
-    label: "country",
-    options: countryOptions
-}
-];
-
-export default dropwdownOptions;
