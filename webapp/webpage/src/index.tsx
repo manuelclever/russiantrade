@@ -14,7 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './App.css';
 import './components/standard.css';
-import './components/worldMap/worldMap.css';
 
 
 

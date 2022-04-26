@@ -17,8 +17,6 @@ isoCodes.forEach(countryJson => {
             writeEventListeners(country[i], iso);
             writeRefIntializers(visited, iso);
 
-            addEventListeners(i, countryName, country);
-
             visited.push(iso);
         }
     }
@@ -26,8 +24,11 @@ isoCodes.forEach(countryJson => {
 //click on sea -> deselect country
 const sea = document.getElementsByClassName("oceanxx");
 for(var i = 0; i < sea.length; i++) {
-    sea[i].addEventListener("click", function() {actionOnClick(null, sea)});
-            
+    sea[i].setAttribute("onClick" , "{ () => {"+
+        "fillDefaultOcean(setFill_ocean);" + 
+        "setSelect('');" +
+        "}}"
+    );      
 }
 
 function getExceptions(iso) {
@@ -90,66 +91,26 @@ function writeRef(country, iso) {
 
 function writeEventListeners(country, iso) {
     country.setAttribute("onMouseOver" , "{ () => {"+
-        "fillActive(setFill_" + iso + ");}" +
-        "}");
+        "fillActiveHover(setFill_" + iso + ");" +
+        "}}"
+    );
     country.setAttribute("onMouseLeave" , "{ () => {"+
-        "fillDefault(setFill_" + iso + ");}" +
-        "}");
-    // country.setAttribute("onclick" , "{ () => {"+
-    //     "}");
+        "fillDefault(setFill_" + iso + ");" +
+        "}}"
+    );
+    country.setAttribute("onClick" , "{ () => {"+
+        "fillActiveClick(setFill_" + iso + ");" + 
+        "setSelect('" + iso + "');" +
+        "}}"
+    );
 }
 
 function writeRefIntializers(visited, iso) {
     if(visited.indexOf(iso) == -1) {
         var refInit = document.getElementById("refInit");
-        refInit.innerHTML = refInit.innerHTML + "\nconst [_" + iso + ", setFill_" + iso + "] = useState(defaultFill);";
-    }
-}
+        const useState = "const [_" + iso + ", setFill_" + iso + "] = useState(defaultFill);";
+        const mapSet = "allStates.set('" + iso + "', setFill_" + iso + ");";
 
-function addEventListeners(i, countryName, countryParts) {
-    countryParts[i].addEventListener("mouseover", function() {
-        if(select == null) {
-            fill(countryName, countryParts);
-        }
-    });
-    countryParts[i].addEventListener("mouseleave", function() {
-        if(select == null) {
-            unfill(countryParts);
-        }
-    });
-    countryParts[i].addEventListener("click", function() {actionOnClick(countryName, countryParts)});
-}
-
-function fill(name, country) {
-    document.getElementById("curCountry").innerHTML = name;
-
-    for(var i = 0; i < country.length; i++) {
-        country[i].style = "fill:#005bbb";
-    }
-}
-
-function unfill(country) {
-    document.getElementById("curCountry").innerHTML = "World";
-
-    for(var i = 0; i < country.length; i++) {
-        country[i].style = "fill:#e0e0e0";
-    }
-}
-
-function actionOnClick(name, country) {
-
-    if(select == null && country != sea) {
-        fill(name, country);
-        select = country;
-    } else {
-        if(select != null && select != sea) {
-            unfill(select);
-        }
-        if(country == sea) {
-            select = null;
-        } else {
-            fill(name, country);
-            select = country;
-        }
+        refInit.innerHTML = refInit.innerHTML + "\n" + useState + "\n" + mapSet;
     }
 }
