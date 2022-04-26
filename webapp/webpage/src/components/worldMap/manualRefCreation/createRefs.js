@@ -22,23 +22,17 @@ isoCodes.forEach(countryJson => {
             countryEdited = country;
         }
     
+        var visited = [];
         for(var i = 0; i < countryEdited.length; i++) {
             writeRefToHTML(countryEdited[i], iso);
+            writeRefIntializers(visited, iso)
+            addEventListeners(i, countryName, countryEdited);
 
-            countryEdited[i].addEventListener("mouseover", function() {
-                if(select == null) {
-                    fill(countryName, countryEdited);
-                }
-            });
-            countryEdited[i].addEventListener("mouseleave", function() {
-                if(select == null) {
-                    unfill(countryEdited)
-                }
-            });
-            countryEdited[i].addEventListener("click", function() {actionOnClick(countryName, countryEdited)});
+            visited.push(iso);
         }
     }
 });
+
 const sea = document.getElementsByClassName("oceanxx");
 for(var i = 0; i < sea.length; i++) {
     sea[i].addEventListener("click", function() {actionOnClick(null, sea)});
@@ -46,8 +40,29 @@ for(var i = 0; i < sea.length; i++) {
 }
 
 function writeRefToHTML(country, iso) {
-    var ref = "{" + iso + "}";
-    country.setAttribute("ref", ref);
+    var ref = "{_" + iso + ".style}";
+    country.setAttribute("style", ref);
+}
+
+function writeRefIntializers(visited, iso) {
+    if(visited.indexOf(iso) == -1) {
+        var refInit = document.getElementById("refInit");
+        refInit.innerHTML = refInit.innerHTML + "\nconst [_" + iso + ", setFill_" + iso + "] = useState(defaultFill);";
+    }
+}
+
+function addEventListeners(i, countryName, countryParts) {
+    countryParts[i].addEventListener("mouseover", function() {
+        if(select == null) {
+            fill(countryName, countryParts);
+        }
+    });
+    countryParts[i].addEventListener("mouseleave", function() {
+        if(select == null) {
+            unfill(countryParts);
+        }
+    });
+    countryParts[i].addEventListener("click", function() {actionOnClick(countryName, countryParts)});
 }
 
 function fill(name, country) {
