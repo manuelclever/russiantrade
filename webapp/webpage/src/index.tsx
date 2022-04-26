@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //custom typescript
-import 'panzoom/dist/panzoom.js';
 
 //styling
 import './index.css';

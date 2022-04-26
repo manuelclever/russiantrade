@@ -2,7 +2,7 @@ import { ChartConfiguration, ChartType, ChartData, ChartOptions } from 'chart.js
 import 'chart.js/auto';
 
 import Navbar from './components/navbar/Navbar';
-import WorldMap from './components/worldMap/WorldMap';
+import RenderWorldMap from './components/worldMap/RenderWorldMap';
 
 import img_bar from "./resources/images/bar.png";
 import img_pie from "./resources/images/pie.png";
@@ -109,8 +109,8 @@ function App(this: any) {
                 </div>
             </div>
             <div className="row">
-                <div className="col">
-                    <WorldMap/>
+                <div className="col" >
+                    <RenderWorldMap/>
                 </div>
             </div>
         </div>         
