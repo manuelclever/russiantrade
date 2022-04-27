@@ -1,11 +1,10 @@
-import { ChartConfiguration, ChartType, ChartData, ChartOptions } from 'chart.js';
 import 'chart.js/auto';
+import { ChartConfiguration, ChartType, ChartData, ChartOptions } from 'chart.js';
+import { Chart } from 'react-chartjs-2';
+
 
 import Navbar from './components/navbar/Navbar';
 import RenderWorldMap from './components/worldMap/RenderWorldMap';
-
-import img_bar from "./resources/images/bar.png";
-import img_pie from "./resources/images/pie.png";
 
 export interface myCustomChartConfig {
   type: ChartType,
@@ -17,23 +16,45 @@ export interface myCustomChartConfig {
 
 function App(this: any) {
 
-  var config: ChartConfiguration = {
+  var barConfig: ChartConfiguration = {
     type: "bar",
     data: {
-      labels: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June'],
-      datasets: [
-          {
-              label: 'My First dataset',
-              backgroundColor: ['rgb(205,92,92)'],
-              borderColor: 'rgb(255, 99, 132)',
-              data: [2, 10, 5, 2, 20, 30, 45] 
-          }
+        labels: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June'],
+        datasets: [
+            {
+                label: 'My First dataset',
+                backgroundColor: ['#6d597a', '#b56576', '#e56b6f', '#eaac8b'],
+                borderColor: '#355070',
+                data: [2, 10, 5, 2, 20, 30, 45] 
+            }
+      ]
+    },
+    options: {},
+  }
+
+  var doghnutConfig: ChartConfiguration = {
+    type: "doughnut",
+    data: {
+        labels: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June'],
+        datasets: [
+            {
+                label: 'My First dataset',
+                backgroundColor: ['#6d597a', '#b56576', '#e56b6f', '#eaac8b'],
+                borderColor: '#355070',
+                data: [2, 10, 5, 2, 20, 30, 45] 
+            }
       ]
     },
     options: {},
@@ -48,8 +69,8 @@ function App(this: any) {
         width: '100%'
     },
     hundredAuto: {
-        height: 'auto',
-        width: '100%'
+        height: '100%',
+        width: 'auto'
     },
     burly: {
         backgroundColor: 'burlywood',
@@ -77,14 +98,10 @@ function App(this: any) {
                         <h1>Export</h1>
                     </div>
                     <div className="row overview-bar">
-                        <div className="col " style={styles.rebecca}>
-                            <img src={img_bar} style={styles.hundred}/>
-                        </div>
+                            <Chart id="exportOverview" type={barConfig.type} data={barConfig.data}/>
                     </div>
                     <div className="row specific-pie">
-                        <div className="col" style={styles.burly}>
-                            <img src={img_pie} style={styles.hundred}/>
-                        </div>
+                            <Chart id="exportSpecific" type={doghnutConfig.type} data={doghnutConfig.data}/>
                     </div>
                 </div>
                 <div className="col-md importCol">
@@ -92,14 +109,10 @@ function App(this: any) {
                         <h1>Import</h1>
                     </div>
                     <div className="row overview-bar">
-                        <div className="col" style={styles.burly}>
-                            <img src={img_bar} style={styles.hundred}/>
-                        </div>
+                            <Chart id="importOverview" type={barConfig.type} data={barConfig.data}/>
                     </div>
                     <div className="row specific-pie">
-                        <div className="col" style={styles.burly}>
-                            <img src={img_pie} style={styles.hundred}/>
-                        </div>
+                            <Chart id="importSpecific" type={doghnutConfig.type} data={doghnutConfig.data}/>
                     </div>
                 </div>
             </div>

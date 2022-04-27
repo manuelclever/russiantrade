@@ -2,6 +2,8 @@ import Select from "react-select";
 import dropdownOptions from './Dropdown';
 import ua_flag from './../../resources/images/svg_flags/ukraine.svg';
 
+import './navbar.css';
+
 export default function navbar() {
     const style = {
         flag: {
@@ -15,11 +17,13 @@ export default function navbar() {
 
     return (
         <div className="containerNavbar fixed-top">      
-                <img id="navIMG" src={ua_flag} alt='ukraine_flag' style={style.flag}/>
-                <nav className="navbar">
-                    <a className="navbar-brand" href="localhost:3000" style={style.brand}>Russian Trade</a>
-                    <ul className="nav justify-content-start">
-                      <Select id="selector" options={dropdownOptions}/>
+                <svg id="nav_logo">
+                    <rect x="30" y="-20" width="20" height ="130" transform="rotate(45,30,0)" style={{fill: '#0057B8'}}/>
+                    <rect x="58" y="-20" width="20" height ="180" transform="rotate(45,58,0)" style={{fill: '#FFD700'}}/>
+                </svg>
+                <nav className="navbar justify-content-end">
+                    <ul className="nav">
+                        <Select id="selector" options={dropdownOptions}/>
                     </ul>
                 </nav>
         </div>

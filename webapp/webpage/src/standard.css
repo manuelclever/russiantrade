@@ -35,6 +35,10 @@
     text-decoration: none;
 }
 
+.col-md {
+    min-width: '375px';
+}
+
 .firstRow {
     padding-top:4rem
 }
