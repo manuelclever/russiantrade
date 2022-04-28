@@ -40,7 +40,6 @@ public class Query {
             for(int arg : args) {
                 query.setInt(i++, arg);
             }
-
             ResultSet rs = query.executeQuery();
 
             if(rs.next()) {

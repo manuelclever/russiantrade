@@ -37,7 +37,7 @@ public class PSQLQTradeData extends PSQLQueries {
 
     //queries
     public static final String QUERY_INSERT = INSERT_INTO + TABLE_MONTHLY_TRADE + "(" +
-            TABLE_MONTHLY_TRADE + P + PERIOD + C +
+            PERIOD + C +
             MONTHLY_TRADE_REPORTER + C +
             MONTHLY_TRADE_PARTNER + C +
             MONTHLY_TRADE_FLOW + C +
@@ -83,7 +83,7 @@ public class PSQLQTradeData extends PSQLQueries {
                     PARAMETER_PARTNER + AND +
                     PARAMETER_PERIOD +
                 ORDER_BY +
-                    TABLE_MONTHLY_TRADE + P + PERIOD +
+                    TABLE_MONTHLY_TRADE + P + PERIOD + C +
                     TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
                 FROM_END + AS + ROW + END;
     }

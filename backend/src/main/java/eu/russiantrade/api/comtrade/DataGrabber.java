@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataGrabber {
-    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "src", "test", "resources", "backend/src/main/resources/database", "testDatabase.properties");
+    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath("backend", "src", "test", "resources",
+            "database", "testDatabase.properties");
     private  static final Path API_LOG = FileSystems.getDefault().getPath(
-            "src", "main", "resources", "backend/src/main/resources/database", "api.log");
+            "backend", "src",  "main", "resources", "database", "api.log");
     private static final Path COUNTRIES_TXT = FileSystems.getDefault()
-            .getPath("src", "main", "resources", "backend/src/main/resources/countries.txt");
+            .getPath("backend", "src",  "main", "resources", "countries.txt");
 
     public static final int REQUEST_DELAY = 1000;
     public static final int RATE_LIMIT_HOUR = 100;
@@ -49,7 +49,6 @@ public class DataGrabber {
             for(Country country : countries) {
 
                 for(int period : periods) {
-
                     if (entryDoesntExist(country, period)) {
                         if(c >= RATE_LIMIT_HOUR) {
                             try {
@@ -75,6 +74,7 @@ public class DataGrabber {
             }
             logWriter.close();
         } catch (IOException ignore) {
+            ignore.printStackTrace();
         }
     }
 

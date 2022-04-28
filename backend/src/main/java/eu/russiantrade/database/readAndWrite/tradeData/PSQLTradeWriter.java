@@ -29,7 +29,7 @@ public class PSQLTradeWriter implements tradeDataWriter {
             query.setInt(1, tradeData.getPeriod());
             query.setInt(2, tradeData.getReporterCode());
             query.setInt(3, tradeData.getPartnerCode());
-            query.setInt(4, tradeData.getTradeFlowCode());
+            query.setString(4, tradeData.getTradeFlowDesc());
             query.setString(5, tradeData.getCommodityCode());
             query.setString(6, tradeData.getCommodityDesc());
             query.setLong(7, tradeData.getTradeValue());

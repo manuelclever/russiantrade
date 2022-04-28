@@ -1,9 +1,11 @@
 package eu.russiantrade.database.readAndWrite;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import eu.russiantrade.api.comtrade.parser.TradeData;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TradeMapper {
@@ -29,20 +31,39 @@ public class TradeMapper {
         }
      */
 
-    public String getTradeDataMonth(List<TradeData> tradeDataList) {
+    public static String jsonTradeDataMonth(List<TradeData> tradeDataList) {
         ObjectMapper mapper = new ObjectMapper();
 
-        String[] labels = new String[tradeDataList.size()];
+        String[] labelsArr = new String[tradeDataList.size()];
+        long[] dataArr = new long[tradeDataList.size()];
 
         for(int i = 0; i < tradeDataList.size(); i++) {
             TradeData tradeData = tradeDataList.get(i);
-            labels[i] = tradeData.getCommodityCode() + " - " + tradeData.getCommodityDesc();
+            labelsArr[i] = tradeData.getCommodityCode() + " - " + tradeData.getCommodityDesc();
+            dataArr[i] = tradeData.getTradeValue();
         }
 
-        return null;
+        ObjectNode innerData = mapper.createObjectNode();
+        innerData.put("label", "where does this go?");
+        ArrayNode dataArrNode = innerData.putArray("data");
+        Arrays.stream(dataArr).forEach(dataArrNode::add);
+
+        ObjectNode datasets = mapper.createObjectNode();
+        ArrayNode arrayNode = datasets.putArray("datasets");
+        arrayNode.add(innerData);
+
+        ObjectNode outerData = mapper.createObjectNode();
+        ArrayNode arrayNodeLabels = outerData.putArray("labels");
+        ArrayNode arrayNodeDatasets = outerData.putArray("datasets");
+        Arrays.stream(labelsArr).forEach(arrayNodeLabels::add);
+        arrayNodeDatasets.add(innerData);
+
+
+
+        return outerData.toPrettyString();
     }
 
-    public String getTradeDataYear(List<TradeData> tradeDataList) {
+    public static String jsonTradeDataYear(List<TradeData> tradeDataList) {
         ObjectMapper mapper = new ObjectMapper();
 
         String[] labels = new String[]{

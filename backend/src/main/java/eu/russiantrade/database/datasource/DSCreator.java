@@ -75,7 +75,7 @@ public class DSCreator {
                 basicDS.getDriverClassName(),
                 properties.getProperty("server"),
                 properties.getProperty("port"),
-                properties.getProperty(type + "backend/src/main/resources/database")));
+                properties.getProperty(type + "database")));
 
         String tempProperty = properties.getProperty(type + "defaultAutoCommit");
         if (tempProperty != null) {
