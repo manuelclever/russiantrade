@@ -60,6 +60,18 @@ public class PSQLQTradeData extends PSQLQueries {
             PARAMETER_REPORTER + AND +
             PARAMETER_PERIOD_BETWEEN + END;
 
+    public static String queryWhereTradeReporterAndPartnerNoFlow(String select) {
+        return CREATE_JSON_MULTIPLE + FROM_START + select +
+                JOIN_COUNTRY_REPORTER +
+                JOIN_COUNTRY_PARTNER +
+                WHERE +
+                PARAMETER_REPORTER + AND +
+                PARAMETER_PARTNER +
+                ORDER_BY +
+                TABLE_MONTHLY_TRADE + P + PERIOD + C +
+                TABLE_MONTHLY_TRADE + P + MONTHLY_TRADE_COMMODITY_CODE +
+                FROM_END + AS + ROW + END;
+    }
     public static String queryWhereTradeReporterAndPartner(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select +
                 JOIN_COUNTRY_REPORTER +

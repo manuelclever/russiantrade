@@ -31,7 +31,7 @@ public class TradeMapper {
         }
      */
 
-    public static String jsonTradeDataMonth(List<TradeData> tradeDataList) {
+    public static String jsonTradeDataOneTimePeriod(List<TradeData> tradeDataList) {
         ObjectMapper mapper = new ObjectMapper();
 
         String[] labelsArr = new String[tradeDataList.size()];
@@ -44,7 +44,7 @@ public class TradeMapper {
         }
 
         ObjectNode innerData = mapper.createObjectNode();
-        innerData.put("label", "where does this go?");
+        innerData.put("label", "");
         ArrayNode dataArrNode = innerData.putArray("data");
         Arrays.stream(dataArr).forEach(dataArrNode::add);
 
@@ -58,12 +58,14 @@ public class TradeMapper {
         Arrays.stream(labelsArr).forEach(arrayNodeLabels::add);
         arrayNodeDatasets.add(innerData);
 
-
-
         return outerData.toPrettyString();
     }
 
-    public static String jsonTradeDataYear(List<TradeData> tradeDataList) {
+    public static String jsonTradeDataMonth(List<TradeData> tradeDataList) {
+        return null;
+    }
+
+    public static String jsonTradeDataYears(List<TradeData> tradeDataList) {
         ObjectMapper mapper = new ObjectMapper();
 
         String[] labels = new String[]{

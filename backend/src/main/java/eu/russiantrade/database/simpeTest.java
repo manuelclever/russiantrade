@@ -20,8 +20,20 @@ public class simpeTest {
         JsonObject myJsonOj = new JsonObject();
 
         PSQLTradeReader reader = new PSQLTradeReader(ds.getDataSourceTradeDB());
-        List<TradeData> result = reader.getDatasets(8, 643, "Imports", 201201);
-        String json = TradeMapper.jsonTradeDataMonth(result);
-        System.out.println(json);
+        List<TradeData> resultOneMonth = reader.getDatasets(8, 643, "Imports", 201201);
+        String jsonOneMonth = TradeMapper.jsonTradeDataOneTimePeriod(resultOneMonth);
+        System.out.println(jsonOneMonth);
+
+        List<TradeData> resultOneYear = reader.getDatasets(8, 643, "Imports", 2012);
+        String jsonOneYear = TradeMapper.jsonTradeDataOneTimePeriod(resultOneYear);
+        System.out.println(jsonOneYear);
+
+        List<TradeData> resultSeveralMonth = reader.getDatasets(8, 643, "Imports", 2012);
+        String jsonSeveralMonth = TradeMapper.jsonTradeDataMonth(resultSeveralMonth);
+        System.out.println(jsonSeveralMonth);
+
+        List<TradeData> resultSeveralYears = reader.getDatasets(8, 643, "Imports", 2012);
+        String jsonSeveralYears = TradeMapper.jsonTradeDataYears(resultSeveralYears);
+        System.out.println(jsonSeveralYears);
     }
 }

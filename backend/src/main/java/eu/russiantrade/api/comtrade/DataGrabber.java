@@ -95,7 +95,11 @@ public class DataGrabber {
 
     private static boolean entryDoesntExist(Country country, int period) {
         PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
-        return dr.getDatasets(country.getCountryID(), DataDesignations.RUSSIA, null, period) == null;
+        System.out.println(country + " " + period + ":");
+        List<TradeData> data = dr.getDatasets(country.getCountryID(), DataDesignations.RUSSIA, period);
+        System.out.println(data == null);
+        System.out.println(data);
+        return data == null;
     }
 
     private static ComtradeResponse apiCall(Country country, int period) {
