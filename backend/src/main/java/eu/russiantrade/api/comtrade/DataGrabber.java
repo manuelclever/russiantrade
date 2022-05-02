@@ -64,6 +64,7 @@ public class DataGrabber {
                             c++;
 
                             if (comtradeResponse != null && comtradeResponse.isValid()) {
+                                System.out.println(comtradeResponse);
                                 addComtradeResponseToDB(comtradeResponse, country, period);
                             }
                         } catch (InterruptedException e){
@@ -74,7 +75,6 @@ public class DataGrabber {
             }
             logWriter.close();
         } catch (IOException ignore) {
-            ignore.printStackTrace();
         }
     }
 
@@ -97,8 +97,6 @@ public class DataGrabber {
         PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
         System.out.println(country + " " + period + ":");
         List<TradeData> data = dr.getDatasets(country.getCountryID(), DataDesignations.RUSSIA, period);
-        System.out.println(data == null);
-        System.out.println(data);
         return data == null;
     }
 

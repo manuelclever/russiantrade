@@ -18,8 +18,8 @@ public class PSQLTradeReader implements tradeDataReader {
     @Override
     public List<TradeData> getDatasets(int reporter, int partner, int period) {
         return parse(Query.queryWhereInt(datasource,
-                PSQLQTradeData.queryWhereTradeReporterAndPartnerNoFlow(PSQLQTradeData.SELECT_DATASET),
-                reporter, partner));
+                PSQLQTradeData.queryWhereTradeReporterPartnerAndPeriodNoFlow(PSQLQTradeData.SELECT_DATASET),
+                reporter, partner, period));
     }
 
     @Override
