@@ -88,8 +88,12 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         tradeData.setAggrLevel(node.findValue("aggrLevel").asInt());
         tradeData.setIsLeaf(node.findValue("IsLeaf").asInt());
 
-        tradeData.setTradeFlowCode(node.findValue("rgCode").asInt());
-        tradeData.setTradeFlowDesc(node.findValue("rgDesc").asText());
+        int tradeFlowCode = node.findValue("rgCode").asInt();
+        tradeData.setTradeFlowCode(tradeFlowCode);
+
+        //comtrade.un saves desc as 'Import/Export' or 'Imports/Exports'. This fixes irregularities
+        String tradeFlowDesc = tradeFlowCode == 1 ? "Import" : "Export";
+        tradeData.setTradeFlowDesc(tradeFlowDesc);
 
         tradeData.setReporterCode(node.findValue("rtCode").asInt());
         tradeData.setReporterDesc(node.findValue("rtTitle").asText());
