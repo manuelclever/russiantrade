@@ -4,6 +4,7 @@ import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.parser.DatabaseTradeDataParser;
 import eu.russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
 import eu.russiantrade.database.querydesignations.Query;
+import eu.russiantrade.util.DigitCount;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -21,7 +22,7 @@ public class PSQLTradeReader implements tradeDataReader {
 
     @Override
     public List<TradeData> getTotalOfYears(int reporter, int partner, String tradeFlow, int periodStart, int periodEnd) {
-        if(countDigits(periodStart) == 4 && countDigits(periodEnd) == 4) {
+        if(DigitCount.count(periodStart) == 4 && DigitCount.count(periodEnd) == 4) {
             return parse(
                     Query.queryWhereTwoStringAndInt(
                             datasource,
@@ -39,7 +40,7 @@ public class PSQLTradeReader implements tradeDataReader {
     }
 
     public List<TradeData> getCommodityMonth(int reporter, int partner, String tradeFlow, int period, String commodityCode) {
-        if(countDigits(period) == 6) {
+        if(DigitCount.count(period) == 6) {
             if (commodityCode.startsWith("AG")) {
                 int commodityCodeLength = Integer.parseInt(commodityCode.substring(2, 3));
                 return parse(
@@ -71,7 +72,7 @@ public class PSQLTradeReader implements tradeDataReader {
     }
 
     public List<TradeData> getCommodityYear(int reporter, int partner, String tradeFlow, int period, String commodityCode) {
-        if(countDigits(period) == 4) {
+        if(DigitCount.count(period) == 4) {
             if (commodityCode.startsWith("AG")) {
                 int commodityCodeLength = Integer.parseInt(commodityCode.substring(2, 3));
                 return parse(Query.queryWhereStringAndInt(datasource,
@@ -89,43 +90,32 @@ public class PSQLTradeReader implements tradeDataReader {
     @Override
     public List<TradeData> getDatasets(int reporter, int partner, int period) {
         return parse(Query.queryWhereInt(datasource,
-                PSQLQTradeData.queryWhereTradeReporterPartnerAndPeriodNoFlow(PSQLQTradeData.SELECT_DATASET),
+                PSQLQTradeData.queryWhere_Tr_Re_Pa_Pe_NoFl(PSQLQTradeData.SELECT_DATASET),
                 reporter, partner, period));
     }
 
     @Override
     public List<TradeData> getDatasets(int reporter, int partner, String tradeFlow) {
         return parse(Query.queryWhereStringAndInt(datasource,
-                PSQLQTradeData.queryWhereTradeReporterAndPartner(PSQLQTradeData.SELECT_DATASET),
+                PSQLQTradeData.queryWhere_Tr_Re_Pa(PSQLQTradeData.SELECT_DATASET),
                 tradeFlow, reporter, partner));
     }
 
     @Override
     public List<TradeData> getDatasets(int reporter, int partner, String tradeFlow, int period) {
         return parse(Query.queryWhereStringAndInt(datasource,
-                PSQLQTradeData.queryWhereTradeReporterPartnerAndPeriod(PSQLQTradeData.SELECT_DATASET),
+                PSQLQTradeData.queryWhere_Tr_Re_Pa_Pe(PSQLQTradeData.SELECT_DATASET),
                 tradeFlow, reporter, partner, period));
     }
 
     @Override
     public List<TradeData> getDatasets(int reporter, int partner, String tradeFlow, int periodStart, int periodEnd) {
         return parse(Query.queryWhereStringAndInt(datasource,
-                PSQLQTradeData.queryWhereTradeReporterPartnerAndPeriodBetween(PSQLQTradeData.SELECT_DATASET),
+                PSQLQTradeData.queryWhere_Tr_Re_Pa_PeBe(PSQLQTradeData.SELECT_DATASET),
                 tradeFlow, reporter, partner, periodStart, periodEnd));
     }
 
     private List<TradeData> parse(String json) {
         return DatabaseTradeDataParser.parseResponse(json);
-    }
-
-    private int countDigits(int n) {
-        int temp = 1;
-        int count = 0;
-
-        while(temp <= n) {
-            temp *= 10;
-            count++;
-        }
-        return count;
     }
 }

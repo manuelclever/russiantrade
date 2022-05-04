@@ -48,8 +48,6 @@ public class TradeMapper {
 
     public static String jsonTotal(List<TradeData> tradeDataList) {
         if(tradeDataList != null) {
-            ObjectMapper mapper = new ObjectMapper();
-
             String[] labelsArr = new String[tradeDataList.size()];
             long[] dataArr = new long[tradeDataList.size()];
 

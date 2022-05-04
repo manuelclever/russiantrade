@@ -1,4 +1,4 @@
-package eu.russiantrade.database;
+package eu.russiantrade.servlets;
 
 public final class HtmlFilter {
     /**
