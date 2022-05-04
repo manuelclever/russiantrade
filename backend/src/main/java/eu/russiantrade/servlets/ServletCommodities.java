@@ -45,6 +45,8 @@ public class ServletCommodities extends HttpServlet {
             if (tradeData != null) {
                 String json = TradeMapper.jsonCommodity(tradeData);
                 out.write(json);
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("UTF-8");
             }
         }
     }

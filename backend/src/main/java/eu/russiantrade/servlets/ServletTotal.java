@@ -42,6 +42,8 @@ public class ServletTotal extends HttpServlet {
             if (tradeData != null) {
                 String json = TradeMapper.jsonTotal(tradeData);
                 out.write(json);
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("UTF-8");
             }
         }
     }
