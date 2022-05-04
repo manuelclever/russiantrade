@@ -19,21 +19,22 @@ public class simpeTest {
 
         JsonObject myJsonOj = new JsonObject();
 
+
         PSQLTradeReader reader = new PSQLTradeReader(ds.getDataSourceTradeDB());
-        List<TradeData> resultOneMonth = reader.getDatasets(8, 643, "Imports", 201201);
-        String jsonOneMonth = TradeMapper.jsonTradeDataOneTimePeriod(resultOneMonth);
+        List<TradeData> resultOneMonth = reader.getCommodityMonth(8, 643, "Import", 201201, "AG2");
+        String jsonOneMonth = TradeMapper.jsonCommodity(resultOneMonth);
         System.out.println(jsonOneMonth);
 
-        List<TradeData> resultOneYear = reader.getDatasets(8, 643, "Imports", 2012);
-        String jsonOneYear = TradeMapper.jsonTradeDataOneTimePeriod(resultOneYear);
-        System.out.println(jsonOneYear);
+//        System.out.println(PSQLQTradeData.SELECT_DATASET +
+//                PSQLQTradeData.JOIN_COUNTRY_REPORTER +
+//                PSQLQTradeData.JOIN_COUNTRY_PARTNER);
 
-        List<TradeData> resultSeveralMonth = reader.getDatasets(8, 643, "Imports", 2012);
-        String jsonSeveralMonth = TradeMapper.jsonTradeDataMonth(resultSeveralMonth);
-        System.out.println(jsonSeveralMonth);
-
-        List<TradeData> resultSeveralYears = reader.getDatasets(8, 643, "Imports", 2012);
-        String jsonSeveralYears = TradeMapper.jsonTradeDataYears(resultSeveralYears);
+        List<TradeData> resultSeveralYears = reader.getTotalOfYears(8, 643, "Import", 2010, 2020);
+        String jsonSeveralYears = TradeMapper.jsonTotal(resultSeveralYears);
         System.out.println(jsonSeveralYears);
+
+        List<TradeData> resultSeveralMonth = reader.getCommodityYear(8, 643, "Import", 2012, "AG2");
+        String jsonSeveralMonth = TradeMapper.jsonCommodity(resultSeveralMonth);
+        System.out.println(jsonSeveralMonth);
     }
 }

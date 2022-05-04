@@ -4,12 +4,20 @@
   <display-name>Test Seite</display-name>
 
   <servlet>
-    <servlet-name>Datenabfrage</servlet-name>
-    <servlet-class>eu.russiantrade.database.RequestServlet</servlet-class>
+    <servlet-name>Data Retrieval Commodities</servlet-name>
+    <servlet-class>eu.russiantrade.servlets.ServletCommodities</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Data Retrieval Total</servlet-name>
+    <servlet-class>eu.russiantrade.servlets.ServletTotal</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>RequestParam</servlet-name>
-    <url-pattern>/abfrage</url-pattern>
+    <servlet-name>Data Retrieval Commodities</servlet-name>
+    <url-pattern>/api/requestCom</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Data Retrieval Total</servlet-name>
+    <url-pattern>/api/requestTotal</url-pattern>
   </servlet-mapping>
 </web-app>

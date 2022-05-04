@@ -25,7 +25,8 @@ public class ServletTotal extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         // Allocate a output writer to write the response message into the network socket
 
-        try (PrintWriter out = resp.getWriter()) {
+        PrintWriter out = resp.getWriter();
+        try {
             int country = Integer.parseInt(req.getParameter("country"));
             String tradeFlow = req.getParameter("trade_flow");
             int periodStart = Integer.parseInt(req.getParameter("periodStart"));
@@ -44,7 +45,13 @@ public class ServletTotal extends HttpServlet {
                 out.write(json);
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
+                out.println("<p>This is a paragraph</p>");
             }
+        } catch (Exception e) {
+            out.println("<p>Error!!!</p>");
+
+        } finally {
+            out.close();
         }
     }
 }
