@@ -93,6 +93,32 @@ public class DataGrabber {
         return countries;
     }
 
+    private static List<Integer> getPeriods() {
+        int year = 2010;
+        int month = 1;
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMM");
+        LocalDate now = LocalDate.now();
+        String end = dtf.format(now);
+
+        List<Integer> periods = new ArrayList<>();
+        String period = year + String.format("%02d", month);
+        while(Integer.parseInt(period) <= Integer.parseInt(end)) {
+            periods.add(Integer.parseInt(period));
+
+            if(month < 12) {
+                month++;
+            } else {
+                periods.add(year);
+                year++;
+                month = 1;
+            }
+            period = year + String.format("%02d", month);
+        }
+        return periods;
+    }
+
+
     private static boolean entryDoesntExist(Country country, int period) {
         PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
         System.out.println(country + " " + period + ":");
@@ -101,8 +127,10 @@ public class DataGrabber {
     }
 
     private static ComtradeResponse apiCall(Country country, int period) {
+        char frequency = countDigits(period) == 4 ? 'A' : 'M';
+
         ComtradeParametersRequest request = new ComtradeParametersRequest(
-                'M', country.getCountryID(), period, DataDesignations.RUSSIA, new String[]{"TOTAL", "AG2"}, 10000);
+                frequency, country.getCountryID(), period, DataDesignations.RUSSIA, new String[]{"TOTAL", "AG2"});
 
         APICall apiCall = new APICall(request);
         String jsonRequest = apiCall.call();
@@ -111,6 +139,18 @@ public class DataGrabber {
             return ComtradeParser.parseResponse(jsonRequest);
         } return null;
     }
+
+    private static int countDigits(int n) {
+        int temp = 1;
+        int count = 0;
+
+        while(temp <= n) {
+            temp *= 10;
+            count++;
+        }
+        return count;
+    }
+
 
     private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, Country country, int period) throws IOException {
         writeToLog(country + ", " + period);
@@ -168,29 +208,5 @@ public class DataGrabber {
         } catch (JsonMappingException e) {
             cw.addCountry(country);
         } catch (JsonProcessingException ignore) {}
-    }
-
-    private static List<Integer> getPeriods() {
-        int year = 2010;
-        int month = 1;
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMM");
-        LocalDate now = LocalDate.now();
-        String end = dtf.format(now);
-
-        List<Integer> periods = new ArrayList<>();
-        String period = year + String.format("%02d", month);
-        while(Integer.parseInt(period) <= Integer.parseInt(end)) {
-            periods.add(Integer.parseInt(period));
-
-            if(month < 12) {
-                month++;
-            } else {
-                year++;
-                month = 1;
-            }
-            period = year + String.format("%02d", month);
-        }
-        return periods;
     }
 }

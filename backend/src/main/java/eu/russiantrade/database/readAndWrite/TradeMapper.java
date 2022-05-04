@@ -10,38 +10,23 @@ import java.util.List;
 
 public class TradeMapper {
 
-    /*
-        Json format:
-        data: {
-            labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June'],
-        datasets: [
-            {
-                label: 'My First dataset',
-                backgroundColor: ['rgb(205,92,92)'],
-                borderColor: 'rgb(255, 99, 132)',
-                data: [2, 10, 5, 2, 20, 30, 45]
+    public static String jsonCommodity(List<TradeData> tradeDataList) {
+        if(tradeDataList != null) {
+            String[] labelsArr = new String[tradeDataList.size()];
+            long[] dataArr = new long[tradeDataList.size()];
+
+            for (int i = 0; i < tradeDataList.size(); i++) {
+                TradeData tradeData = tradeDataList.get(i);
+                labelsArr[i] = tradeData.getCommodityCode() + " - " + tradeData.getCommodityDesc();
+                dataArr[i] = tradeData.getTradeValue();
             }
-        ]
+            return map(labelsArr, dataArr);
         }
-     */
+        return null;
+    }
 
-    public static String jsonTradeDataOneTimePeriod(List<TradeData> tradeDataList) {
+    private static String map(String[] labelsArr, long[] dataArr) {
         ObjectMapper mapper = new ObjectMapper();
-
-        String[] labelsArr = new String[tradeDataList.size()];
-        long[] dataArr = new long[tradeDataList.size()];
-
-        for(int i = 0; i < tradeDataList.size(); i++) {
-            TradeData tradeData = tradeDataList.get(i);
-            labelsArr[i] = tradeData.getCommodityCode() + " - " + tradeData.getCommodityDesc();
-            dataArr[i] = tradeData.getTradeValue();
-        }
 
         ObjectNode innerData = mapper.createObjectNode();
         innerData.put("label", "");
@@ -61,27 +46,19 @@ public class TradeMapper {
         return outerData.toPrettyString();
     }
 
-    public static String jsonTradeDataMonth(List<TradeData> tradeDataList) {
-        return null;
-    }
+    public static String jsonTotal(List<TradeData> tradeDataList) {
+        if(tradeDataList != null) {
+            ObjectMapper mapper = new ObjectMapper();
 
-    public static String jsonTradeDataYears(List<TradeData> tradeDataList) {
-        ObjectMapper mapper = new ObjectMapper();
+            String[] labelsArr = new String[tradeDataList.size()];
+            long[] dataArr = new long[tradeDataList.size()];
 
-        String[] labels = new String[]{
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "September",
-                "October",
-                "November",
-                "December"};
-
-        ObjectNode data = mapper.createObjectNode();
+            for (int i = 0; i < tradeDataList.size(); i++) {
+                labelsArr[i] = Integer.toString(tradeDataList.get(i).getPeriod());
+                dataArr[i] = tradeDataList.get(i).getTradeValue();
+            }
+            return map(labelsArr, dataArr);
+        }
         return null;
     }
 }

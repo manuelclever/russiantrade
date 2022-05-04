@@ -5,7 +5,6 @@ import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +18,7 @@ public class RequestServlet extends HttpServlet {
     private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
             "src", "test", "resources", "backend/src/main/resources/database", "testDatabase.properties");
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Set the response message's MIME type
         resp.setContentType("text/html;charset=UTF-8");
         // Allocate a output writer to write the response message into the network socket
@@ -37,10 +36,10 @@ public class RequestServlet extends HttpServlet {
 
             List<TradeData> tradeData;
             if(periodEnd == -1) {
-                tradeData = dr.getDatasets(country, DataDesignations.RUSSIA, tradeFlow, periodStart, commodity);
+                tradeData = dr.getCommodityMonth(country, DataDesignations.RUSSIA, tradeFlow, periodStart, commodity);
             } else {
-                tradeData = dr.getDatasets(country, DataDesignations.RUSSIA, tradeFlow, periodStart, periodEnd,
-                        commodity);
+//                tradeData = dr.getCommodityYear(country, DataDesignations.RUSSIA, tradeFlow, period,
+//                        commodity);
             }
 
 

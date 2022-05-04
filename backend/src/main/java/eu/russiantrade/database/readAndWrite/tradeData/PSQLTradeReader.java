@@ -15,6 +15,77 @@ public class PSQLTradeReader implements tradeDataReader {
         this.datasource = datasource;
     }
 
+    public List<TradeData> getTotalOfYear(int reporter, int partner, String tradeFlow, int period) {
+        return getTotalOfYears(reporter, partner, tradeFlow, period, period);
+    }
+
+    @Override
+    public List<TradeData> getTotalOfYears(int reporter, int partner, String tradeFlow, int periodStart, int periodEnd) {
+        if(countDigits(periodStart) == 4 && countDigits(periodEnd) == 4) {
+            return parse(
+                    Query.queryWhereTwoStringAndInt(
+                            datasource,
+                            PSQLQTradeData.queryTotalOfYear(PSQLQTradeData.SELECT_DATASET),
+                            tradeFlow,
+                            "TOTAL",
+                            reporter,
+                            partner,
+                            periodStart,
+                            periodEnd
+                    )
+            );
+        }
+        throw new NumberFormatException("Year in format 'YYYY' expected.");
+    }
+
+    public List<TradeData> getCommodityMonth(int reporter, int partner, String tradeFlow, int period, String commodityCode) {
+        if(countDigits(period) == 6) {
+            if (commodityCode.startsWith("AG")) {
+                int commodityCodeLength = Integer.parseInt(commodityCode.substring(2, 3));
+                return parse(
+                        Query.queryWhereStringAndInt(
+                                datasource,
+                                PSQLQTradeData.queryWhere_Tr_CoLe_Re_Pa_Pe(PSQLQTradeData.SELECT_DATASET),
+                                tradeFlow,
+                                commodityCodeLength,
+                                reporter,
+                                partner,
+                                period
+                        )
+                );
+            } else {
+                return parse(
+                        Query.queryWhereTwoStringAndInt(
+                                datasource,
+                                PSQLQTradeData.queryWhere_Tr_Co_Re_Pa_Pe(PSQLQTradeData.SELECT_DATASET),
+                                tradeFlow,
+                                commodityCode,
+                                reporter,
+                                partner,
+                                period
+                        )
+                );
+            }
+        }
+        throw new NumberFormatException("Year and month in format 'YYYYMM' expected.");
+    }
+
+    public List<TradeData> getCommodityYear(int reporter, int partner, String tradeFlow, int period, String commodityCode) {
+        if(countDigits(period) == 4) {
+            if (commodityCode.startsWith("AG")) {
+                int commodityCodeLength = Integer.parseInt(commodityCode.substring(2, 3));
+                return parse(Query.queryWhereStringAndInt(datasource,
+                        PSQLQTradeData.queryWhere_Tr_CoLe_Re_Pa_Pe(PSQLQTradeData.SELECT_DATASET),
+                        tradeFlow, commodityCodeLength, reporter, partner, period));
+            } else {
+                return parse(Query.queryWhereTwoStringAndInt(datasource,
+                        PSQLQTradeData.queryWhere_Tr_Co_Re_Pa_Pe(PSQLQTradeData.SELECT_DATASET),
+                        commodityCode, tradeFlow, reporter, partner, period));
+            }
+        }
+        throw new NumberFormatException("Year in format 'YYYY' expected.");
+    }
+
     @Override
     public List<TradeData> getDatasets(int reporter, int partner, int period) {
         return parse(Query.queryWhereInt(datasource,
@@ -37,41 +108,24 @@ public class PSQLTradeReader implements tradeDataReader {
     }
 
     @Override
-    public List<TradeData> getDatasets(int reporter, int partner, String tradeFlow, int period, String commodityCode) {
-        if(commodityCode.startsWith("AG")) {
-            int commodityCodeLength = Integer.parseInt(commodityCode.substring(2,3));
-            return parse(Query.queryWhereStringAndInt(datasource,
-                    PSQLQTradeData.queryWhereTradeCommodityLengthReporterPartnerAndPeriod(PSQLQTradeData.SELECT_DATASET),
-                    tradeFlow, commodityCodeLength, reporter, partner, period));
-        } else {
-            return parse(Query.queryWhereTwoStringAndInt(datasource,
-                    PSQLQTradeData.queryWhereCommodityTradeReporterPartnerAndPeriod(PSQLQTradeData.SELECT_DATASET),
-                    commodityCode, tradeFlow, reporter, partner, period));
-        }
-    }
-
-    @Override
     public List<TradeData> getDatasets(int reporter, int partner, String tradeFlow, int periodStart, int periodEnd) {
         return parse(Query.queryWhereStringAndInt(datasource,
                 PSQLQTradeData.queryWhereTradeReporterPartnerAndPeriodBetween(PSQLQTradeData.SELECT_DATASET),
                 tradeFlow, reporter, partner, periodStart, periodEnd));
     }
 
-    @Override
-    public List<TradeData> getDatasets(int reporter, int partner, String tradeFlow, int periodStart, int periodEnd, String commodityCode) {
-        if(commodityCode.startsWith("AG")) {
-            int commodityCodeLength = Integer.parseInt(commodityCode.substring(2,3));
-            return parse(Query.queryWhereStringAndInt(datasource,
-                    PSQLQTradeData.queryWhereTradeCommodityLengthReporterPartnerAndPeriodBetween(PSQLQTradeData.SELECT_DATASET),
-                    tradeFlow, commodityCodeLength, reporter, partner, periodStart, periodEnd));
-        } else {
-            return parse(Query.queryWhereTwoStringAndInt(datasource,
-                    PSQLQTradeData.queryWhereCommodityTradeReporterPartnerAndPeriodBetween(PSQLQTradeData.SELECT_DATASET),
-                    commodityCode, tradeFlow, reporter, partner, periodStart, periodEnd));
-        }
-    }
-
     private List<TradeData> parse(String json) {
         return DatabaseTradeDataParser.parseResponse(json);
+    }
+
+    private int countDigits(int n) {
+        int temp = 1;
+        int count = 0;
+
+        while(temp <= n) {
+            temp *= 10;
+            count++;
+        }
+        return count;
     }
 }

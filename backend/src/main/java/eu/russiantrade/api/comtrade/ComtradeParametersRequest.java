@@ -38,12 +38,11 @@ public class ComtradeParametersRequest extends ComtradeParameters {
      *
      * @param partner 0 - All, country code (default is 0)
      * @param classificationCode TOTAL - total Trade, All - all Codes, AG[digit] - detailed code at specified digit (1-6, depends on classification) (default AG2)
-     * @param max maximum records returned (default 500, free tier caps 10 000)
      *
      */
     public ComtradeParametersRequest(char frequency, int reporter, long period, int partner,
-                                     String[] classificationCode, int max) {
+                                     String[] classificationCode) {
         super(Character.MIN_VALUE, frequency, reporter, period, null, null, partner, new int[]{1,2},
-                classificationCode, null, max, Character.MIN_VALUE, -1);
+                classificationCode, null, -1, Character.MIN_VALUE, -1);
     }
 }
