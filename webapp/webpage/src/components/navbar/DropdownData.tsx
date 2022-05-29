@@ -38,15 +38,13 @@ import che_flag from './../../resources/images/svg_flags/switzerland.svg';
 import tur_flag from './../../resources/images/svg_flags/turkey.svg';
 import usa_flag from './../../resources/images/svg_flags/usa.svg';
 import gbr_flag from './../../resources/images/svg_flags/united-kingdom.svg';
+import { PropsValue } from 'react-select';
 
-export interface CountryOption {
-    value: String;
-    label: JSX.Element;
-}
+import { GroupBase } from 'react-select';
 
-export interface GroupedOptions {
-    label: String;
-    options: CountryOption[];
+export interface Option {
+    value: PropsValue<String>,
+    label: JSX.Element
 }
 
 const style = {
@@ -57,7 +55,7 @@ const style = {
     },
 }
 
-export const associationOptions = [
+export const associationOptions: Option[] = [
 	{ value: 'world', label: (
         <div className="label">
             <img src={world_flag} alt="world_flag" style={style.img}/>
@@ -78,7 +76,7 @@ export const associationOptions = [
     ) }
 ];
   
-export const countryOptions: CountryOption[] = [
+export const countryOptions: Option[] = [
 	{ value: 'albania',label: (
 		<div className='label'>
 			<img src={alb_flag} alt='albania_flag' style={style.img}/>

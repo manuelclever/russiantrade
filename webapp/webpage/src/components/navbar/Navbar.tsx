@@ -1,29 +1,75 @@
 import Select from "react-select";
-import dropdownOptions from './Dropdown';
 import React from "react";
-import { ChartConfiguration, ChartData, } from 'chart.js';
+import { ChartConfiguration, ChartData } from 'chart.js';
+import { SingleValue } from "react-select";
 
+import dropdownOptions from './Dropdown';
+import { Option } from './DropdownData';
 import './navbar.css';
+import { optionCSS } from "react-select/dist/declarations/src/components/Option";
 
 interface Data {
+    selected: Option,
     exportBarChart: ChartData;
     importBarChart: ChartData;
 }
 
-class Navbar extends React.Component<Data> {
+class Navbar extends React.Component<any, Data> {
     constructor(props: any) {
         super(props);
         this.state = {
-            exportBarChart: 'no Data',
-            importBarChart: 'no Data'
+            selected: dropdownOptions[0].options[0],
+            exportBarChart: {
+                labels: this.labels,
+                datasets: [
+                    {
+                        label: 'No Data',
+                        backgroundColor: ['#6d597a', '#b56576', '#e56b6f', '#eaac8b'],
+                        borderColor: '#355070',
+                        data: [0] 
+                    }
+                ]
+            },
+            importBarChart: {
+                labels: this.labels,
+                datasets: [
+                    {
+                        label: 'No Data',
+                        backgroundColor: ['#6d597a', '#b56576', '#e56b6f', '#eaac8b'],
+                        borderColor: '#355070',
+                        data: [0] 
+                    }
+                ]
+            }
         }
     }
 
-    refresh(el: String) {
-        var dataExportBarChart = fetch("localhost:8081/api/requestTotal?country=" + el + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
+    labels: string[] = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+
+    refresh(el: SingleValue<Option>) {
+        var dataExportBarChart: any = fetch("localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
             .then(response => response.json());
-        var dataImportBarChart = fetch("localhost:8081/api/requestTotal?country=" + el + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
+        var dataImportBarChart: any = fetch("localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
             .then(response => response.json());
+
+        console.log("fetching: localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
+        console.log(JSON.stringify(dataExportBarChart));
+
+        console.log("fetching: localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
+        console.log(JSON.stringify(dataImportBarChart));
 
         this.setState({
             exportBarChart: dataExportBarChart,
@@ -40,7 +86,8 @@ class Navbar extends React.Component<Data> {
                     </svg>
                     <nav className="navbar justify-content-end">
                         <ul className="nav">
-                            <Select id="selector" options={dropdownOptions} value={dropdownOptions.find(obj => obj.value === selectedValue)} onChange={this.refresh}/>
+                            <Select id="selector" options={dropdownOptions} defaultValue={this.state.selected} onChange={(event) => this.refresh(event)}/>
+                            {/* onChange={(event) => this.refresh(event)} */}
                         </ul>
                     </nav>
             </div>

@@ -1,6 +1,8 @@
-import { GroupedOptions, associationOptions, countryOptions } from './DropdownData';
+import { Option, associationOptions, countryOptions } from './DropdownData';
 
-const dropwdownOptions: GroupedOptions[] = [
+import { GroupBase } from 'react-select';
+
+const dropdownOptions: GroupBase<Option>[] = [
 {
     label: "association",
     options: associationOptions,
@@ -11,4 +13,4 @@ const dropwdownOptions: GroupedOptions[] = [
 }
 ];
 
-export default dropwdownOptions;
+export default dropdownOptions;

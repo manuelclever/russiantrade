@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 public class ServletTotal extends HttpServlet {
@@ -26,6 +27,8 @@ public class ServletTotal extends HttpServlet {
         // Allocate a output writer to write the response message into the network socket
 
         PrintWriter out = resp.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<p>starting</p>");
         try {
             int country = Integer.parseInt(req.getParameter("country"));
             String tradeFlow = req.getParameter("trade_flow");
@@ -33,15 +36,21 @@ public class ServletTotal extends HttpServlet {
             int periodEnd = Integer.parseInt(req.getParameter("periodEnd"));
 
             DSCreator dsC = new DSCreator(DB_PROPERTIES);
+//            InitialContext ctx = new InitialContext();
+//            DataSource dataSource = (DataSource)ctx.lookup("java:comp/env/jdbc/DefaultDB");
+//            PSQLTradeReader dr = new PSQLTradeReader(dataSource);
             PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
 
             List<TradeData> tradeData = null;
             if (DigitCount.count(periodStart) == 4 && DigitCount.count(periodEnd) == 4) {
+                out.println("<p>getting trade data</p>");
                 tradeData = dr.getTotalOfYears(country, DataDesignations.RUSSIA, tradeFlow, periodStart, periodEnd);
             }
 
             if (tradeData != null) {
                 String json = TradeMapper.jsonTotal(tradeData);
+                out.println("<p>" + country + ", " + tradeFlow + ", " + periodStart + ", " + periodEnd + "</p>");
+
                 out.write(json);
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
@@ -49,6 +58,8 @@ public class ServletTotal extends HttpServlet {
             }
         } catch (Exception e) {
             out.println("<p>Error!!!</p>");
+            out.println("<p>" + e.getMessage() + "</p>");
+            out.println("<p>" + Arrays.toString(e.getStackTrace()) + "</p>");
 
         } finally {
             out.close();
