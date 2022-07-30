@@ -1,7 +1,7 @@
-package russiantrade.database.readAndWrite.union;
+package eu.russiantrade.database.readAndWrite.union;
 
-import russiantrade.database.querydesignations.PSQL.PSQLQUnion;
-import russiantrade.database.querydesignations.Query;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQUnion;
+import eu.russiantrade.database.querydesignations.Query;
 
 import javax.sql.DataSource;
 

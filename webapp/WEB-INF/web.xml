@@ -5,20 +5,28 @@
 
   <servlet>
     <servlet-name>Data Retrieval Commodities</servlet-name>
-    <servlet-class>eu.russiantrade.servlets.ServletCommodities</servlet-class>
+    <servlet-class>eu.russiantrade.eu.russiantrade.servlets.ServletCommodities</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Data Retrieval Total</servlet-name>
-    <servlet-class>eu.russiantrade.servlets.ServletTotal</servlet-class>
+    <servlet-class>eu.russiantrade.eu.russiantrade.servlets.ServletTotal</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>eu.russiantrade.eu.russiantrade.servlets.ServletTest</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>Data Retrieval Commodities</servlet-name>
-    <url-pattern>/api/requestCom</url-pattern>
+    <url-pattern>/requestCom</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Data Retrieval Total</servlet-name>
-    <url-pattern>/api/requestTotal</url-pattern>
+    <url-pattern>/requestTotal</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/test</url-pattern>
   </servlet-mapping>
 
   <resource-ref>

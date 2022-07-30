@@ -60,15 +60,15 @@ class Navbar extends React.Component<any, Data> {
     ];
 
     refresh(el: SingleValue<Option>) {
-        var dataExportBarChart: any = fetch("localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
+        var dataExportBarChart: any = fetch("localhost:8081/api/requestTotal?country=" + el?.value?.toString().split("_")[1] + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
             .then(response => response.json());
-        var dataImportBarChart: any = fetch("localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
+        var dataImportBarChart: any = fetch("localhost:8081/api/requestTotal?country=" + el?.value?.toString().split("_")[1] + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
             .then(response => response.json());
 
-        console.log("fetching: localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
+        console.log("fetching: localhost:8081/api/requestTotal?country=" + el?.value?.toString().split("_")[1] + "&trade_flow=Export&periodStart=2010&periodEnd=2020")
         console.log(JSON.stringify(dataExportBarChart));
 
-        console.log("fetching: localhost:8081/api/requestTotal?country=" + el?.value + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
+        console.log("fetching: localhost:8081/api/requestTotal?country=" + el?.value?.toString().split("_")[1] + "&trade_flow=Import&periodStart=2010&periodEnd=2020")
         console.log(JSON.stringify(dataImportBarChart));
 
         this.setState({

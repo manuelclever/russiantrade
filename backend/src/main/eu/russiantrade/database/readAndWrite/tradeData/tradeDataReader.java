@@ -1,6 +1,6 @@
-package russiantrade.database.readAndWrite.tradeData;
+package eu.russiantrade.database.readAndWrite.tradeData;
 
-import russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.comtrade.parser.TradeData;
 
 import java.util.List;
 

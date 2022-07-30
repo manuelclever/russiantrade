@@ -1,4 +1,4 @@
-package russiantrade.database.querydesignations;
+package eu.russiantrade.database.querydesignations;
 
 public abstract class DataDesignations extends SQLQueries {
 

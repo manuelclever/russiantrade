@@ -1,11 +1,11 @@
-package russiantrade.servlets;
+package eu.russiantrade.servlets;
 
-import russiantrade.comtrade.parser.TradeData;
-import russiantrade.database.datasource.DSCreator;
-import russiantrade.database.querydesignations.DataDesignations;
-import russiantrade.database.readAndWrite.TradeMapper;
-import russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
-import russiantrade.util.DigitCount;
+import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.database.datasource.DSCreator;
+import eu.russiantrade.database.querydesignations.DataDesignations;
+import eu.russiantrade.database.readAndWrite.TradeMapper;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.util.DigitCount;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

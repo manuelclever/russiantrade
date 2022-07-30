@@ -1,11 +1,11 @@
-package russiantrade.database.readAndWrite;
+package eu.russiantrade.database.readAndWrite;
 
-import russiantrade.comtrade.parser.TradeData;
-import russiantrade.database.datasource.DSCreator;
-import russiantrade.database.readAndWrite.coalition.PSQLCoalitionWriter;
-import russiantrade.database.readAndWrite.country.PSQLCountryWriter;
-import russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
-import russiantrade.database.readAndWrite.union.PSQLUnionWriter;
+import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.database.datasource.DSCreator;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
+import eu.russiantrade.database.readAndWrite.coalition.PSQLCoalitionWriter;
+import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
+import eu.russiantrade.database.readAndWrite.union.PSQLUnionWriter;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;

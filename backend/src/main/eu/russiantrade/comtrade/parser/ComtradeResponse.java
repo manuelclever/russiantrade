@@ -1,4 +1,4 @@
-package russiantrade.comtrade.parser;
+package eu.russiantrade.comtrade.parser;
 
 import java.util.List;
 

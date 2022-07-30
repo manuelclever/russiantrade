@@ -1,4 +1,4 @@
-package russiantrade.util;
+package eu.russiantrade.util;
 
 import java.io.*;
 import java.nio.file.FileSystems;

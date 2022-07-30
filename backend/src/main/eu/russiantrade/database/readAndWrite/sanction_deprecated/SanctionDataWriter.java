@@ -1,4 +1,4 @@
-package russiantrade.database.readAndWrite.sanction_deprecated;
+package eu.russiantrade.database.readAndWrite.sanction_deprecated;
 
 public interface SanctionDataWriter {
     int addSanctionGlobal(int groupID, int periodStart, String content);

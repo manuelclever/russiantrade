@@ -1,4 +1,4 @@
-package russiantrade.util;
+package eu.russiantrade.util;
 
 public class DigitCount {
     public static int count(int n) {

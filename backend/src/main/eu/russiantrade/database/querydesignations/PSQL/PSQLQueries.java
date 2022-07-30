@@ -1,6 +1,6 @@
-package russiantrade.database.querydesignations.PSQL;
+package eu.russiantrade.database.querydesignations.PSQL;
 
-import russiantrade.database.querydesignations.DataDesignations;
+import eu.russiantrade.database.querydesignations.DataDesignations;
 
 public abstract class PSQLQueries extends DataDesignations {
 

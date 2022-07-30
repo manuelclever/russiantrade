@@ -1,7 +1,7 @@
-package russiantrade.database.readAndWrite.coalition;
+package eu.russiantrade.database.readAndWrite.coalition;
 
-import russiantrade.database.querydesignations.PSQL.PSQLQCoalition;
-import russiantrade.database.querydesignations.Query;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQCoalition;
+import eu.russiantrade.database.querydesignations.Query;
 
 import javax.sql.DataSource;
 

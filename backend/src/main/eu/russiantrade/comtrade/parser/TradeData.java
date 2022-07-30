@@ -1,4 +1,4 @@
-package russiantrade.comtrade.parser;
+package eu.russiantrade.comtrade.parser;
 
 public class TradeData {
     private String pfCode;

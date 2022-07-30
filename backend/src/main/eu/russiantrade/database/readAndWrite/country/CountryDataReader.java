@@ -1,4 +1,4 @@
-package russiantrade.database.readAndWrite.country;
+package eu.russiantrade.database.readAndWrite.country;
 
 public interface CountryDataReader {
     String getCountry(String name);

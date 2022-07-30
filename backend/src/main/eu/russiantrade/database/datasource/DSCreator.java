@@ -1,7 +1,7 @@
-package russiantrade.database.datasource;
+package eu.russiantrade.database.datasource;
 
-import russiantrade.database.datasource.util.CreateUrl;
-import russiantrade.database.querydesignations.DataDesignations;
+import eu.russiantrade.database.datasource.util.CreateUrl;
+import eu.russiantrade.database.querydesignations.DataDesignations;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;

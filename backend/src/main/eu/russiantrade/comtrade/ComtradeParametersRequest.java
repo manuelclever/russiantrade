@@ -1,4 +1,4 @@
-package russiantrade.comtrade;
+package eu.russiantrade.comtrade;
 
 public class ComtradeParametersRequest extends ComtradeParameters {
 

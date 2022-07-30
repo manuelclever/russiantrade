@@ -1,4 +1,4 @@
-package russiantrade.comtrade;
+package eu.russiantrade.comtrade;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
@@ -8,10 +8,10 @@ public class APICall {
     private static final String URL_AVAILABILITY = "http://comtrade.un.org/api//refs/da/view?";
     private static final String URL_REQUEST = "http://comtrade.un.org/api/get?";
 
-    russiantrade.comtrade.ComtradeParameters comtradeParameters;
+    ComtradeParameters comtradeParameters;
     private StringBuilder requestUrl;
 
-    public APICall(russiantrade.comtrade.ComtradeParameters comtradeParametersRequest) {
+    public APICall(ComtradeParameters comtradeParametersRequest) {
         this.comtradeParameters = comtradeParametersRequest;
     }
 
@@ -34,7 +34,7 @@ public class APICall {
     private String getRequestUrl() {
         requestUrl = new StringBuilder();
 
-        if(comtradeParameters.getClass() == russiantrade.comtrade.ComtradeParametersAvailability.class) {
+        if(comtradeParameters.getClass() == ComtradeParametersAvailability.class) {
             requestUrl.append(URL_AVAILABILITY);
         } else {
             requestUrl.append(URL_REQUEST);

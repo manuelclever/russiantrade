@@ -1,10 +1,10 @@
-package russiantrade.database;
+package eu.russiantrade.database;
 
 import com.google.gson.JsonObject;
-import russiantrade.comtrade.parser.TradeData;
-import russiantrade.database.datasource.DSCreator;
-import russiantrade.database.readAndWrite.TradeMapper;
-import russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.database.datasource.DSCreator;
+import eu.russiantrade.database.readAndWrite.TradeMapper;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;

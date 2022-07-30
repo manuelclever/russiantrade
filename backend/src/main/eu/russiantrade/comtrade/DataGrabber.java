@@ -1,18 +1,18 @@
-package russiantrade.comtrade;
+package eu.russiantrade.comtrade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import russiantrade.comtrade.parser.ComtradeParser;
-import russiantrade.comtrade.parser.ComtradeResponse;
-import russiantrade.comtrade.parser.TradeData;
-import russiantrade.database.datasource.DSCreator;
-import russiantrade.database.parser.Country;
-import russiantrade.database.querydesignations.DataDesignations;
-import russiantrade.database.readAndWrite.country.PSQLCountryReader;
-import russiantrade.database.readAndWrite.country.PSQLCountryWriter;
-import russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
-import russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
+import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.database.datasource.DSCreator;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
+import eu.russiantrade.comtrade.parser.ComtradeParser;
+import eu.russiantrade.comtrade.parser.ComtradeResponse;
+import eu.russiantrade.database.parser.Country;
+import eu.russiantrade.database.querydesignations.DataDesignations;
+import eu.russiantrade.database.readAndWrite.country.PSQLCountryReader;
+import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
 
 import java.io.*;
 import java.nio.file.FileSystems;

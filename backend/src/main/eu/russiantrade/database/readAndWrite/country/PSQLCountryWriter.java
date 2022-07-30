@@ -1,8 +1,8 @@
-package russiantrade.database.readAndWrite.country;
+package eu.russiantrade.database.readAndWrite.country;
 
-import russiantrade.database.parser.Country;
-import russiantrade.database.querydesignations.PSQL.PSQLQCountry;
-import russiantrade.util.LogGenerator;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQCountry;
+import eu.russiantrade.database.parser.Country;
+import eu.russiantrade.util.LogGenerator;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

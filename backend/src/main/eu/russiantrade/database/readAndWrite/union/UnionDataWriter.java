@@ -1,4 +1,4 @@
-package russiantrade.database.readAndWrite.union;
+package eu.russiantrade.database.readAndWrite.union;
 
 public interface UnionDataWriter {
     int addConnection(int coalitionID, int countryID);

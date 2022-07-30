@@ -1,4 +1,4 @@
-package russiantrade.comtrade.parser;
+package eu.russiantrade.comtrade.parser;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

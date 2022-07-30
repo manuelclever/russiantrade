@@ -1,4 +1,4 @@
-package eu.russiantrade.databas.datasource;
+package java.eu.russiantrade.database.datasource;
 
 import eu.russiantrade.database.datasource.DSCreator;
 import org.junit.jupiter.api.Assertions;

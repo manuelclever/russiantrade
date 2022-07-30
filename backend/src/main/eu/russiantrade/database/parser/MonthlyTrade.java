@@ -1,4 +1,4 @@
-package russiantrade.database.parser;
+package eu.russiantrade.database.parser;
 
 public class MonthlyTrade {
     // all variable names have to equal DataDesignations of column in database

@@ -1,6 +1,6 @@
-package russiantrade.database.readAndWrite.country;
+package eu.russiantrade.database.readAndWrite.country;
 
-import russiantrade.database.parser.Country;
+import eu.russiantrade.database.parser.Country;
 
 public interface CountryDataWriter {
     int addCountry(String name, String abbrev, int comtradeId);

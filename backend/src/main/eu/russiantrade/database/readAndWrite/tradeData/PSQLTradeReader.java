@@ -1,10 +1,10 @@
-package russiantrade.database.readAndWrite.tradeData;
+package eu.russiantrade.database.readAndWrite.tradeData;
 
-import russiantrade.comtrade.parser.TradeData;
-import russiantrade.database.parser.DatabaseTradeDataParser;
-import russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
-import russiantrade.database.querydesignations.Query;
-import russiantrade.util.DigitCount;
+import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.database.parser.DatabaseTradeDataParser;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
+import eu.russiantrade.database.querydesignations.Query;
+import eu.russiantrade.util.DigitCount;
 
 import javax.sql.DataSource;
 import java.util.List;

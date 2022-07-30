@@ -1,4 +1,4 @@
-package russiantrade.database.datasource.util;
+package eu.russiantrade.database.datasource.util;
 
 public class CreateUrl {
     private static final String POSTGRESQL = "org.postgresql.Driver";

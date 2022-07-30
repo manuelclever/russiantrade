@@ -1,4 +1,4 @@
-package russiantrade.util;
+package eu.russiantrade.util;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;

@@ -1,7 +1,7 @@
-package russiantrade.database.readAndWrite.country;
+package eu.russiantrade.database.readAndWrite.country;
 
-import russiantrade.database.querydesignations.PSQL.PSQLQCountry;
-import russiantrade.database.querydesignations.Query;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQCountry;
+import eu.russiantrade.database.querydesignations.Query;
 
 import javax.sql.DataSource;
 

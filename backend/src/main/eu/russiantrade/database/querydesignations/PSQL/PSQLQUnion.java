@@ -1,4 +1,4 @@
-package russiantrade.database.querydesignations.PSQL;
+package eu.russiantrade.database.querydesignations.PSQL;
 
 public class PSQLQUnion extends PSQLQueries {
 

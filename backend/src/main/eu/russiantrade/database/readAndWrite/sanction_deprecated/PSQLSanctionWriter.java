@@ -1,4 +1,4 @@
-package russiantrade.database.readAndWrite.sanction_deprecated;
+package eu.russiantrade.database.readAndWrite.sanction_deprecated;
 
 import javax.sql.DataSource;
 

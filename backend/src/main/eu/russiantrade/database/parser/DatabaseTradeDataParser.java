@@ -1,9 +1,9 @@
-package russiantrade.database.parser;
+package eu.russiantrade.database.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.comtrade.parser.TradeData;
 
 import java.io.IOException;
 import java.util.ArrayList;

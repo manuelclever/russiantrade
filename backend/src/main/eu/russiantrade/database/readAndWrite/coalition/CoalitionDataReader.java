@@ -1,4 +1,4 @@
-package russiantrade.database.readAndWrite.coalition;
+package eu.russiantrade.database.readAndWrite.coalition;
 
 public interface CoalitionDataReader {
     String getGroups();

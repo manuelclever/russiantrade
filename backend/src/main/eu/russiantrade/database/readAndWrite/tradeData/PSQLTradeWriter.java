@@ -1,8 +1,8 @@
-package russiantrade.database.readAndWrite.tradeData;
+package eu.russiantrade.database.readAndWrite.tradeData;
 
-import russiantrade.comtrade.parser.TradeData;
-import russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
-import russiantrade.util.LogGenerator;
+import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
+import eu.russiantrade.util.LogGenerator;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
