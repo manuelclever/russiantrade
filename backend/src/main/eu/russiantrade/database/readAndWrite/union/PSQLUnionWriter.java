@@ -2,14 +2,12 @@ package eu.russiantrade.database.readAndWrite.union;
 
 import eu.russiantrade.database.querydesignations.PSQL.PSQLQCoalition;
 import eu.russiantrade.database.querydesignations.PSQL.PSQLQUnion;
-import eu.russiantrade.util.LogGenerator;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 
 public class PSQLUnionWriter implements UnionDataWriter {
     DataSource datasource;
@@ -34,7 +32,6 @@ public class PSQLUnionWriter implements UnionDataWriter {
             }
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return 0;
     }
@@ -54,7 +51,6 @@ public class PSQLUnionWriter implements UnionDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }

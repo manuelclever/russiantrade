@@ -7,30 +7,27 @@ import eu.russiantrade.database.readAndWrite.TradeMapper;
 import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
 import eu.russiantrade.util.DigitCount;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 public class ServletTotal extends HttpServlet {
-    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "backend", "src", "main", "", "database", "testDatabase.properties");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // Set the response message's MIME type
+        ServletContext context = req.getServletContext();
+                // Set the response message's MIME type
         resp.setContentType("text/html;charset=UTF-8");
         // Allocate a output writer to write the response message into the network socket
 
         PrintWriter out = resp.getWriter();
         out.println("<!DOCTYPE html>");
-        out.println("<p>starting</p>");
         try {
             int country = Integer.parseInt(req.getParameter("country"));
             String tradeFlow = req.getParameter("trade_flow");
@@ -42,20 +39,20 @@ public class ServletTotal extends HttpServlet {
             out.println("<p>periodStart: " + periodStart + "</p>");
             out.println("<p>periodEnd: " + periodEnd + "</p>");
 
-            DSCreator dsC = new DSCreator(DB_PROPERTIES);
-//            InitialContext ctx = new InitialContext();
-//            DataSource dataSource = (DataSource)ctx.lookup("java:comp/env/jdbc/DefaultDB");
-//            PSQLTradeReader dr = new PSQLTradeReader(dataSource);
-            DataSource ds = dsC.getDataSourceTradeDB();
-            System.out.println("<p>Datasource " + ds.toString() + "</p>");
-            PSQLTradeReader dr = new PSQLTradeReader(ds);
+
+            DSCreator dsC = new DSCreator(out);
+
+            out.println("<p>getDataSourceTradeDB</p>");
+            DataSource ds = dsC.getDataSourceTradeDBServlet(out);
+            out.println("<p>string is being created</p>");
+            PSQLTradeReader dr = new PSQLTradeReader(ds, out);
 
             List<TradeData> tradeData = null;
             if (DigitCount.count(periodStart) == 4 && DigitCount.count(periodEnd) == 4) {
                 out.println("<p>getting trade data</p>");
                 tradeData = dr.getTotalOfYears(country, DataDesignations.RUSSIA, tradeFlow, periodStart, periodEnd);
             }
-
+            out.println("<p>is trade data other than null?</p>");
             if (tradeData != null) {
                 String json = TradeMapper.jsonTotal(tradeData);
                 out.println("<p>" + country + ", " + tradeFlow + ", " + periodStart + ", " + periodEnd + "</p>");
@@ -63,7 +60,6 @@ public class ServletTotal extends HttpServlet {
                 out.write(json);
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
-                out.println("<p>This is a paragraph</p>");
             }
         } catch (Exception e) {
             out.println("<p>Error!!!</p>");
@@ -72,6 +68,8 @@ public class ServletTotal extends HttpServlet {
 
         } finally {
             out.close();
+            out.println("<p>closed</p>");
         }
+        out.println("<p>end</p>");
     }
 }

@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.List;
 
 public class ServletCommodities extends HttpServlet {
-    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "src", "test", "", "backend/src/main/resources/database", "testDatabase.properties");
+    private static final String DB_PROPERTIES = FileSystems.getDefault().getPath(
+            "src", "test", "", "backend/src/main/resources/database", "testDatabase.properties")
+            .toAbsolutePath().toString();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Set the response message's MIME type
@@ -32,7 +32,7 @@ public class ServletCommodities extends HttpServlet {
             String commodity = req.getParameter("commodity");
 
             DSCreator dsC = new DSCreator(DB_PROPERTIES);
-            PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
+            PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDBServlet(out));
 
             List<TradeData> tradeData = null;
             int digits = DigitCount.count(period);
@@ -48,6 +48,9 @@ public class ServletCommodities extends HttpServlet {
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
     }
 }

@@ -2,7 +2,6 @@ package eu.russiantrade.database.readAndWrite.tradeData;
 
 import eu.russiantrade.comtrade.parser.TradeData;
 import eu.russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
-import eu.russiantrade.util.LogGenerator;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -11,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class PSQLTradeWriter implements tradeDataWriter {
     DataSource datasource;
@@ -43,7 +41,6 @@ public class PSQLTradeWriter implements tradeDataWriter {
             }
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return 0;
     }
@@ -73,7 +70,6 @@ public class PSQLTradeWriter implements tradeDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }
@@ -92,7 +88,6 @@ public class PSQLTradeWriter implements tradeDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }
@@ -112,7 +107,6 @@ public class PSQLTradeWriter implements tradeDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }
@@ -133,7 +127,6 @@ public class PSQLTradeWriter implements tradeDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }
@@ -155,7 +148,6 @@ public class PSQLTradeWriter implements tradeDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }

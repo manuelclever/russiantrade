@@ -17,9 +17,7 @@ public class ServletTest extends HttpServlet {
 
         PrintWriter out = resp.getWriter();
         out.println("<!DOCTYPE html>");
-        out.println("<p>starting</p>");
-
-        out.println("<p>This is a paragraph</p>");
+        out.println("<p>If you see this site, all servlets should be up</p>");
 
         out.close();
     }

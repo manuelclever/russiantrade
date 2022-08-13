@@ -1,10 +1,9 @@
 package eu.russiantrade.database.querydesignations;
 
-import eu.russiantrade.util.LogGenerator;
-
 import javax.sql.DataSource;
+import java.io.PrintWriter;
 import java.sql.*;
-import java.util.logging.Level;
+import java.util.Arrays;
 
 public class Query {
 
@@ -26,7 +25,6 @@ public class Query {
 
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, statement, e.getMessage());
         }
         return null;
     }
@@ -40,6 +38,7 @@ public class Query {
             for(int arg : args) {
                 query.setInt(i++, arg);
             }
+            System.out.println(query);
             ResultSet rs = query.executeQuery();
 
             if(rs.next()) {
@@ -50,7 +49,6 @@ public class Query {
 
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, statement, e.getMessage());
         }
         return null;
     }
@@ -67,6 +65,7 @@ public class Query {
                 query.setInt(i++, arg);
             }
 
+            System.out.println(query);
             ResultSet rs = query.executeQuery();
 
             if(rs.next()) {
@@ -77,7 +76,39 @@ public class Query {
 
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, statement, e.getMessage());
+        }
+        return null;
+    }
+
+    public static String queryWhereTwoStringAndIntServlet(PrintWriter out, DataSource datasource, String statement,
+                                                          String s1,
+                                                          String s2, int ... args) {
+        try(Connection conn = datasource.getConnection();
+            PreparedStatement query = conn.prepareStatement(statement)) {
+
+            query.setString(1, s1);
+            query.setString(2, s2);
+            int i = 3;
+            for(int arg : args) {
+                query.setInt(i++, arg);
+            }
+
+            out.println("<p>Query: " + query + "</p>");
+            ResultSet rs = query.executeQuery();
+
+            if(rs.next()) {
+                String output = rs.getString(1);
+                out.println("<p>Output: " + output + "</p>");
+                out.println("<p>close re</p>");
+                rs.close();
+                out.println("<p>return output</p>");
+                return output;
+            }
+
+        } catch(SQLException e) {
+            out.println("<p>SQL Exception</p>");
+            out.println(e.getMessage());
+            out.println("<p>" + Arrays.toString(e.getStackTrace()) + "</p>");
         }
         return null;
     }
@@ -97,7 +128,6 @@ public class Query {
 
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, statement, e.getMessage());
         }
         return null;
     }
@@ -121,7 +151,6 @@ public class Query {
 
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, statement, e.getMessage());
         }
         return null;
     }
@@ -140,7 +169,6 @@ public class Query {
 
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, statement, e.getMessage());
         }
         return null;
     }

@@ -1,18 +1,18 @@
-package eu.russiantrade.comtrade;
+package eu.russiantrade.api.comtrade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.api.comtrade.parser.ComtradeParser;
+import eu.russiantrade.api.comtrade.parser.ComtradeResponse;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
-import eu.russiantrade.comtrade.parser.ComtradeParser;
-import eu.russiantrade.comtrade.parser.ComtradeResponse;
 import eu.russiantrade.database.parser.Country;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryReader;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
 import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataGrabber {
-    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath("backend", "src", "test", "",
+    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath("backend", "src", "main", "resources",
             "database", "testDatabase.properties");
     private  static final Path API_LOG = FileSystems.getDefault().getPath(
-            "backend", "src",  "main", "", "database", "api.log");
+            "backend", "src",  "main", "resources", "database", "api.log");
     private static final Path COUNTRIES_TXT = FileSystems.getDefault()
-            .getPath("backend", "src",  "main", "", "countries.txt");
+            .getPath("backend", "src",  "main", "resources", "countries.txt");
 
     public static final int REQUEST_DELAY = 1000;
     public static final int RATE_LIMIT_HOUR = 100;

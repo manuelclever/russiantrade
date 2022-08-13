@@ -7,13 +7,21 @@ import eu.russiantrade.database.querydesignations.Query;
 import eu.russiantrade.util.DigitCount;
 
 import javax.sql.DataSource;
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 
 public class PSQLTradeReader implements tradeDataReader {
-    DataSource datasource;
+    private DataSource datasource;
+    private PrintWriter out;
 
     public PSQLTradeReader(DataSource datasource) {
         this.datasource = datasource;
+    }
+
+    public PSQLTradeReader(DataSource datasource, PrintWriter out) {
+        this.datasource = datasource;
+        this.out = out;
     }
 
     public List<TradeData> getTotalOfYear(int reporter, int partner, String tradeFlow, int period) {
@@ -23,18 +31,34 @@ public class PSQLTradeReader implements tradeDataReader {
     @Override
     public List<TradeData> getTotalOfYears(int reporter, int partner, String tradeFlow, int periodStart, int periodEnd) {
         if(DigitCount.count(periodStart) == 4 && DigitCount.count(periodEnd) == 4) {
-            return parse(
-                    Query.queryWhereTwoStringAndInt(
-                            datasource,
-                            PSQLQTradeData.queryTotalOfYear(PSQLQTradeData.SELECT_DATASET),
-                            tradeFlow,
-                            "TOTAL",
-                            reporter,
-                            partner,
-                            periodStart,
-                            periodEnd
-                    )
-            );
+            if(out == null) {
+                return parse(
+                        Query.queryWhereTwoStringAndInt(
+                                datasource,
+                                PSQLQTradeData.queryTotalOfYear(PSQLQTradeData.SELECT_DATASET),
+                                tradeFlow,
+                                "TOTAL",
+                                reporter,
+                                partner,
+                                periodStart,
+                                periodEnd
+                        )
+                );
+            } else {
+                return parse(
+                        Query.queryWhereTwoStringAndIntServlet(
+                                out,
+                                datasource,
+                                PSQLQTradeData.queryTotalOfYear(PSQLQTradeData.SELECT_DATASET),
+                                tradeFlow,
+                                "TOTAL",
+                                reporter,
+                                partner,
+                                periodStart,
+                                periodEnd
+                        )
+                );
+            }
         }
         throw new NumberFormatException("Year in format 'YYYY' expected.");
     }
@@ -116,6 +140,18 @@ public class PSQLTradeReader implements tradeDataReader {
     }
 
     private List<TradeData> parse(String json) {
-        return DatabaseTradeDataParser.parseResponse(json);
+        if(out == null) {
+            return DatabaseTradeDataParser.parseResponse(json);
+        } else {
+            out.println("<p>parseResponseServlet</p>");
+            try {
+                return DatabaseTradeDataParser.parseResponseServlet(json, out);
+            } catch (Exception e) {
+                out.println("<p>Error</p>");
+                out.println("<p>" + e.getMessage() + "</p>");
+                out.println("<p>" + Arrays.toString(e.getStackTrace()) + "</p>");
+            }
+        }
+        return null;
     }
 }

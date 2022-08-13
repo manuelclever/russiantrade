@@ -1,15 +1,13 @@
 package eu.russiantrade.database.readAndWrite.country;
 
-import eu.russiantrade.database.querydesignations.PSQL.PSQLQCountry;
 import eu.russiantrade.database.parser.Country;
-import eu.russiantrade.util.LogGenerator;
+import eu.russiantrade.database.querydesignations.PSQL.PSQLQCountry;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 
 public class PSQLCountryWriter implements CountryDataWriter {
     DataSource datasource;
@@ -35,7 +33,6 @@ public class PSQLCountryWriter implements CountryDataWriter {
             }
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return 0;
     }
@@ -64,7 +61,6 @@ public class PSQLCountryWriter implements CountryDataWriter {
             }
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return 0;
     }
@@ -83,7 +79,6 @@ public class PSQLCountryWriter implements CountryDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }
@@ -102,7 +97,6 @@ public class PSQLCountryWriter implements CountryDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }

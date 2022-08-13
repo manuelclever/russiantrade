@@ -1,14 +1,12 @@
 package eu.russiantrade.database.readAndWrite.coalition;
 
 import eu.russiantrade.database.querydesignations.PSQL.PSQLQCoalition;
-import eu.russiantrade.util.LogGenerator;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 
 public class PSQLCoalitionWriter implements CoalitionDataWriter {
     DataSource datasource;
@@ -32,7 +30,6 @@ public class PSQLCoalitionWriter implements CoalitionDataWriter {
             }
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return 0;
     }
@@ -51,7 +48,6 @@ public class PSQLCoalitionWriter implements CoalitionDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }
@@ -70,7 +66,6 @@ public class PSQLCoalitionWriter implements CoalitionDataWriter {
             return success;
         } catch(SQLException e) {
             e.printStackTrace();
-            LogGenerator.log(Level.WARNING, getClass(), e.getMessage());
         }
         return false;
     }

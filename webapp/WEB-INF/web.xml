@@ -15,6 +15,10 @@
     <servlet-name>Test</servlet-name>
     <servlet-class>eu.russiantrade.eu.russiantrade.servlets.ServletTest</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>eu.russiantrade.servlets.ServletTest</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Data Retrieval Commodities</servlet-name>

@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import eu.russiantrade.comtrade.parser.TradeData;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DatabaseTradeDataParser {
 
@@ -17,6 +19,21 @@ public class DatabaseTradeDataParser {
                 return mapper.readValue(json, ArrayList.class);
             } return null;
         } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static ArrayList<TradeData> parseResponseServlet(String json, PrintWriter out) {
+        out.println("<p>prepare Mapper</p>");
+        try {
+            ObjectMapper mapper = prepareMapper(ArrayList.class, new DatabaseTradeDataDeserializer());
+            if(json != null) {
+                out.println("<p>mapper read value</p>");
+                return mapper.readValue(json, ArrayList.class);
+            } return null;
+        } catch (IOException e) {
+            out.println("<p>" + e.getMessage() + "</p>");
+            out.println("<p>" + Arrays.toString(e.getStackTrace()) + "</p>");
             return null;
         }
     }

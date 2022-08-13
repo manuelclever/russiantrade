@@ -2,17 +2,22 @@ package eu.russiantrade.database.datasource;
 
 import eu.russiantrade.database.datasource.util.CreateUrl;
 import eu.russiantrade.database.querydesignations.DataDesignations;
+import eu.russiantrade.util.LogGenerator;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.logging.Level;
 
 
 public class DSCreator {
@@ -27,43 +32,77 @@ public class DSCreator {
     // before running, create directory with permissions for user postgres
 
 
-    private final String DATABASE_SETTINGS_PATH;
+    private String DATABASE_SETTINGS_PATH;
+    private PrintWriter out = null;
 
-    public DSCreator(Path databaseProperties) {
-        this.DATABASE_SETTINGS_PATH = databaseProperties.toAbsolutePath().toString();
+    public DSCreator(String databaseProperties) {
+        this.DATABASE_SETTINGS_PATH = databaseProperties;
+    }
+    public DSCreator(PrintWriter out) {
+        this.out = out;
     }
 
-    public DataSource getDataSourceTradeDB() {
+    public DataSource getDataSourceTradeDBJava() throws IOException, NamingException {
         if (dataSourceTradeDB == null) {
+            DataSource dataSourcePostgres = createDataSourceJava("");
 
-            try {
-                properties = new Properties();
-                InputStream inputStream = new FileInputStream(DATABASE_SETTINGS_PATH);
-                properties.load(inputStream);
-
-                BasicDataSource dataSourcePostgres = createDataSource("source_");
-                createUserIfNotExist(dataSourcePostgres);
-                createTableSpaceIfNotExist(dataSourcePostgres);
-                createDatabaseIfNotExist(dataSourcePostgres);
-
-                dataSourceTradeDB = new BasicDataSource();
-                setDataSourceTradeDB(dataSourceTradeDB);
-                createSchemaIfNotExist(dataSourceTradeDB);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //initializeDatabase(dataSourcePostgres);
+            dataSourceTradeDB = dataSourcePostgres;
         }
         return dataSourceTradeDB;
     }
 
-    private BasicDataSource createDataSource(String type) throws IOException {
-        BasicDataSource dataSourcePostgres = new BasicDataSource();
-        setDataSource(dataSourcePostgres, type);
-        return dataSourcePostgres;
+    private void initializeDatabase(DataSource dataSource) {
+        createUserIfNotExist(dataSource);
+        createTableSpaceIfNotExist(dataSource);
+        createDatabaseIfNotExist(dataSource);
+        createSchemaIfNotExist(dataSource);
+
+    }
+
+    public DataSource getDataSourceTradeDBServlet(PrintWriter out) throws IOException, NamingException {
+        if (dataSourceTradeDB == null) {
+            this.out = out;
+
+            DataSource dataSourcePostgres = createDataSourceServlet();
+
+            //initializeDatabase(dataSourcePostgres);
+            dataSourceTradeDB = dataSourcePostgres;
+        }
+        return dataSourceTradeDB;
+    }
+
+    private DataSource createDataSourceJava(String type) throws IOException {
+        setProperties();
+
+        BasicDataSource basicDataSourcePostgres = new BasicDataSource();
+        setDataSource(basicDataSourcePostgres, type);
+        return basicDataSourcePostgres;
+    }
+
+    private void setProperties() throws IOException {
+        properties = new Properties();
+
+        InputStream inputStream = new FileInputStream(DATABASE_SETTINGS_PATH);
+        properties.load(inputStream);
+    }
+
+    private DataSource createDataSourceServlet() throws NamingException {
+        if(out != null) {
+            out.println("<p>new datasourceservlet</p>");
+        }
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup("java:/comp/env/jdbc/tradetest_db");
     }
 
     private void setDataSource(BasicDataSource basicDS, String type) throws IOException {
+        if(out != null) {
+            out.println("<p>set Connection</p>");
+        }
         setDSConnection(basicDS, type);
+        if(out != null) {
+            out.println("<p>set dspool</p>");
+        }
         setDSPool(basicDS);
     }
 
@@ -134,15 +173,14 @@ public class DSCreator {
         return basicDS;
     }
 
-    private void createUserIfNotExist(BasicDataSource basicDS) {
-        printDatasource(basicDS);
+    private void createUserIfNotExist(DataSource basicDS) {
         String statement =
                 "CREATE USER " + properties.getProperty("user") +
                         " WITH ENCRYPTED PASSWORD '" + properties.getProperty("password") + "';";
         execute(basicDS, statement);
     }
 
-    private void execute(BasicDataSource basicDS, String statement) {
+    private void execute(DataSource basicDS, String statement) {
         try (Connection con = basicDS.getConnection()) {
             Statement st = con.createStatement();
             System.out.println(statement);
@@ -152,19 +190,18 @@ public class DSCreator {
             st.close();
         } catch (SQLException e) {
             System.out.println(ANSI_YELLOW + e.getMessage() + ANSI_RESET);
+            LogGenerator.debug(Level.SEVERE, getClass(), e.getMessage());
         }
     }
 
-    public void createTableSpaceIfNotExist(BasicDataSource basicDS) {
-        printDatasource(basicDS);
+    public void createTableSpaceIfNotExist(DataSource basicDS) {
         String statement =
                 "CREATE TABLESPACE " + properties.getProperty("tablespace") + " LOCATION '" +
                         properties.getProperty("databasePath") + "';";
         executeAuto(basicDS, statement);
     }
 
-    private void createDatabaseIfNotExist(BasicDataSource basicDS) {
-        printDatasource(basicDS);
+    private void createDatabaseIfNotExist(DataSource basicDS) {
         String statement =
                 "CREATE DATABASE " + properties.getProperty("backend/src/main/resources/database") +
                         " OWNER " + properties.getProperty("user") +
@@ -172,7 +209,7 @@ public class DSCreator {
         executeAuto(basicDS, statement);
     }
 
-    private void executeAuto(BasicDataSource basicDS, String statement) {
+    private void executeAuto(DataSource basicDS, String statement) {
         try (Connection con = basicDS.getConnection()) {
             con.setAutoCommit(true);
             Statement st = con.createStatement();
@@ -185,17 +222,12 @@ public class DSCreator {
         }
     }
 
-    private void printDatasource(BasicDataSource basicDS) {
-        System.out.println("user=" + basicDS.getUsername() + ", passwort=" + basicDS.getPassword() + ", url=" + basicDS.getUrl());
-    }
-
     private void setDataSourceTradeDB(BasicDataSource basicDS) throws IOException {
         setDSConnection(basicDS, "");
         setDSPool(basicDS);
     }
 
-    public void createSchemaIfNotExist(BasicDataSource basicDS) {
-        printDatasource(basicDS);
+    public void createSchemaIfNotExist(DataSource basicDS) {
         String statement =
                 "CREATE SCHEMA " + properties.getProperty("schema") +
                         " AUTHORIZATION " + properties.getProperty("user") + "\n" +
