@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DBTest {
     private static final String PATH = FileSystems.getDefault().getPath(
-                    "backend", "src", "main", "resources", "database", "testDatabase.properties")
+                    "src", "main", "resources", "database", "testDatabase.properties")
             .toAbsolutePath().toString();
 
     public static void main(String[] args) {

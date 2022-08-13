@@ -3,15 +3,15 @@
 #java
 /target/
 /.idea/
-/backend/src/main/resources/log.log
-/backend/src/main/resources/database/successfulApiResponses.txt
+/src/main/resources/log.log
+/src/main/resources/database/successfulApiResponses.txt
 *.class
 
 #webapp
-/webapp/webpage/node_modules/
-/webapp/WEB-INF/classes/
+/src/webapp/webpage/node_modules/
+/src/webapp/WEB-INF/classes/
 
 #other
 /todo.txt
 /ideas.txtdebug.log
-webapp/webpage/node_modules/abab/CHANGELOG.md
+src/webapp/webpage/node_modules/abab/CHANGELOG.md
