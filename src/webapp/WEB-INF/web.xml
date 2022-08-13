@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+  <display-name>Test Seite</display-name>
+
+  <servlet>
+    <servlet-name>Data Retrieval Commodities</servlet-name>
+    <servlet-class>eu.russiantrade.servlets.ServletCommodities</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Data Retrieval Total</servlet-name>
+    <servlet-class>eu.russiantrade.servlets.ServletTotal</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>eu.russiantrade.servlets.ServletTest</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Data Retrieval Commodities</servlet-name>
+    <url-pattern>/requestCom</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Data Retrieval Total</servlet-name>
+    <url-pattern>/requestTotal</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+  <resource-ref>
+    <res-ref-name>jdbc/DefaultDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+</web-app>
