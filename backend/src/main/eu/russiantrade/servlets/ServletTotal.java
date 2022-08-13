@@ -1,6 +1,6 @@
 package eu.russiantrade.servlets;
 
-import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.TradeMapper;

@@ -21,7 +21,7 @@ import java.util.logging.Level;
 
 
 public class DSCreator {
-    private BasicDataSource dataSourceTradeDB;
+    private DataSource dataSourceTradeDB;
     private Properties properties;
 
     public static final String ANSI_RESET = "\u001B[0m";

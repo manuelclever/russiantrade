@@ -3,7 +3,7 @@ package eu.russiantrade.database.readAndWrite;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 
 import java.util.Arrays;
 import java.util.List;

@@ -3,17 +3,18 @@ package eu.russiantrade.api.comtrade;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.russiantrade.api.comtrade.parser.ComtradeParser;
-import eu.russiantrade.api.comtrade.parser.ComtradeResponse;
 import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
+import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
+import eu.russiantrade.api.comtrade.parser.ComtradeParser;
+import eu.russiantrade.api.comtrade.parser.ComtradeResponse;
 import eu.russiantrade.database.parser.Country;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryReader;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
 import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
 
+import javax.naming.NamingException;
 import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -24,12 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataGrabber {
-    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath("backend", "src", "main", "resources",
-            "database", "testDatabase.properties");
+    private static final String DB_PROPERTIES = FileSystems.getDefault().getPath("backend", "src", "test", "",
+                    "database", "testDatabase.properties")
+            .toAbsolutePath().toString();
     private  static final Path API_LOG = FileSystems.getDefault().getPath(
-            "backend", "src",  "main", "resources", "database", "api.log");
+            "backend", "src",  "main", "", "database", "api.log");
     private static final Path COUNTRIES_TXT = FileSystems.getDefault()
-            .getPath("backend", "src",  "main", "resources", "countries.txt");
+            .getPath("backend", "src",  "main", "", "countries.txt");
 
     public static final int REQUEST_DELAY = 1000;
     public static final int RATE_LIMIT_HOUR = 100;
@@ -67,7 +69,7 @@ public class DataGrabber {
                                 System.out.println(comtradeResponse);
                                 addComtradeResponseToDB(comtradeResponse, country, period);
                             }
-                        } catch (InterruptedException e){
+                        } catch (InterruptedException | NamingException e){
                             writeToLog("Minute delay interrupted:\n" + e.getMessage());
                         }
                     }
@@ -120,9 +122,14 @@ public class DataGrabber {
 
 
     private static boolean entryDoesntExist(Country country, int period) {
-        PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDB());
-        System.out.println(country + " " + period + ":");
-        List<TradeData> data = dr.getDatasets(country.getCountryID(), DataDesignations.RUSSIA, period);
+        List<TradeData> data = null;
+        try {
+            PSQLTradeReader dr = new PSQLTradeReader(dsC.getDataSourceTradeDBJava());
+            System.out.println(country + " " + period + ":");
+            data = dr.getDatasets(country.getCountryID(), DataDesignations.RUSSIA, period);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return data == null;
     }
 
@@ -152,10 +159,10 @@ public class DataGrabber {
     }
 
 
-    private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, Country country, int period) throws IOException {
+    private static void addComtradeResponseToDB(ComtradeResponse comtradeResponse, Country country, int period) throws IOException, NamingException {
         writeToLog(country + ", " + period);
 
-        PSQLTradeWriter dw = new PSQLTradeWriter(dsC.getDataSourceTradeDB());
+        PSQLTradeWriter dw = new PSQLTradeWriter(dsC.getDataSourceTradeDBJava());
         for (TradeData tradeData : comtradeResponse.getDatasets()) {
             dw.addDataset(tradeData);
         }
@@ -183,13 +190,17 @@ public class DataGrabber {
     }
 
     private static void addCountriesToDBIfNotExist(List<Country> countries) {
-        PSQLCountryReader cr = new PSQLCountryReader(dsC.getDataSourceTradeDB());
-        PSQLCountryWriter cw = new PSQLCountryWriter(dsC.getDataSourceTradeDB());
+        try {
+            PSQLCountryReader cr = new PSQLCountryReader(dsC.getDataSourceTradeDBJava());
+            PSQLCountryWriter cw = new PSQLCountryWriter(dsC.getDataSourceTradeDBJava());
 
-        for(Country country : countries) {
-            addCountryToDBIfNotExist(cr, cw, country);
+            for (Country country : countries) {
+                addCountryToDBIfNotExist(cr, cw, country);
+            }
+            addCountryToDBIfNotExist(cr, cw, new Country(DataDesignations.RUSSIA, "Russian Federation", "RUS"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        addCountryToDBIfNotExist(cr, cw, new Country(DataDesignations.RUSSIA, "Russian Federation", "RUS"));
     }
 
     private static void addCountryToDBIfNotExist(PSQLCountryReader cr, PSQLCountryWriter cw, Country country) {

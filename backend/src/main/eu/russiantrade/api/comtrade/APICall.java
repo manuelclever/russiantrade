@@ -1,4 +1,4 @@
-package eu.russiantrade.comtrade;
+package eu.russiantrade.api.comtrade;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;

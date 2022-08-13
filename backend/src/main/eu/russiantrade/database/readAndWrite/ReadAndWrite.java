@@ -1,6 +1,6 @@
 package eu.russiantrade.database.readAndWrite;
 
-import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
 import eu.russiantrade.database.readAndWrite.coalition.PSQLCoalitionWriter;

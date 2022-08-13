@@ -1,4 +1,4 @@
-package eu.russiantrade.comtrade.parser;
+package eu.russiantrade.api.comtrade.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;

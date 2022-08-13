@@ -1,4 +1,4 @@
-package eu.russiantrade.comtrade;
+package eu.russiantrade.api.comtrade;
 
 public class ComtradeParametersAvailability extends ComtradeParameters {
 

@@ -1,6 +1,6 @@
 package eu.russiantrade.servlets;
 
-import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.readAndWrite.TradeMapper;
 import eu.russiantrade.database.querydesignations.DataDesignations;
@@ -14,8 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Test {
-    private static final Path DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "resources", "", "database", "testDatabase.properties");
+    private static final String DB_PROPERTIES = FileSystems.getDefault().getPath(
+            "backend", "src", "main", "resources", "database", "testDatabase.properties")
+            .toAbsolutePath().toString();
 
     public static void main(String[] args) {
         // Set the response message's MIME type
@@ -37,7 +38,7 @@ public class Test {
 //            InitialContext ctx = new InitialContext();
 //            DataSource dataSource = (DataSource)ctx.lookup("java:comp/env/jdbc/DefaultDB");
 //            PSQLTradeReader dr = new PSQLTradeReader(dataSource);
-            DataSource ds = dsC.getDataSourceTradeDB();
+            DataSource ds = dsC.getDataSourceTradeDBJava();
             System.out.println("<p>Datasource " + ds.toString() + "</p>");
             PSQLTradeReader dr = new PSQLTradeReader(ds);
 

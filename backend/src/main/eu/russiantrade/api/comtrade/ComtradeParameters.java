@@ -1,4 +1,4 @@
-package eu.russiantrade.comtrade;
+package eu.russiantrade.api.comtrade;
 
 import java.util.ArrayList;
 import java.util.List;

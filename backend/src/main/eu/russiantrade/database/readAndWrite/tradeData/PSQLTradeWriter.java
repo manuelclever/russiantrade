@@ -1,6 +1,6 @@
 package eu.russiantrade.database.readAndWrite.tradeData;
 
-import eu.russiantrade.comtrade.parser.TradeData;
+import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.querydesignations.PSQL.PSQLQTradeData;
 
 import javax.sql.DataSource;
