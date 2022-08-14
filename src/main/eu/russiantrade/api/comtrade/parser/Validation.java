@@ -155,11 +155,6 @@ public class Validation {
 
     @Override
     public int hashCode() {
-        return (
-                name != null ? name.hashCode() : 0) +
-                countValue + (countStarted != null ? countStarted.hashCode() : 0) +
-                (countFinished != null ? countFinished.hashCode() : 0) +
-                (datasetTimerStarted != null ? datasetTimerStarted.hashCode() : 0) +
-                (datasetTimerFinished != null ? datasetTimerFinished.hashCode() : 0) ;
+        return name != null ? name.hashCode() : 0;
     }
 }
