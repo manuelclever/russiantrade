@@ -25,13 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataGrabber {
-    private static final String DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "src", "test", "resources", "database", "testDatabase.properties")
+    private static final String DB_PROPERTIES = FileSystems.getDefault()
+            .getPath("src", "test", "resources", "database", "testDatabase.properties")
             .toAbsolutePath().toString();
-    private  static final Path API_LOG = FileSystems.getDefault().getPath(
-            "backend", "src",  "main", "", "database", "api.log");
+    private  static final Path API_LOG = FileSystems.getDefault()
+            .getPath("src",  "test", "resources", "database", "api.log");
     private static final Path COUNTRIES_TXT = FileSystems.getDefault()
-            .getPath("backend", "src",  "main", "", "countries.txt");
+            .getPath( "src",  "main", "resources", "countries.txt");
 
     public static final int REQUEST_DELAY = 1000;
     public static final int RATE_LIMIT_HOUR = 100;

@@ -25,7 +25,7 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
 
         Validation validation = createValidation(node);
 
-        if(validation.isValid()) {
+        if (validation.isValid()) {
             List<TradeData> tradeData = createDatasets(node);
             return new ComtradeResponse(validation, tradeData);
         }
@@ -53,7 +53,7 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         validation.setCountDurationSeconds(count.get("durationSeconds").asDouble());
 
         JsonNode datasetTimer = validationNode.findValue("datasetTimer");
-        if(!datasetTimer.toString().equals("null")) { //datasetTimer could be null
+        if (!datasetTimer.toString().equals("null")) { //datasetTimer could be null
             validation.setDatasetTimerStarted(datasetTimer.get("started").asText());
             validation.setDatasetTimerFinished(datasetTimer.get("finished").asText());
             validation.setDatasetTimerDurationSeconds(datasetTimer.get("durationSeconds").asDouble());
@@ -67,9 +67,9 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         JsonNode datasetNodes = node.findValue("dataset");
 
         List<TradeData> tradeData = new ArrayList<>();
-        if(datasetNodes.isArray()) {
+        if (datasetNodes.isArray()) {
 
-            for(JsonNode datasetNode : datasetNodes) {
+            for (JsonNode datasetNode : datasetNodes) {
                 tradeData.add(createDataset(datasetNode));
             }
         } else {
@@ -120,6 +120,7 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
         tradeData.setCifValue(node.findValue("CIFValue").asInt());
         tradeData.setFobValue(node.findValue("FOBValue").asInt());
         tradeData.setEstCode(node.findValue("estCode").asInt());
+
 
         return tradeData;
     }

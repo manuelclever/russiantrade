@@ -41,4 +41,21 @@ public class ComtradeResponse {
         }
         return "[" + validation.toString() + ", [null]]";
     }
+
+    @Override
+    public int hashCode() {
+        return (validation != null ? validation.hashCode() * 7 : 0) +
+                (tradeData != null ? tradeData.hashCode() * 13 : 0);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null) {
+            if(obj.getClass() == this.getClass()) {
+                return obj.hashCode() == this.hashCode();
+            }
+
+        }
+        return false;
+    }
 }

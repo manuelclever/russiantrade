@@ -2,7 +2,6 @@ package eu.russiantrade.database.datasource;
 
 import eu.russiantrade.database.datasource.util.CreateUrl;
 import eu.russiantrade.database.querydesignations.DataDesignations;
-import eu.russiantrade.util.LogGenerator;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.naming.Context;
@@ -17,7 +16,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import java.util.logging.Level;
 
 
 public class DSCreator {
@@ -46,18 +44,25 @@ public class DSCreator {
         if (dataSourceTradeDB == null) {
             DataSource dataSourcePostgres = createDataSourceJava("");
 
-            //initializeDatabase(dataSourcePostgres);
             dataSourceTradeDB = dataSourcePostgres;
         }
         return dataSourceTradeDB;
     }
 
-    private void initializeDatabase(DataSource dataSource) {
-        createUserIfNotExist(dataSource);
-        createTableSpaceIfNotExist(dataSource);
-        createDatabaseIfNotExist(dataSource);
-        createSchemaIfNotExist(dataSource);
+    public boolean initializeDatabase() {
+        try {
+            DataSource dataSource = createDataSourceJava("admin_");
 
+            createUserIfNotExist(dataSource);
+            createTableSpaceIfNotExist(dataSource);
+            createDatabaseIfNotExist(dataSource);
+            createSchemaIfNotExist(dataSource);
+        } catch (IOException e) {
+            System.out.println("Database initialization failed.");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public DataSource getDataSourceTradeDBServlet(PrintWriter out) throws IOException, NamingException {
@@ -66,7 +71,6 @@ public class DSCreator {
 
             DataSource dataSourcePostgres = createDataSourceServlet();
 
-            //initializeDatabase(dataSourcePostgres);
             dataSourceTradeDB = dataSourcePostgres;
         }
         return dataSourceTradeDB;
@@ -75,9 +79,9 @@ public class DSCreator {
     private DataSource createDataSourceJava(String type) throws IOException {
         setProperties();
 
-        BasicDataSource basicDataSourcePostgres = new BasicDataSource();
-        setDataSource(basicDataSourcePostgres, type);
-        return basicDataSourcePostgres;
+        BasicDataSource dataSource = new BasicDataSource();
+        setDataSource(dataSource, type);
+        return dataSource;
     }
 
     private void setProperties() throws IOException {
@@ -184,14 +188,13 @@ public class DSCreator {
         try (Connection con = basicDS.getConnection()) {
             Statement st = con.createStatement();
             System.out.println(statement);
-            System.out.println("---");
             st.execute(statement);
             con.commit();
             st.close();
         } catch (SQLException e) {
             System.out.println(ANSI_YELLOW + e.getMessage() + ANSI_RESET);
-            LogGenerator.debug(Level.SEVERE, getClass(), e.getMessage());
         }
+        System.out.println("---");
     }
 
     public void createTableSpaceIfNotExist(DataSource basicDS) {
@@ -203,7 +206,7 @@ public class DSCreator {
 
     private void createDatabaseIfNotExist(DataSource basicDS) {
         String statement =
-                "CREATE DATABASE " + properties.getProperty("backend/src/main/resources/database") +
+                "CREATE DATABASE " + properties.getProperty("database") +
                         " OWNER " + properties.getProperty("user") +
                         " TABLESPACE " + properties.getProperty("tablespace") + ";";
         executeAuto(basicDS, statement);
@@ -214,12 +217,12 @@ public class DSCreator {
             con.setAutoCommit(true);
             Statement st = con.createStatement();
             System.out.println(statement);
-            System.out.println("---");
             st.execute(statement);
             st.close();
         } catch (SQLException e) {
             System.out.println(ANSI_YELLOW + e.getMessage() + ANSI_RESET);
         }
+        System.out.println("---");
     }
 
     private void setDataSourceTradeDB(BasicDataSource basicDS) throws IOException {

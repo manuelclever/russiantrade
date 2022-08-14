@@ -52,7 +52,6 @@ public class LogGenerator {
     }
 
     public static void log(Level level, String source, String string) {
-        System.out.println("logging: " + ABSOLUTE_PATH);
         logger.log(level, source + ": " + string);
     }
 
@@ -61,7 +60,6 @@ public class LogGenerator {
     }
 
     public static void debug(Level level, String source, String string) {
-        System.out.println("debugging: " + ABSOLUTE_PATH_DEBUG);
         debugger.log(level, source + ": " + string);
     }
 

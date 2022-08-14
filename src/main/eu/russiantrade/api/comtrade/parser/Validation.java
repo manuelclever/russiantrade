@@ -20,6 +20,24 @@ public class Validation {
 
     public Validation() {}
 
+    public Validation(String name, int value, int category, String description, String helpUrl, String message,
+                      int countValue, String countStarted, String countFinished, double countDurationSeconds,
+                      String datasetTimerStarted, String datasetTimerFinished, double datasetTimerDurationSeconds) {
+        this.name = name;
+        this.value = value;
+        this.category = category;
+        this.description = description;
+        this.helpUrl = helpUrl;
+        this.message = message;
+        this.countValue = countValue;
+        this.countStarted = countStarted;
+        this.countFinished = countFinished;
+        this.countDurationSeconds = countDurationSeconds;
+        this.datasetTimerStarted = datasetTimerStarted;
+        this.datasetTimerFinished = datasetTimerFinished;
+        this.datasetTimerDurationSeconds = datasetTimerDurationSeconds;
+    }
+
     public String getName() {
         return name;
     }
@@ -133,5 +151,15 @@ public class Validation {
         return "[" + name + ", " + value + ", " + category + ", " + description + ", " + helpUrl + ", " + message +
                 ", " + countValue + ", " + countStarted + ", " + countFinished + ", " + datasetTimerStarted + ", " +
                 datasetTimerFinished + ", " + datasetTimerDurationSeconds + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return (
+                name != null ? name.hashCode() : 0) +
+                countValue + (countStarted != null ? countStarted.hashCode() : 0) +
+                (countFinished != null ? countFinished.hashCode() : 0) +
+                (datasetTimerStarted != null ? datasetTimerStarted.hashCode() : 0) +
+                (datasetTimerFinished != null ? datasetTimerFinished.hashCode() : 0) ;
     }
 }

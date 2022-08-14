@@ -44,6 +44,43 @@ public class TradeData {
     public TradeData() {
     }
 
+    public TradeData(String pfCode, int year, int period, int periodDesc, int aggrLevel, int isLeaf, int tradeFlowCode,
+                     String tradeFlowDesc, int reporterCode, String reporterDesc, String rt3iso, int partnerCode,
+                     String partnerDesc, String pt3iso, int partnerCode2, String partnerDesc2, String pt3iso2,
+                     String commodityCode, String commodityDesc, int qtCode, String qtDesc, int qtAltCode,
+                     String qtAltDesc, int tradeQuantity, int altQuantity, long tradeValue, int cifValue, int fobValue,
+                     int estCode) {
+        this.pfCode = pfCode;
+        this.year = year;
+        this.period = period;
+        this.periodDesc = periodDesc;
+        this.aggrLevel = aggrLevel;
+        this.isLeaf = isLeaf;
+        this.tradeFlowCode = tradeFlowCode;
+        this.tradeFlowDesc = tradeFlowDesc;
+        this.reporterCode = reporterCode;
+        this.reporterDesc = reporterDesc;
+        this.rt3iso = rt3iso;
+        this.partnerCode = partnerCode;
+        this.partnerDesc = partnerDesc;
+        this.pt3iso = pt3iso;
+        this.partnerCode2 = partnerCode2;
+        this.partnerDesc2 = partnerDesc2;
+        this.pt3iso2 = pt3iso2;
+        this.commodityCode = commodityCode;
+        this.commodityDesc = commodityDesc;
+        this.qtCode = qtCode;
+        this.qtDesc = qtDesc;
+        this.qtAltCode = qtAltCode;
+        this.qtAltDesc = qtAltDesc;
+        this.tradeQuantity = tradeQuantity;
+        this.altQuantity = altQuantity;
+        this.tradeValue = tradeValue;
+        this.cifValue = cifValue;
+        this.fobValue = fobValue;
+        this.estCode = estCode;
+    }
+
     public String getPfCode() {
         return pfCode;
     }
@@ -280,5 +317,11 @@ public class TradeData {
     public String toString() {
         return "[" + period + ", " + tradeFlowDesc + ", " + reporterDesc + ", " + partnerDesc + ", " + commodityCode +
                 ", " + commodityDesc + ", " + tradeValue + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return period + tradeFlowCode + reporterCode + partnerCode + partnerCode2 +
+                (commodityCode != null ? commodityCode.hashCode() : 0) + (int) tradeValue;
     }
 }
