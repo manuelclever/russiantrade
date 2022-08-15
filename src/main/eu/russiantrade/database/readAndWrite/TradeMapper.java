@@ -43,7 +43,7 @@ public class TradeMapper {
         Arrays.stream(labelsArr).forEach(arrayNodeLabels::add);
         arrayNodeDatasets.add(innerData);
 
-        return outerData.toPrettyString();
+        return outerData.toString();
     }
 
     public static String jsonTotal(List<TradeData> tradeDataList) {

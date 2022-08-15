@@ -1,4 +1,4 @@
-package eu.russiantrade.database.readAndWrite.tradeData;
+package eu.russiantrade.database.readAndWrite.monthly_trade;
 
 import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.parser.DatabaseTradeDataParser;

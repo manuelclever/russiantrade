@@ -1,6 +1,5 @@
-package eu.russiantrade.database;
+package eu.russiantrade.database.datasource;
 
-import eu.russiantrade.database.datasource.DSCreator;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.Test;
 

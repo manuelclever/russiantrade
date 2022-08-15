@@ -5,14 +5,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeWriter;
+import eu.russiantrade.database.readAndWrite.monthly_trade.PSQLTradeWriter;
 import eu.russiantrade.api.comtrade.parser.ComtradeParser;
 import eu.russiantrade.api.comtrade.parser.ComtradeResponse;
 import eu.russiantrade.database.parser.Country;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryReader;
 import eu.russiantrade.database.readAndWrite.country.PSQLCountryWriter;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.database.readAndWrite.monthly_trade.PSQLTradeReader;
 
 import javax.naming.NamingException;
 import java.io.*;

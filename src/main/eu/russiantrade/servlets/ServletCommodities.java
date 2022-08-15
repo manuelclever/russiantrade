@@ -4,13 +4,12 @@ import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.querydesignations.DataDesignations;
 import eu.russiantrade.database.readAndWrite.TradeMapper;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.database.readAndWrite.monthly_trade.PSQLTradeReader;
 import eu.russiantrade.util.DigitCount;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.util.List;
@@ -20,7 +19,7 @@ public class ServletCommodities extends HttpServlet {
             "src", "test", "", "backend/src/main/resources/database", "testDatabase.properties")
             .toAbsolutePath().toString();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         // Set the response message's MIME type
         resp.setContentType("text/html;charset=UTF-8");
         // Allocate a output writer to write the response message into the network socket

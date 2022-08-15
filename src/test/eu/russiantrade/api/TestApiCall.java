@@ -24,6 +24,7 @@ public class TestApiCall {
 
         Assertions.assertEquals(result, expected);
     }
+
     private static Stream<Arguments> parametersRequest() {
         return Stream.of(
                 Arguments.of(

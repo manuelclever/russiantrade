@@ -4,12 +4,11 @@ import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.readAndWrite.TradeMapper;
 import eu.russiantrade.database.querydesignations.DataDesignations;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.database.readAndWrite.monthly_trade.PSQLTradeReader;
 import eu.russiantrade.util.DigitCount;
 
 import javax.sql.DataSource;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 

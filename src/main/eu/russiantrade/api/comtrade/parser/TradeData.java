@@ -44,6 +44,29 @@ public class TradeData {
     public TradeData() {
     }
 
+    // initialize only with minimal needed data also present in database columns
+    public TradeData(int period, String tradeFlowDesc, int reporterCode, int partnerCode, String commodityCode,
+                     long tradeValue) {
+        this.period = period;
+        this.tradeFlowDesc = tradeFlowDesc;
+        this.reporterCode = reporterCode;
+        this.partnerCode = partnerCode;
+        this.commodityCode = commodityCode;
+        this.tradeValue = tradeValue;
+    }
+
+    // initialize with data present in database columns and send to webpage
+    public TradeData(int period, String tradeFlowDesc, int reporterCode, int partnerCode, String commodityCode,
+                     String commodityDesc, long tradeValue) {
+        this.period = period;
+        this.tradeFlowDesc = tradeFlowDesc;
+        this.reporterCode = reporterCode;
+        this.partnerCode = partnerCode;
+        this.commodityCode = commodityCode;
+        this.commodityDesc = commodityDesc;
+        this.tradeValue = tradeValue;
+    }
+
     public TradeData(String pfCode, int year, int period, int periodDesc, int aggrLevel, int isLeaf, int tradeFlowCode,
                      String tradeFlowDesc, int reporterCode, String reporterDesc, String rt3iso, int partnerCode,
                      String partnerDesc, String pt3iso, int partnerCode2, String partnerDesc2, String pt3iso2,
@@ -319,9 +342,15 @@ public class TradeData {
                 ", " + commodityDesc + ", " + tradeValue + "]";
     }
 
+    // only data also present in database columns is compared for hash
     @Override
     public int hashCode() {
-        return period + tradeFlowCode + reporterCode + partnerCode + partnerCode2 +
+        return period + (tradeFlowDesc != null ? tradeFlowDesc.hashCode() : 0) + reporterCode + partnerCode +
                 (commodityCode != null ? commodityCode.hashCode() : 0) + (int) tradeValue;
+    }
+
+    public String hashCodeString() {
+        return "[" + period + ", " + tradeFlowDesc + ", " + reporterCode + ", " + partnerCode + ", " + commodityCode +
+                ", " + tradeValue + "]";
     }
 }

@@ -3,7 +3,7 @@ package eu.russiantrade.database;
 import eu.russiantrade.api.comtrade.parser.TradeData;
 import eu.russiantrade.database.datasource.DSCreator;
 import eu.russiantrade.database.readAndWrite.TradeMapper;
-import eu.russiantrade.database.readAndWrite.tradeData.PSQLTradeReader;
+import eu.russiantrade.database.readAndWrite.monthly_trade.PSQLTradeReader;
 
 import java.nio.file.FileSystems;
 import java.util.List;
