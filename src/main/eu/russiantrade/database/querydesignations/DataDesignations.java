@@ -3,7 +3,7 @@ package eu.russiantrade.database.querydesignations;
 public abstract class DataDesignations extends SQLQueries {
 
     //tables and columns
-    public static final String SCHEMA = "tradetest_schema";
+    public static final String SCHEMA = "trade_schema";
 
     //global
     public static final String ID = "_id";

@@ -51,12 +51,15 @@ public class DSCreator {
 
     public boolean initializeDatabase() {
         try {
-            DataSource dataSource = createDataSourceJava("admin_");
+            DataSource dataSourceAdmin = createDataSourceJava("admin_");
 
-            createUserIfNotExist(dataSource);
-            createTableSpaceIfNotExist(dataSource);
-            createDatabaseIfNotExist(dataSource);
-            createSchemaIfNotExist(dataSource);
+            createUserIfNotExist(dataSourceAdmin);
+            createTableSpaceIfNotExist(dataSourceAdmin);
+            createDatabaseIfNotExist(dataSourceAdmin);
+
+            DataSource dataSourceTrade = createDataSourceJava("");
+
+            createSchemaIfNotExist(dataSourceTrade);
         } catch (IOException e) {
             System.out.println("Database initialization failed.");
             e.printStackTrace();
@@ -232,7 +235,7 @@ public class DSCreator {
 
     public void createSchemaIfNotExist(DataSource basicDS) {
         String statement =
-                "CREATE SCHEMA " + properties.getProperty("schema") +
+                "CREATE SCHEMA " + DataDesignations.SCHEMA +
                         " AUTHORIZATION " + properties.getProperty("user") + "\n" +
                         "CREATE TABLE " + DataDesignations.COALITION + "(\n" +
                         DataDesignations.COALITION_ID + " serial PRIMARY KEY,\n" +

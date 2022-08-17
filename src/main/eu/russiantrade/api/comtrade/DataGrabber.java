@@ -26,10 +26,10 @@ import java.util.List;
 
 public class DataGrabber {
     private static final String DB_PROPERTIES = FileSystems.getDefault()
-            .getPath("src", "test", "resources", "database", "testDatabase.properties")
+            .getPath("src", "main", "resources", "database", "database.properties")
             .toAbsolutePath().toString();
     private  static final Path API_LOG = FileSystems.getDefault()
-            .getPath("src",  "test", "resources", "database", "api.log");
+            .getPath("src",  "main", "resources", "database", "api.log");
     private static final Path COUNTRIES_TXT = FileSystems.getDefault()
             .getPath( "src",  "main", "resources", "countries.txt");
 
