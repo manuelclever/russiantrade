@@ -88,7 +88,7 @@ public class PSQLCountryWriter implements CountryDataWriter {
 
         try(Connection conn = datasource.getConnection();
             PreparedStatement query =
-                    conn.prepareStatement(PSQLQCountry.QUERY_DELETE_WHERE_COMTRADE_ID)) {
+                    conn.prepareStatement(PSQLQCountry.QUERY_DELETE_WHERE_COUNTRY_ID)) {
 
             query.setInt(1, comtradeId);
 

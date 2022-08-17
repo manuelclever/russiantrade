@@ -8,7 +8,7 @@ public class PSQLQCoalition extends PSQLQueries {
             COALITION_NAME + FROM + TABLE_COALITION;
 
     //parameter
-    public static final String PARAMETER_ID = SANCTION_ID + PARAMETER;
+    public static final String PARAMETER_ID = COALITION_ID + PARAMETER;
     public static final String PARAMETER_NAME =  COALITION_NAME + PARAMETER;
 
     //delete
@@ -27,7 +27,7 @@ public class PSQLQCoalition extends PSQLQueries {
                 COALITION_NAME + FROM_END + AS + ROW + END;
     }
     public static String queryWhereName(String select) {
-        return CREATE_JSON_MULTIPLE + FROM_START + select + WHERE +
+        return CREATE_JSON_SINGLETON + FROM_START + select + WHERE +
                 PARAMETER_NAME+ ORDER_BY +
                 COALITION_NAME + FROM_END + AS + ROW + END;
     }

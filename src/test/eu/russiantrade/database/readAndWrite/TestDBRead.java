@@ -25,7 +25,7 @@ public class TestDBRead {
     private static final String PATH_PARAMETERS = FileSystems.getDefault()
             .getPath("src","test","resources","database","parameters")
             .toAbsolutePath().toString();
-    private static DSCreator ds = new DSCreator(PATH_PROPERTIES);
+    private static final DSCreator ds = new DSCreator(PATH_PROPERTIES);
     private static PSQLTradeReader reader = null;
     private static Exception exceptionBeforeAll = null;
 

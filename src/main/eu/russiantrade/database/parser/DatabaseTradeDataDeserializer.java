@@ -1,7 +1,6 @@
 package eu.russiantrade.database.parser;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -24,8 +23,7 @@ public class DatabaseTradeDataDeserializer extends StdDeserializer<List<TradeDat
     }
 
     @Override
-    public List<TradeData> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException,
-            JsonProcessingException {
+    public List<TradeData> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
 
         return createDatasets(node);

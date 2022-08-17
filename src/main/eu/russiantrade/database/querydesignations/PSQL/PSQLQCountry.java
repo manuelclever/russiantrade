@@ -28,10 +28,11 @@ public class PSQLQCountry extends PSQLQueries {
             PARAMETER_ID + C +
             PARAMETER_NAME + C +
             PARAMETER_ABBREV + WHERE + PARAMETER_ID + RETURNING + DataDesignations.COUNTRY_ID + END;
+    public static final String QUERY_DELETE_WHERE_COUNTRY_ID = COUNTRY_DELETE + WHERE +
+            PARAMETER_ID + END;
     public static final String QUERY_DELETE_WHERE_NAME = COUNTRY_DELETE + WHERE +
             PARAMETER_NAME + END;
-    public static final String QUERY_DELETE_WHERE_COMTRADE_ID = COUNTRY_DELETE + WHERE +
-            DataDesignations.COUNTRY_COMTRADE_ID + END;
+
 
     public static String queryWhereName(String select) {
         return CREATE_JSON_MULTIPLE + FROM_START + select + WHERE +

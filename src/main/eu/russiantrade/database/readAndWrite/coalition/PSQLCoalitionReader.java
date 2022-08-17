@@ -19,7 +19,7 @@ public class PSQLCoalitionReader implements CoalitionDataReader {
     }
 
     @Override
-    public String getGroup(String name) {
+    public String getCoalition(String name) {
         return Query.queryWhereString(datasource,
                 PSQLQCoalition.queryWhereName(PSQLQCoalition.SELECT_COALITION),
                 name);

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PSQLTradeReader implements tradeDataReader {
-    private DataSource datasource;
+    private final DataSource datasource;
     private PrintWriter out;
 
     public PSQLTradeReader(DataSource datasource) {

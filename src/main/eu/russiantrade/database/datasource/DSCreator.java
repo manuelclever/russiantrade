@@ -239,11 +239,11 @@ public class DSCreator {
                         " AUTHORIZATION " + properties.getProperty("user") + "\n" +
                         "CREATE TABLE " + DataDesignations.COALITION + "(\n" +
                         DataDesignations.COALITION_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.COALITION_NAME + " text NOT NULL)\n" +
+                        DataDesignations.COALITION_NAME + " text NOT NULL UNIQUE)\n" +
                         "CREATE TABLE " + DataDesignations.COUNTRY + "(\n" +
                         DataDesignations.COUNTRY_ID + " serial PRIMARY KEY,\n" +
-                        DataDesignations.COUNTRY_NAME + " text NOT NULL,\n" +
-                        DataDesignations.COUNTRY_ABBREV + " text NOT NULL)\n" +
+                        DataDesignations.COUNTRY_NAME + " text NOT NULL UNIQUE,\n" +
+                        DataDesignations.COUNTRY_ABBREV + " text NOT NULL UNIQUE)\n" +
 //                        DataDesignations.COUNTRY_COMTRADE_ID + " smallint )\n" +
                         "CREATE TABLE " + DataDesignations.UNION + "(\n" +
                         DataDesignations.UNION_ID + " serial PRIMARY KEY,\n" +
@@ -267,23 +267,6 @@ public class DSCreator {
                         DataDesignations.MONTHLY_TRADE_COMMODITY_CODE + " smallint NOT NULL,\n" +
                         DataDesignations.MONTHLY_TRADE_COMMODITY_DESC + " text,\n" +
                         DataDesignations.MONTHLY_TRADE_VALUE + " bigint);";
-
-//        depreciated table sanction
-//        "CREATE TABLE " + DataDesignations.TABLE_SANCTION + "(\n" +
-//                DataDesignations.SANCTION_ID + " serial PRIMARY KEY,\n" +
-//                DataDesignations.COALITION + " int REFERENCES " + DataDesignations.UNION + ",\n" +
-//                DataDesignations.COUNTRY + " int REFERENCES " + DataDesignations.COUNTRY + ",\n" +
-//                DataDesignations.SANCTION_PERIOD_START + " int NOT NULL,\n" +
-//                DataDesignations.SANCTION_PERIOD_END + " int NOT NULL,\n" +
-//                DataDesignations.SANCTION_CONTENT + " text NOT NULL )\n" +
-
-//        references of monthly_trade
-//        DataDesignations.MONTHLY_TRADE_SANCTION_GLOBAL + " int REFERENCES " + DataDesignations.SANCTION + ",\n" +
-//        DataDesignations.MONTHLY_TRADE_SANCTION_LOCAL + " int REFERENCES " + DataDesignations.SANCTION + " )\n" +
-
-//        references of custom_monthly_trade
-//        DataDesignations.MONTHLY_TRADE_SANCTION_GLOBAL + " int REFERENCES " + DataDesignations.SANCTION + ",\n" +
-//        DataDesignations.MONTHLY_TRADE_SANCTION_LOCAL + " int REFERENCES " + DataDesignations.SANCTION + " );";
 
         execute(basicDS, statement);
     }

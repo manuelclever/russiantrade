@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Test {
     private static final String DB_PROPERTIES = FileSystems.getDefault().getPath(
-            "src", "main", "resources", "database", "testDatabase.properties")
+            "src", "main", "resources", "database", "database.properties")
             .toAbsolutePath().toString();
 
     public static void main(String[] args) {
