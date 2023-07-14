@@ -1,19 +1,17 @@
-<style>
-.path {
-    color: orange;
-}
-</style>
+# russiantrade
 
-<h1>Installation</h1>
+This project was developed in the context of the Russian invasion of Ukraine. The idea was an interactive representation of Russian global trade using data from [https://comtrade.un.org/](https://comtrade.un.org/).
 
-<h2>Add a new Country</h2>
-<p>Countries to download data into the database for are saved in <span class="path">.
-/backend/src/main/resources/countries.txt</span>. After adding another country the next cronjob execution will 
-download that country's data to the database. For the country to appear in the dropdown menu, execute <span 
-class="path">./webapp/WEB-INF/classes/eu/russiantrade/util/ConvertCountriesForWeb.class</span> and rebuild the react 
-webapp.
-</p>
+Backend finished. Frontend unfinished, because personal stuff happened and no time anymore.
 
-<h2>Change something about the svg world map</h2>
-<p>For more information consult <span class="path">.
-/webapp/webpage/src/components/worldMap/manualRefCreation/createRefs.md</span></p>
+Data is being pulled  via cronjob from the comtrade database to a local postgresql instance. This is done that way, because the free api has usage restrictions. Every cronjob checks if new data has been added to the comtrade database and if so updates the local database.
+
+Frontend only has an interactive map visualising the countries and some templates for the unfinished datea representation.
+
+## Installation
+
+### Add a new Country
+Countries to download data into the database for are saved in [src/main/resources/countries.txt](https://github.com/manuelclever/russiantrade/blob/master/src/main/resources/countries.txt). After adding another country the next cronjob execution will download that country's data to the database. For the country to appear in the dropdown menu, execute [/webapp/WEB-INF/classes/eu/russiantrade/util/ConvertCountriesForWeb.class](https://github.com/manuelclever/russiantrade/blob/master/src/main/eu/russiantrade/util/ConvertCountriesForWeb.java) and rebuild the react webapp.
+
+## Change something about the svg world map
+For more information consult [src/webapp/webpage/src/components/worldMap/manualRefCreation/createRefs.md](https://github.com/manuelclever/russiantrade/blob/master/src/webapp/webpage/src/components/worldMap/manualRefCreation/createRefs.md)
