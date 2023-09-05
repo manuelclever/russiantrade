@@ -1,12 +1,12 @@
 # russiantrade
 
-This project was developed in the context of the Russian invasion of Ukraine. The goal was to create an interactive representation of Russian global trade data using [https://comtrade.un.org/](https://comtrade.un.org/).
+This project was initiated during the Russian invasion of Ukraine with the aim of developing an interactive visualization of Russian global trade regarding the sanctions. Data sourced from https://comtrade.un.org/.
 
-Backend finished. Frontend unfinished, because personal stuff happened and i had no time anymore.
+The backend is completed, but the frontend remains unfinished.
 
-Data is being pulled  via cronjob from the comtrade database to a local postgresql instance. A cronjob checks if new data has been added to the comtrade database and if so updates the local database.
+Data is regularly retrieved via a cronjob from the Comtrade database and stored in a local PostgreSQL instance. Another cronjob periodically checks for new data in the Comtrade database and updates the local database accordingly.
 
-Frontend only has an interactive map visualising the countries and some templates for the unfinished datea representation.
+The frontend currently features an interactive map for visualizing countries, as well as templates for representing the data.
 
 ## Installation
 
