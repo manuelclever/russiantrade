@@ -18,7 +18,7 @@ public class TestDatabaseConnection {
         try {
             DataSource dataSource = dsCreator.getDataSourceTradeDBJava();
             Connection con = dataSource.getConnection();
-            Assertions.assertEquals(con.getCatalog(), "tradetest_db");
+            Assertions.assertEquals("tradetest_db", con.getCatalog());
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();

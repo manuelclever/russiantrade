@@ -22,7 +22,7 @@ public class TestApiCall {
         String result = apiCall.call().replaceAll(regex,"");
         expected = expected.replaceAll(regex, "");
 
-        Assertions.assertEquals(result, expected);
+        Assertions.assertEquals(expected, result);
     }
 
     private static Stream<Arguments> parametersRequest() {

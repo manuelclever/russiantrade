@@ -16,5 +16,4 @@ public class TestDSCreator {
         dsCreator.initializeDatabase();
         Assertions.assertTrue(true);
     }
-
 }

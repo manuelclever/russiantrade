@@ -15,7 +15,7 @@ public class TestComtradeParser {
     @MethodSource("comtradeResponse")
     void deserialize(String input, ComtradeResponse expected) {
         ComtradeResponse response = ComtradeParser.parseResponse(input);
-        Assertions.assertEquals(response, expected);
+        Assertions.assertEquals(expected, response);
     }
 
     private static Stream<Arguments> comtradeResponse() {
