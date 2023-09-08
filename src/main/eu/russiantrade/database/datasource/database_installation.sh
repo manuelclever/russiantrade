@@ -10,7 +10,7 @@ sudo chown -R postgres:postgres /data/trade_db &&
 sudo mkdir /data/tradetest_db &&
 sudo chown -R postgres:postgres /data/tradetest_db &&
 sudo chcon unconfined_u:object_r:postgresql_db_t:s0 /data &&
-sudo chcon unconfined_u:object_r:postgresql_db_t:s0 /data/tradedb &&
+sudo chcon unconfined_u:object_r:postgresql_db_t:s0 /data/trade_db &&
 sudo systemctl enable postgresql &&
 sudo systemctl start postgresql &&
 
