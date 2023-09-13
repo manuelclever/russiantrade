@@ -136,8 +136,12 @@ public class DataGrabber {
     private static ComtradeResponse apiCall(Country country, int period) {
         char frequency = countDigits(period) == 4 ? 'A' : 'M';
 
-        ComtradeParametersRequest request = new ComtradeParametersRequest(
-                frequency, country.getCountryID(), period, DataDesignations.RUSSIA, new String[]{"TOTAL", "AG2"});
+        ComtradeAPIParametersRequest request = new ComtradeAPIParametersRequest(
+                frequency,
+                country.getCountryID(),
+                period,
+                DataDesignations.RUSSIA,
+                new String[]{"TOTAL", "AG2"});
 
         APICall apiCall = new APICall(request);
         String jsonRequest = apiCall.call();

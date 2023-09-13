@@ -5,6 +5,7 @@ sudo apt install postgresql-server &&
 sudo /usr/bin/postgresql-setup --initdb &&
 
 #create database directory with correct rights
+sudo mkdir /data &&
 sudo mkdir /data/trade_db &&
 sudo chown -R postgres:postgres /data/trade_db &&
 sudo mkdir /data/tradetest_db &&

@@ -5,19 +5,37 @@ import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 
 public class APICall {
+    private static final String URL_BASE = "https://comtradeapi.un.org/data/v1/get";
     private static final String URL_AVAILABILITY = "http://comtrade.un.org/api//refs/da/view?";
     private static final String URL_REQUEST = "http://comtrade.un.org/api/get?";
 
-    ComtradeParameters comtradeParameters;
+    //New-API: https://comtradeapi.un.org/data/v1/get/{typeCode}/{freqCode}/{clCode}
+    // [?reporterCode]
+    // [&period]
+    // [&partnerCode]
+    // [&partner2Code]
+    // [&cmdCode]
+    // [&flowCode]
+    // [&customsCode]
+    // [&motCode]
+    // [&aggregateBy]
+    // [&breakdownMode]
+    // [&includeDesc]
+
+    // Beispiel: GET https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=8&period=2010&partnerCode=643&flowCode=-1&customsCode=-1&motCode=-1&aggregateBy=cmdCode&breakdownMode=classic&includeDesc=false
+
+    ComtradeAPIParameters comtradeAPIParameters;
     private StringBuilder requestUrl;
 
-    public APICall(ComtradeParameters comtradeParametersRequest) {
-        this.comtradeParameters = comtradeParametersRequest;
+    public APICall(ComtradeAPIParameters comtradeAPIParametersRequest) {
+        this.comtradeAPIParameters = comtradeAPIParametersRequest;
     }
 
     public String call() {
         System.out.println(getRequestUrl());
-        HttpResponse<JsonNode> httpResponse = Unirest.get(getRequestUrl()).asJson();
+        HttpResponse<JsonNode> httpResponse = Unirest.get(getRequestUrl())
+                .header("Ocp-Apim-Subscription-Key", "1468af1849604304a6328b7a70d7c4f5")
+                .asJson();
         try {
             return httpResponse.getBody().toString();
         }catch (NullPointerException e) {
@@ -34,13 +52,13 @@ public class APICall {
     private String getRequestUrl() {
         requestUrl = new StringBuilder();
 
-        if(comtradeParameters.getClass() == ComtradeParametersAvailability.class) {
+        if(comtradeAPIParameters.getClass() == ComtradeAPIParametersAvailability.class) {
             requestUrl.append(URL_AVAILABILITY);
         } else {
             requestUrl.append(URL_REQUEST);
         }
 
-        comtradeParameters.stream().forEach(param -> {
+        comtradeAPIParameters.stream().forEach(param -> {
             if(param != null) {
                 requestUrl.append(param).append("&");
             }

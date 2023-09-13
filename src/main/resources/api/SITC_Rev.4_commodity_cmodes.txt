@@ -1,0 +1,102 @@
+The Standard International Trade Classification (SITC) is a classification of goods used in international trade statistics. The latest version is SITC Rev. 4, which was adopted by the United Nations Statistical Commission. SITC Rev. 4 provides a detailed classification of goods, dividing them into broad categories, sections, and divisions. The codes in SITC Rev. 4 are structured hierarchically, with increasing levels of detail.
+
+Here is an overview of the main sections and divisions in SITC Rev. 4:
+
+Section 0: Food and Live Animals
+
+    Division 00: Live Animals
+    Division 01: Meat and Meat Preparations
+    Division 02: Dairy Products and Birds' Eggs
+    Division 03: Fish (not Marine Mammals), Crustaceans, Molluscs, and Preparations Thereof
+    Division 04: Cereals and Cereal Preparations
+    Division 05: Vegetables and Fruit
+    Division 06: Sugar, Sugar Preparations, and Honey
+    Division 07: Coffee, Tea, Cocoa, Spices, and Manufactures Thereof
+    Division 08: Feeding Stuffs for Animals (Excluding Unmilled Cereals)
+
+Section 1: Beverages and Tobacco
+
+    Division 11: Beverages
+    Division 12: Tobacco and Tobacco Manufactures
+
+Section 2: Raw Materials, Inedible, and Other Crude Materials
+
+    Division 21: Hides, Skins, and Furskins, Raw
+    Division 22: Oil Seeds and Oleaginous Fruits
+    Division 23: Crude Rubber (Including Synthetic and Reclaimed)
+    Division 24: Cork and Wood
+    Division 25: Pulp and Waste Paper
+    Division 26: Textile Fibers and Their Wastes (Excluding Silk-Worm Cocoons)
+    Division 27: Crude Fertilizers (Excluding Coal, Coke, and Briquettes)
+    Division 28: Metalliferous Ores and Metal Scrap
+    Division 29: Crude Animal and Vegetable Materials
+
+Section 3: Mineral Fuels, Lubricants, and Related Materials
+
+    Division 31: Coal, Coke, and Briquettes
+    Division 32: Crude Petroleum and Natural Gas
+    Division 33: Petroleum Products and Related Materials
+
+Section 4: Animal and Vegetable Oils, Fats, and Waxes
+
+    Division 41: Animal Oils and Fats
+    Division 42: Fixed Vegetable Oils and Fats
+
+Section 5: Chemicals and Related Products
+
+    Division 51: Basic Chemicals
+    Division 52: Dyeing, Tanning, and Coloring Materials
+    Division 53: Medicinal and Pharmaceutical Products
+    Division 54: Essential Oils and Resinoids
+    Division 55: Fertilizers (Excluding Crude)
+    Division 56: Chemical Products, Not Elsewhere Specified
+
+Section 6: Manufactured Goods Classified Chiefly by Material
+
+    Division 61: Leather, Leather Manufactures, and Leather Footwear
+    Division 62: Rubber Manufactures
+    Division 63: Cork Manufactures
+    Division 64: Manufactures of Straw, of Esparto or of Other Plaiting Materials
+    Division 65: Paper, Paperboard, and Manufactures of Paper and Paperboard
+    Division 66: Textile Yarn, Fabrics, and Made-Up Articles
+    Division 67: Iron and Steel
+    Division 68: Non-Ferrous Metals
+    Division 69: Manufactures of Metals
+    Division 71: Power Generating Machinery and Equipment
+    Division 72: Machinery (Excluding Electrical)
+    Division 73: Electrical Machinery, Apparatus, and Appliances
+    Division 74: General Industrial Machinery and Equipment
+
+Section 7: Machinery and Transport Equipment
+
+    Division 71: Power Generating Machinery and Equipment
+    Division 72: Machinery (Excluding Electrical)
+    Division 73: Electrical Machinery, Apparatus, and Appliances
+    Division 74: General Industrial Machinery and Equipment
+    Division 75: Office Machines and Automatic Data Processing Machines
+    Division 76: Telecommunications and Sound Recording and Reproducing Apparatus and Equipment
+    Division 77: Electrical Machinery, Apparatus, and Appliances, Not Elsewhere Specified
+    Division 78: Road Vehicles (Including Air-Cushion Vehicles)
+    Division 79: Other Transport Equipment
+
+Section 8: Miscellaneous Manufactured Articles
+
+    Division 81: Domestic Appliances and Other Electrical Housewares
+    Division 82: Furniture and Parts Thereof; Bedding, Mattresses, Mattress Supports, Cushions, and Similar Stuffed Furnishings
+    Division 83: Travel Goods, Handbags, and Similar Containers; Articles of Animal Gut (Other Than Silkworm Gut)
+    Division 84: Articles of Apparel and Clothing Accessories
+    Division 85: Footwear, Headgear, Umbrellas, Sun Umbrellas, Walking-Sticks, Seat-Sticks, Whips, Riding-Crops, and Parts Thereof; Prepared Feathers and Articles Made Therewith; Artificial Flowers; Articles of Human Hair
+    Division 87: Professional, Scientific, and Controlling Instruments and Apparatus, Not Elsewhere Specified
+    Division 88: Photographic Apparatus, Equipment, and Supplies and Optical Goods, Not Elsewhere Specified
+
+Section 9: Commodities and Transactions Not Classified Elsewhere
+
+    Division 91: Miscellaneous Manufactured Articles
+    Division 92: Works of Art, Collectors' Pieces, and Antiques
+    Division 93: Commodities and Transactions Not Classified According to Kind
+    Division 94: Coins and Banknotes
+    Division 95: Gold Coin and Platinum, Unwrought or in Semi-Manufactured Forms, or in Powder Form
+    Division 96: Silver, Unwrought or in Semi-Manufactured Forms, or in Powder Form
+    Division 97: Platinum and Palladium, Unwrought or in Semi-Manufactured Forms, or in Powder Form
+    Division 98: Non-monetary Gold, Silver, Platinum, and Other Precious Metals
+    Division 99: Commodities and Transactions Not Classified According to Kind
