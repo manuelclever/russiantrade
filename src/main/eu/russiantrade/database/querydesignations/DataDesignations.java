@@ -8,7 +8,7 @@ public abstract class DataDesignations extends SQLQueries {
     //global
     public static final String ID = "_id";
     public static final String PERIOD = "period";
-    public static final int RUSSIA = 643;
+    public static final short RUSSIA = 643;
 
     //local
     public static final String COALITION = "coalition";

@@ -2,24 +2,24 @@ package eu.russiantrade.database.parser;
 
 public class Country {
     // all variable names have to equal DataDesignations of column in database
-    private int country_id;
+    private short country_id;
     private String name;
     private String abbrev;
 
     public Country() {
     }
 
-    public Country(int country_id, String name, String abbrev) {
+    public Country(short country_id, String name, String abbrev) {
         this.country_id = country_id;
         this.name = name;
         this.abbrev = abbrev;
     }
 
-    public int getCountryID() {
+    public short getCountryID() {
         return country_id;
     }
 
-    public void setCountry_id(int country_id) {
+    public void setCountry_id(short country_id) {
         this.country_id = country_id;
     }
 

@@ -89,7 +89,7 @@ public class DataGrabber {
         while ((line = br.readLine()) != null) {
             if(line.charAt(0) != '#') {
                 String[] country = line.split("_");
-                countries.add(new Country(Integer.parseInt(country[0]), country[1], country[2]));
+                countries.add(new Country(Short.parseShort(country[0]), country[1], country[2]));
             }
         }
         return countries;
@@ -136,12 +136,13 @@ public class DataGrabber {
     private static ComtradeResponse apiCall(Country country, int period) {
         char frequency = countDigits(period) == 4 ? 'A' : 'M';
 
-        ComtradeAPIParametersRequest request = new ComtradeAPIParametersRequest(
+        ComtradeAPIParametersRequest request = ComtradeAPIParametersRequest.allCommodities(
                 frequency,
                 country.getCountryID(),
                 period,
                 DataDesignations.RUSSIA,
-                new String[]{"TOTAL", "AG2"});
+                null,
+                null);
 
         APICall apiCall = new APICall(request);
         String jsonRequest = apiCall.call();
