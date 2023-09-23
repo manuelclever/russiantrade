@@ -32,8 +32,8 @@ public class APICall {
     }
 
     public String call() {
-        System.out.println(getRequestUrl());
-        HttpResponse<JsonNode> httpResponse = Unirest.get(getRequestUrl())
+        System.out.println(buildRequestUrl());
+        HttpResponse<JsonNode> httpResponse = Unirest.get(buildRequestUrl())
                 .header("Ocp-Apim-Subscription-Key", "1468af1849604304a6328b7a70d7c4f5")
                 .asJson();
         try {
@@ -49,20 +49,45 @@ public class APICall {
         return httpResponse.getBody().toString();
     }
 
-    private String getRequestUrl() {
+    /**
+     * Build URL for API
+     * <p>
+     * Last updated: 2023/09
+     *  API: https://comtradeapi.un.org/data/v1/get/{typeCode}/{freqCode}/{clCode}
+     *  [?reporterCode]
+     *  [&period]
+     *  [&partnerCode]
+     *  [&partner2Code]
+     *  [&cmdCode]
+     *  [&flowCode]
+     *  [&customsCode]
+     *  [&motCode]
+     *  [&aggregateBy]
+     *  [&breakdownMode]
+     *  [&includeDesc]
+     */
+
+    private String buildRequestUrl() {
         requestUrl = new StringBuilder();
 
-        if(comtradeAPIParameters.getClass() == ComtradeAPIParametersAvailability.class) {
-            requestUrl.append(URL_AVAILABILITY);
-        } else {
-            requestUrl.append(URL_REQUEST);
-        }
+        // first part of url
+        requestUrl.append(URL_BASE);
 
-        comtradeAPIParameters.stream().forEach(param -> {
+        comtradeAPIParameters.streamDataFormat().forEach(param -> {
+            if(param != null) {
+                requestUrl.append("/").append(param);
+            }
+        });
+
+        // start char for search parameters
+        requestUrl.append("?");
+
+        comtradeAPIParameters.streamSearchParameters().forEach(param -> {
             if(param != null) {
                 requestUrl.append(param).append("&");
             }
         });
+        // Remove last &
         requestUrl.replace(requestUrl.length()-1, requestUrl.length(), ""); //remove last &
 
         return requestUrl.toString();

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public abstract class ComtradeAPIParameters {
-    private static final String TYPE_OF_TRADE = "typeCode="; // Commodities (C) or Services (S)
-    private static final String FREQUENCY = "freqCode="; // Annual (A), Monthly (M)
-    private static final String CLASSIFICATION = "clCode="; // Classification. SITC S4 is used (S4)
     private static final String REPORTER = "reporterCode=";
     private static final String PERIOD = "period="; // Years or Months, depends on chosen frequency
     private static final String PARTNER = "partnerCode=";
@@ -95,7 +92,7 @@ public abstract class ComtradeAPIParameters {
 
     public void setTypeOfTrade(char typeOfTrade) {
         if (typeOfTrade == 'C' | typeOfTrade == 'S' ) {
-            this.typeOfTrade = TYPE_OF_TRADE + typeOfTrade;
+            this.typeOfTrade = String.valueOf(typeOfTrade);
         } else {
             this.typeOfTrade = null;
         }
@@ -103,18 +100,14 @@ public abstract class ComtradeAPIParameters {
 
     public void setFrequency(char frequency) {
         if (frequency == 'A' | frequency == 'M' ) {
-            this.frequency = FREQUENCY + frequency;
+            this.frequency = String.valueOf(frequency);
         } else {
             this.typeOfTrade = null;
         }
     }
 
     public void setClassification(String classification) {
-        if (classification != null) {
-            this.classification = CLASSIFICATION + classification;
-        } else {
-            this.classification = null;
-        }
+        this.classification = classification;
     }
 
     public void setReporter(short reporter) {
@@ -158,7 +151,11 @@ public abstract class ComtradeAPIParameters {
     }
 
     public void setCustoms(String customs) {
-        this.customs = CUSTOMS + customs;
+        if(customs != null) {
+            this.customs = CUSTOMS + customs;
+        } else {
+            this.customs = null;
+        }
     }
 
     public void setModeOfTransport(int[] modeOfTransport) {
@@ -187,11 +184,27 @@ public abstract class ComtradeAPIParameters {
         this.token = token;
     }
 
-    public Stream<String> stream() {
+    public Stream<String> streamDataFormat() throws NullPointerException {
+        if(typeOfTrade == null || frequency == null || classification == null)  {
+            throw new NullPointerException("typeOfTrade, frequency and/or classification is null, but these are " +
+                    "prerequisites for the data format.");
+        }
         List<String> list = new ArrayList<>() {{
             add(typeOfTrade);
             add(frequency);
             add(classification);
+        }};
+
+        return list.stream();
+
+    }
+
+    public Stream<String> streamSearchParameters() throws NullPointerException {
+        if(reporter == null || period == null || partner == null)  {
+            throw new NullPointerException("reporter, period and/or partner is null, but these are " +
+                    "prerequisite search criteria.");
+        }
+        List<String> list = new ArrayList<>() {{
             add(reporter);
             add(period);
             add(partner);
