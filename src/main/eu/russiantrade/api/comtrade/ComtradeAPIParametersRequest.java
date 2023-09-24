@@ -36,7 +36,7 @@ public class ComtradeAPIParametersRequest extends ComtradeAPIParameters {
                 partner,
                 commodity,
                 tradeFlow,
-                "-1",
+                null,
                 modeOfTransport,
                 includeDesc,
                 token);
@@ -69,7 +69,7 @@ public class ComtradeAPIParametersRequest extends ComtradeAPIParameters {
                 partner,
                 new String[]{"TOTAL"},
                 tradeFlow,
-                new int[]{-1},
+                null,
                 true,
                 token);
     }
@@ -101,7 +101,7 @@ public class ComtradeAPIParametersRequest extends ComtradeAPIParameters {
                 partner,
                 new String[]{"ALL"},
                 tradeFlow,
-                new int[]{-1},
+                null,
                 true,
                 token);
     }
@@ -134,7 +134,7 @@ public class ComtradeAPIParametersRequest extends ComtradeAPIParameters {
                 partner,
                 commodities,
                 tradeFlow,
-                new int[]{-1},
+                null,
                 true,
                 token);
     }

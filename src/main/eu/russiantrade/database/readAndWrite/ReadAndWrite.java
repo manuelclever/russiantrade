@@ -30,12 +30,12 @@ public class ReadAndWrite {
             psqlCoalitionWriter.addCoalition("NATO");
 
             TradeData tradeData = new TradeData();
-            tradeData.setPeriod(102021);
+            tradeData.setRefPeriodId(102021);
             tradeData.setReporterCode(208);
             tradeData.setPartnerCode(89);
-            tradeData.setTradeFlowCode(1);
+            tradeData.setFlowCode("X");
             tradeData.setCommodityCode("All");
-            tradeData.setTradeValue(20000000000L);
+            tradeData.setPrimaryValue(20000000000L);
 
             psqlDatasetWriter.addDataset(tradeData);
         } catch (IOException | NamingException e) {

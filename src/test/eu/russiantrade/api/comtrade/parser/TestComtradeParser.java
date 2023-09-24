@@ -21,126 +21,247 @@ public class TestComtradeParser {
     private static Stream<Arguments> comtradeResponse() {
         List<TradeData> argument2 = new ArrayList<>();
         argument2.add(new TradeData(
-                "H3",
-                2010,
-                2010,
-                2010,
-                2,
-                0,
-                2,
-                "Export",
-                8,
-                "Albania",
-                "ALB",
-                643,
-                "Russian Federation",
-                "RUS",
-                0,
-                "","",
-                "07",
-                "Edible vegetables and certain roots and tubers",
-                1,
-                "No Quantity",
-                0,"",0,0,
-                26170,
-                0,0,
-                0));
-        argument2.add(new TradeData(
-                "H3",
-                2010,
-                2010,
-                2010,
-                2,
-                0,
-                1,
+                'C',
+               'A',
+
+                20100101,
+                (short) 2010,
+                (short) 52,
+                (short) 2010,
+
+                "M",
                 "Import",
+
                 8,
                 "Albania",
-                "ALB",
+                "Alb",
+
                 643,
                 "Russian Federation",
                 "RUS",
+
                 0,
-                "","",
-                "08",
-                "Edible fruit and nuts; peel of citrus fruit or melons",
-                1,
-                "No Quantity",
-                0,"",0,0,
-                226,
-                0,0,
-                0));
+                "W00",
+                "World",
+
+                "S4",
+                "S4",
+                false,
+
+                "TOTAL",
+                "All Commodities",
+
+                0,
+                false,
+
+                "C00",
+                "TOTAL CPC",
+
+                0,
+
+                0,
+                "TOTAL MOT",
+
+                -1,
+                "N/A",
+                0,
+                false,
+
+                -1,
+                "N/A",
+                0,
+                false,
+
+                0,
+                false,
+
+                0,
+                false,
+
+                101647050,
+                0,
+                101647050,
+
+                0,
+                true,
+                false));
+        argument2.add(new TradeData(
+                'C',
+                'A',
+
+                20100101,
+                (short) 2010,
+                (short) 52,
+                (short) 2010,
+
+                "X",
+                "Export",
+
+                8,
+                "Albania",
+                "Alb",
+
+                643,
+                "Russian Federation",
+                "RUS",
+
+                0,
+                "W00",
+                "World",
+
+                "S4",
+                "S4",
+                false,
+
+                "TOTAL",
+                "All Commodities",
+
+                0,
+                false,
+
+                "C00",
+                "TOTAL CPC",
+
+                0,
+
+                0,
+                "TOTAL MOT",
+
+                -1,
+                "N/A",
+                0,
+                false,
+
+                -1,
+                "N/A",
+                0,
+                false,
+
+                0,
+                false,
+
+                0,
+                false,
+
+                34372,
+                0,
+                34372,
+
+                0,
+                true,
+                false));
 
         return Stream.of(
-                Arguments.of("{\"validation\":{" +
-                                "\"status\":{" +
-                                    "\"name\":\"Ok\"," +
-                                    "\"value\":0," +
-                                    "\"category\":0," +
-                                    "\"description\":\"\"," +
-                                    "\"helpUrl\":\"For more reference visit http://comtrade.un.org/data/dev/portal/\"}," +
-                                    "\"message\":null," +
-                                "\"count\":{" +
-                                    "\"value\":0," +
-                                    "\"started\":\"0001-01-01T00:00:00\"," +
-                                    "\"finished\":\"0001-01-01T00:00:00\"," +
-                                    "\"durationSeconds\":0.0}," +
-                                "\"datasetTimer\":{" +
-                                    "\"started\":\"2022-08-14T12:40:57.3776756+02:00\"," +
-                                    "\"finished\":\"2022-08-14T12:40:57.4557842+02:00\"," +
-                                    "\"durationSeconds\":0.0781086}}," +
-                                "\"dataset\":[]}",
+                Arguments.of("{" +
+                        "\"elapsedTime\": \"2.63 secs\"," +
+                        "\"count\": 2," +
+                        "\"data\": [" +
+                        "    {" +
+                        "        \"typeCode\": \"C\"," +
+                        "        \"freqCode\": \"A\"," +
+                        "        \"refPeriodId\": 20100101," +
+                        "        \"refYear\": 2010," +
+                        "        \"refMonth\": 52," +
+                        "        \"period\": \"2010\"," +
+                        "        \"reporterCode\": 8," +
+                        "        \"reporterISO\": \"ALB\"," +
+                        "        \"reporterDesc\": \"Albania\"," +
+                        "        \"flowCode\": \"M\"," +
+                        "        \"flowDesc\": \"Import\"," +
+                        "        \"partnerCode\": 643," +
+                        "        \"partnerISO\": \"RUS\"," +
+                        "        \"partnerDesc\": \"Russian Federation\"," +
+                        "        \"partner2Code\": 0," +
+                        "        \"partner2ISO\": \"W00\"," +
+                        "        \"partner2Desc\": \"World\"," +
+                        "        \"classificationCode\": \"S4\"," +
+                        "        \"classificationSearchCode\": \"S4\"," +
+                        "        \"isOriginalClassification\": false," +
+                        "        \"cmdCode\": \"TOTAL\"," +
+                        "        \"cmdDesc\": \"All Commodities\"," +
+                        "        \"aggrLevel\": 0," +
+                        "        \"isLeaf\": false," +
+                        "        \"customsCode\": \"C00\"," +
+                        "        \"customsDesc\": \"TOTAL CPC\"," +
+                        "        \"mosCode\": \"0\"," +
+                        "        \"motCode\": 0," +
+                        "        \"motDesc\": \"TOTAL MOT\"," +
+                        "        \"qtyUnitCode\": -1," +
+                        "        \"qtyUnitAbbr\": \"N/A\"," +
+                        "        \"qty\": null," +
+                        "        \"isQtyEstimated\": false," +
+                        "        \"altQtyUnitCode\": -1," +
+                        "        \"altQtyUnitAbbr\": \"N/A\"," +
+                        "        \"altQty\": null," +
+                        "        \"isAltQtyEstimated\": false," +
+                        "        \"netWgt\": null," +
+                        "        \"isNetWgtEstimated\": false," +
+                        "        \"grossWgt\": null," +
+                        "        \"isGrossWgtEstimated\": false," +
+                        "        \"cifvalue\": 101647050," +
+                        "        \"fobvalue\": null," +
+                        "        \"primaryValue\": 101647050," +
+                        "        \"legacyEstimationFlag\": 0," +
+                        "        \"isReported\": true," +
+                        "        \"isAggregate\": false" +
+                        "    }," +
+                        "    {" +
+                        "        \"typeCode\": \"C\"," +
+                        "        \"freqCode\": \"A\"," +
+                        "        \"refPeriodId\": 20100101," +
+                        "        \"refYear\": 2010," +
+                        "        \"refMonth\": 52," +
+                        "        \"period\": \"2010\"," +
+                        "        \"reporterCode\": 8," +
+                        "        \"reporterISO\": \"ALB\"," +
+                        "        \"reporterDesc\": \"Albania\"," +
+                        "        \"flowCode\": \"X\"," +
+                        "        \"flowDesc\": \"Export\"," +
+                        "        \"partnerCode\": 643," +
+                        "        \"partnerISO\": \"RUS\"," +
+                        "        \"partnerDesc\": \"Russian Federation\"," +
+                        "        \"partner2Code\": 0," +
+                        "        \"partner2ISO\": \"W00\"," +
+                        "        \"partner2Desc\": \"World\"," +
+                        "        \"classificationCode\": \"S4\"," +
+                        "        \"classificationSearchCode\": \"S4\"," +
+                        "        \"isOriginalClassification\": false," +
+                        "        \"cmdCode\": \"TOTAL\"," +
+                        "        \"cmdDesc\": \"All Commodities\"," +
+                        "        \"aggrLevel\": 0," +
+                        "        \"isLeaf\": false," +
+                        "        \"customsCode\": \"C00\"," +
+                        "        \"customsDesc\": \"TOTAL CPC\"," +
+                        "        \"mosCode\": \"0\"," +
+                        "        \"motCode\": 0," +
+                        "        \"motDesc\": \"TOTAL MOT\"," +
+                        "        \"qtyUnitCode\": -1," +
+                        "        \"qtyUnitAbbr\": \"N/A\"," +
+                        "        \"qty\": null," +
+                        "        \"isQtyEstimated\": false," +
+                        "        \"altQtyUnitCode\": -1," +
+                        "        \"altQtyUnitAbbr\": \"N/A\"," +
+                        "        \"altQty\": null," +
+                        "        \"isAltQtyEstimated\": false," +
+                        "        \"netWgt\": null," +
+                        "        \"isNetWgtEstimated\": false," +
+                        "        \"grossWgt\": null," +
+                        "        \"isGrossWgtEstimated\": false," +
+                        "        \"cifvalue\": null," +
+                        "        \"fobvalue\": 34372," +
+                        "        \"primaryValue\": 34372," +
+                        "        \"legacyEstimationFlag\": 0," +
+                        "        \"isReported\": true," +
+                        "        \"isAggregate\": false" +
+                        "    }" +
+                        "  ]," +
+                        "  \"error\": \"\"" +
+                        "}",
                         new ComtradeResponse(
-                                new Validation(
-                                        "Ok",
-                                        0,
-                                        0,
-                                        "",
-                                        "For more reference visit http://comtrade.un.org/data/dev/portal/",
-                                        null,
-                                        0,
-                                        "0001-01-01T00:00:00",
-                                        "0001-01-01T00:00:00",
-                                        0.0,
-                                        "2022-08-14T12:40:57.3776756+02:00",
-                                        "2022-08-14T12:40:57.4557842+02:00",
-                                        0.0781086),
-                                null)),
-                Arguments.of("{\"validation\":{" +
-                                "\"status\":{" +
-                                    "\"name\":\"Ok\"," +
-                                    "\"value\":0," +
-                                    "\"category\":0," +
-                                    "\"description\":\"\"," +
-                                    "\"helpUrl\":\"For more reference visit http://comtrade.un.org/data/dev/portal/\"}," +
-                                    "\"message\":null," +
-                                "\"count\":{\"value\":41," +
-                                    "\"started\":\"2022-08-14T13:23:28.202793+02:00\"," +
-                                    "\"finished\":\"2022-08-14T13:23:28.374632+02:00\"," +
-                                    "\"durationSeconds\":0.171839}," +
-                                "\"datasetTimer\":{" +
-                                    "\"started\":\"2022-08-14T13:23:28.202793+02:00\"," +
-                                    "\"finished\":\"2022-08-14T13:23:28.5670659+02:00\"," +
-                                    "\"durationSeconds\":0.3642729}}," +
-                                "\"dataset\":[" +
-                                    "{\"pfCode\":\"H3\",\"yr\":2010,\"period\":2010,\"periodDesc\":\"2010\",\"aggrLevel\":2,\"IsLeaf\":0,\"rgCode\":2,\"rgDesc\":\"Export\",\"rtCode\":8,\"rtTitle\":\"Albania\",\"rt3ISO\":\"ALB\",\"ptCode\":643,\"ptTitle\":\"Russian Federation\",\"pt3ISO\":\"RUS\",\"ptCode2\":null,\"ptTitle2\":\"\",\"pt3ISO2\":\"\",\"cstCode\":\"\",\"cstDesc\":\"\",\"motCode\":\"\",\"motDesc\":\"\",\"cmdCode\":\"07\",\"cmdDescE\":\"Edible vegetables and certain roots and tubers\",\"qtCode\":1,\"qtDesc\":\"No Quantity\",\"qtAltCode\":null,\"qtAltDesc\":\"\",\"TradeQuantity\":null,\"AltQuantity\":null,\"NetWeight\":null,\"GrossWeight\":null,\"TradeValue\":26170,\"CIFValue\":null,\"FOBValue\":null,\"estCode\":0}," +
-                                    "{\"pfCode\":\"H3\",\"yr\":2010,\"period\":2010,\"periodDesc\":\"2010\",\"aggrLevel\":2,\"IsLeaf\":0,\"rgCode\":1,\"rgDesc\":\"Import\",\"rtCode\":8,\"rtTitle\":\"Albania\",\"rt3ISO\":\"ALB\",\"ptCode\":643,\"ptTitle\":\"Russian Federation\",\"pt3ISO\":\"RUS\",\"ptCode2\":null,\"ptTitle2\":\"\",\"pt3ISO2\":\"\",\"cstCode\":\"\",\"cstDesc\":\"\",\"motCode\":\"\",\"motDesc\":\"\",\"cmdCode\":\"08\",\"cmdDescE\":\"Edible fruit and nuts; peel of citrus fruit or melons\",\"qtCode\":1,\"qtDesc\":\"No Quantity\",\"qtAltCode\":null,\"qtAltDesc\":\"\",\"TradeQuantity\":null,\"AltQuantity\":null,\"NetWeight\":null,\"GrossWeight\":null,\"TradeValue\":226,\"CIFValue\":null,\"FOBValue\":null,\"estCode\":0}]}",
-                        new ComtradeResponse(
-                                new Validation(
-                                        "Ok",
-                                        0,
-                                        0,
-                                        "",
-                                        "For more reference visit http://comtrade.un.org/data/dev/portal/",
-                                        null,
-                                        41,
-                                        "2022-08-14T13:23:28.202793+02:00",
-                                        "2022-08-14T13:23:28.374632+02:00",
-                                        0.171839,
-                                        "2022-08-14T13:23:28.202793+02:00",
-                                        "2022-08-14T13:23:28.5670659+02:00",
-                                        0.3642729),
-                                argument2)
-        ));
+                                null,
+                                2,
+                                argument2,
+                                null))
+                );
     }
 }

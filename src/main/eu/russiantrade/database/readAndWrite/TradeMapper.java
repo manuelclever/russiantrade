@@ -18,7 +18,7 @@ public class TradeMapper {
             for (int i = 0; i < tradeDataList.size(); i++) {
                 TradeData tradeData = tradeDataList.get(i);
                 labelsArr[i] = tradeData.getCommodityCode() + " - " + tradeData.getCommodityDesc();
-                dataArr[i] = tradeData.getTradeValue();
+                dataArr[i] = tradeData.getPrimaryValue();
             }
             return map(labelsArr, dataArr);
         }
@@ -52,8 +52,8 @@ public class TradeMapper {
             long[] dataArr = new long[tradeDataList.size()];
 
             for (int i = 0; i < tradeDataList.size(); i++) {
-                labelsArr[i] = Integer.toString(tradeDataList.get(i).getPeriod());
-                dataArr[i] = tradeDataList.get(i).getTradeValue();
+                labelsArr[i] = Integer.toString(tradeDataList.get(i).getRefPeriodId());
+                dataArr[i] = tradeDataList.get(i).getPrimaryValue();
             }
             return map(labelsArr, dataArr);
         }

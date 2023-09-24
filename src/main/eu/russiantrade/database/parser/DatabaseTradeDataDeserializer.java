@@ -49,15 +49,15 @@ public class DatabaseTradeDataDeserializer extends StdDeserializer<List<TradeDat
     private TradeData createDataset(JsonNode node) {
         TradeData tradeData = new TradeData();
 
-        tradeData.setPeriod(node.get(DataDesignations.PERIOD).asInt());
-        tradeData.setTradeFlowDesc(node.get(DataDesignations.MONTHLY_TRADE_FLOW).asText());
+        tradeData.setRefPeriodId(node.get(DataDesignations.PERIOD).asInt());
+        tradeData.setFlowDesc(node.get(DataDesignations.MONTHLY_TRADE_FLOW).asText());
         tradeData.setReporterCode(node.get(DataDesignations.MONTHLY_TRADE_REPORTER).asInt());
         tradeData.setReporterDesc(node.get(DataDesignations.MONTHLY_TRADE_REPORTER_DESC).asText());
         tradeData.setPartnerCode(node.get(DataDesignations.MONTHLY_TRADE_PARTNER).asInt());
         tradeData.setPartnerDesc(node.get(DataDesignations.MONTHLY_TRADE_PARTNER_DESC).asText());
         tradeData.setCommodityCode(node.get(DataDesignations.MONTHLY_TRADE_COMMODITY_CODE).asText());
         tradeData.setCommodityDesc(node.get(DataDesignations.MONTHLY_TRADE_COMMODITY_DESC).asText());
-        tradeData.setTradeValue(node.get("value").asLong());
+        tradeData.setPrimaryValue(node.get("value").asLong());
 
         return tradeData;
     }

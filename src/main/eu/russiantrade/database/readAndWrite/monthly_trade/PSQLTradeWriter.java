@@ -24,13 +24,13 @@ public class PSQLTradeWriter implements tradeDataWriter {
         try(Connection conn = datasource.getConnection();
             PreparedStatement query = conn.prepareStatement(PSQLQTradeData.QUERY_INSERT)) {
 
-            query.setInt(1, tradeData.getPeriod());
+            query.setInt(1, tradeData.getRefPeriodId());
             query.setInt(2, tradeData.getReporterCode());
             query.setInt(3, tradeData.getPartnerCode());
-            query.setString(4, tradeData.getTradeFlowDesc());
+            query.setString(4, tradeData.getFlowDesc());
             query.setString(5, tradeData.getCommodityCode());
             query.setString(6, tradeData.getCommodityDesc());
-            query.setLong(7, tradeData.getTradeValue());
+            query.setLong(7, tradeData.getPrimaryValue());
 //            query.setInt(6, dataset.getReporterCode()); //global sanction id
 //            query.setInt(7, dataset.getReporterCode()); //local sanction id
 
@@ -62,7 +62,7 @@ public class PSQLTradeWriter implements tradeDataWriter {
             PreparedStatement query = conn.prepareStatement(PSQLQTradeData.QUERY_DELETE_WHERE_REPORTER_AND_PERIOD_AND_COMMODITY)) {
 
             query.setInt(1, tradeData.getReporterCode());
-            query.setInt(2, tradeData.getPeriod());
+            query.setInt(2, tradeData.getRefPeriodId());
             query.setString(3, tradeData.getCommodityCode());
 
             boolean success = query.execute();

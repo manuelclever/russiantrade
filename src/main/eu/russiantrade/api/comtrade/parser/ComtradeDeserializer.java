@@ -23,48 +23,21 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
     public ComtradeResponse deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
 
-        Validation validation = createValidation(node);
+        String elapsedTime = node.findValue("elapsedTime").asText();
+        int count = node.findValue("count").asInt();
+        String error = node.findValue("error").asText();
+        error = error.isEmpty() ? null : error;
 
-        if (validation.isValid()) {
+        if (count > 0) {
             List<TradeData> tradeData = createDatasets(node);
-            return new ComtradeResponse(validation, tradeData);
-        }
-        return new ComtradeResponse(validation, null);
-    }
-
-    private Validation createValidation(JsonNode node) {
-        Validation validation = new Validation();
-
-        JsonNode validationNode = node.findValue("validation");
-
-        JsonNode status = validationNode.findValue("status");
-        validation.setName(status.get("name").asText());
-        validation.setValue(status.get("value").asInt());
-        validation.setCategory(status.get("category").asInt());
-        validation.setDescription(status.get("description").asText());
-        validation.setHelpUrl(status.get("helpUrl").asText());
-
-        validation.setMessage(validationNode.get("message").asText());
-
-        JsonNode count = validationNode.findValue("count");
-        validation.setCountValue(count.get("value").asInt());
-        validation.setCountStarted(count.get("started").asText());
-        validation.setCountFinished(count.get("finished").asText());
-        validation.setCountDurationSeconds(count.get("durationSeconds").asDouble());
-
-        JsonNode datasetTimer = validationNode.findValue("datasetTimer");
-        if (!datasetTimer.toString().equals("null")) { //datasetTimer could be null
-            validation.setDatasetTimerStarted(datasetTimer.get("started").asText());
-            validation.setDatasetTimerFinished(datasetTimer.get("finished").asText());
-            validation.setDatasetTimerDurationSeconds(datasetTimer.get("durationSeconds").asDouble());
+            return new ComtradeResponse(elapsedTime, count, tradeData, error);
         }
 
-        return validation;
+        return new ComtradeResponse(elapsedTime, count, null, error);
     }
-
 
     private List<TradeData> createDatasets(JsonNode node) {
-        JsonNode datasetNodes = node.findValue("dataset");
+        JsonNode datasetNodes = node.findValue("data");
 
         List<TradeData> tradeData = new ArrayList<>();
         if (datasetNodes.isArray()) {
@@ -82,45 +55,70 @@ public class ComtradeDeserializer extends StdDeserializer<ComtradeResponse> {
     private TradeData createDataset(JsonNode node) {
         TradeData tradeData = new TradeData();
 
-        tradeData.setPfCode(node.findValue("pfCode").asText());
-        tradeData.setYear(node.findValue("yr").asInt());
-        tradeData.setPeriod(node.findValue("period").asInt());
-        tradeData.setAggrLevel(node.findValue("aggrLevel").asInt());
-        tradeData.setIsLeaf(node.findValue("IsLeaf").asInt());
+        tradeData.setTypeCode(node.findValue("typeCode").asText().charAt(0));
+        tradeData.setFreqCode(node.findValue("freqCode").asText().charAt(0));
 
-        int tradeFlowCode = node.findValue("rgCode").asInt();
-        tradeData.setTradeFlowCode(tradeFlowCode);
+        tradeData.setRefPeriodId(node.findValue("refPeriodId").asInt());
+        tradeData.setRefYear((short) node.findValue("refYear").asInt());
+        tradeData.setRefMonth((short) node.findValue("refMonth").asInt());
+        tradeData.setPeriod((short) node.findValue("period").asInt());
 
-        //comtrade.un saves desc as 'Import/Export' or 'Imports/Exports'. This fixes irregularities
-        String tradeFlowDesc = tradeFlowCode == 1 ? "Import" : "Export";
-        tradeData.setTradeFlowDesc(tradeFlowDesc);
+        tradeData.setFlowCode(node.findValue("flowCode").asText());
+        tradeData.setFlowDesc(node.findValue("flowDesc").asText());
 
-        tradeData.setReporterCode(node.findValue("rtCode").asInt());
-        tradeData.setReporterDesc(node.findValue("rtTitle").asText());
-        tradeData.setRt3iso(node.findValue("rt3ISO").asText());
+        tradeData.setReporterCode(node.findValue("reporterCode").asInt());
+        tradeData.setReporterDesc(node.findValue("reporterDesc").asText());
+        tradeData.setReporterIso(node.findValue("reporterISO").asText());
 
-        tradeData.setPartnerCode(node.findValue("ptCode").asInt());
-        tradeData.setPartnerDesc(node.findValue("ptTitle").asText());
-        tradeData.setPt3iso(node.findValue("pt3ISO").asText());
+        tradeData.setPartnerCode(node.findValue("partnerCode").asInt());
+        tradeData.setPartnerDesc(node.findValue("partnerDesc").asText());
+        tradeData.setPartnerIso(node.findValue("partnerISO").asText());
 
-        tradeData.setPartnerCode2(node.findValue("ptCode2").asInt());
-        tradeData.setPartnerDesc2(node.findValue("ptTitle2").asText());
-        tradeData.setPt3iso2(node.findValue("pt3ISO2").asText());
+        tradeData.setPartner2Code(node.findValue("partner2Code").asInt());
+        tradeData.setPartner2Desc(node.findValue("partner2Desc").asText());
+        tradeData.setPartner2Iso(node.findValue("partner2ISO").asText());
+
+        tradeData.setClassificationCode(node.findValue("classificationCode").asText());
+        tradeData.setClassificationSearchCode(node.findValue("classificationSearchCode").asText());
+        tradeData.setOriginalClassification(node.findValue("isOriginalClassification").asBoolean());
 
         tradeData.setCommodityCode(node.findValue("cmdCode").asText());
-        tradeData.setCommodityDesc(node.findValue("cmdDescE").asText());
+        tradeData.setCommodityDesc(node.findValue("cmdDesc").asText());
 
-        tradeData.setQtCode(node.findValue("qtCode").asInt());
-        tradeData.setQtDesc(node.findValue("qtDesc").asText());
+        tradeData.setAggregationLevel(node.findValue("aggrLevel").asInt());
+        tradeData.setIsLeaf(node.findValue("isLeaf").asBoolean());
 
-        tradeData.setQtAltCode(node.findValue("qtAltCode").asInt());
-        tradeData.setQtAltDesc(node.findValue("qtAltDesc").asText());
-        tradeData.setTradeValue(node.findValue("TradeValue").asInt());
+        tradeData.setCustomsCode(node.findValue("customsCode").asText());
+        tradeData.setCustomsDesc(node.findValue("customsDesc").asText());
 
-        tradeData.setCifValue(node.findValue("CIFValue").asInt());
-        tradeData.setFobValue(node.findValue("FOBValue").asInt());
-        tradeData.setEstCode(node.findValue("estCode").asInt());
+        tradeData.setModeOfSupplyCode(node.findValue("mosCode").asInt());
 
+        tradeData.setModeOfTransportCode(node.findValue("motCode").asInt());
+        tradeData.setModeOfTransportDesc(node.findValue("motDesc").asText());
+
+        tradeData.setQuantityUnitCode(node.findValue("qtyUnitCode").asInt());
+        tradeData.setQuantityUnitAbbreviation(node.findValue("qtyUnitAbbr").asText());
+        tradeData.setQuantity(node.findValue("qty").asInt());
+        tradeData.setQuantityEstimated(node.findValue("isQtyEstimated").asBoolean());
+
+        tradeData.setAlternativeQuantityUnitCode(node.findValue("altQtyUnitCode").asInt());
+        tradeData.setAlternativeQuantityUnitAbbreviation(node.findValue("altQtyUnitAbbr").asText());
+        tradeData.setAlternativeQuantity(node.findValue("altQty").asInt());
+        tradeData.setAlternativeIsQuantityEstimated(node.findValue("isAltQtyEstimated").asBoolean());
+
+        tradeData.setNetWeight(node.findValue("netWgt").asInt());
+        tradeData.setNetWeightEstimated(node.findValue("isNetWgtEstimated").asBoolean());
+
+        tradeData.setGrossWeight(node.findValue("grossWgt").asInt());
+        tradeData.setGrossWeightEstimated(node.findValue("isGrossWgtEstimated").asBoolean());
+
+        tradeData.setCostInsuranceFreightValue(node.findValue("cifvalue").asInt());
+        tradeData.setFreeOnBoardValue(node.findValue("fobvalue").asInt());
+        tradeData.setPrimaryValue(node.findValue("primaryValue").asLong());
+
+        tradeData.setLegacyEstimationFlag(node.findValue("legacyEstimationFlag").asInt());
+        tradeData.setReported(node.findValue("isReported").asBoolean());
+        tradeData.setAggregated(node.findValue("isAggregate").asBoolean());
 
         return tradeData;
     }

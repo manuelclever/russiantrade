@@ -1,243 +1,411 @@
 package eu.russiantrade.api.comtrade.parser;
 
 public class TradeData {
-    private String pfCode;
-    private int year;
-    private int period;
-    private int periodDesc;
+    private char typeCode;
+    private char freqCode;
 
-    private int aggrLevel;
-    private int isLeaf;
 
-    private int tradeFlowCode;
-    private String tradeFlowDesc;
+    private int refPeriodId;
+    private short refYear;
+    private short refMonth;
+    private short period;
 
+
+    private String flowCode;
+    private String flowDesc;
+
+    
     private int reporterCode;
     private String reporterDesc;
-    private String rt3iso;
-
+    private String reporterIso;
+    
+    
     private int partnerCode;
     private String partnerDesc;
-    private String pt3iso;
+    private String partnerIso;
 
-    private int partnerCode2;
-    private String partnerDesc2;
-    private String pt3iso2;
+
+    private int partner2Code;
+    private String partner2Desc;
+    private String partner2Iso;
+
+
+    private String classificationCode;
+    private String classificationSearchCode;
+    private boolean isOriginalClassification;
+
 
     private String commodityCode;
     private String commodityDesc;
 
-    private int qtCode;
-    private String qtDesc;
 
-    private int qtAltCode;
-    private String qtAltDesc;
+    private int aggregationLevel;
+    private boolean isLeaf;
 
-    private int tradeQuantity;
-    private int altQuantity;
-    private long tradeValue;
 
-    private int cifValue;
-    private int fobValue;
-    private int estCode;
+    private String customsCode;
+    private String customsDesc;
+
+
+    private int modeOfSupplyCode;
+
+
+    private int modeOfTransportCode;
+    private String modeOfTransportDesc;
+
+
+    private int quantityUnitCode;
+    private String quantityUnitAbbreviation;
+    private int quantity;
+    private boolean isQuantityEstimated;
+
+
+    private int alternativeQuantityUnitCode;
+    private String alternativeQuantityUnitAbbreviation;
+    private int alternativeQuantity;
+    private boolean alternativeIsQuantityEstimated;
+
+
+    private int netWeight;
+    private boolean isNetWeightEstimated;
+
+
+    private int grossWeight;
+    private boolean isGrossWeightEstimated;
+
+
+    private int costInsuranceFreightValue;
+    private int freeOnBoardValue;
+    private long primaryValue;
+
+    private int legacyEstimationFlag;
+    private boolean isReported;
+    private boolean isAggregated;
+
 
     public TradeData() {
     }
 
-    // initialize only with minimal needed data also present in database columns
-    public TradeData(int period, String tradeFlowDesc, int reporterCode, int partnerCode, String commodityCode,
-                     long tradeValue) {
-        this.period = period;
-        this.tradeFlowDesc = tradeFlowDesc;
+    // initialize only with minimal data
+    public TradeData(int refPeriodId, 
+                     String flowDesc, 
+                     int reporterCode, 
+                     int partnerCode, 
+                     String commodityCode,
+                     long primaryValue) {
+        this.refPeriodId = refPeriodId;
+        this.flowDesc = flowDesc;
         this.reporterCode = reporterCode;
         this.partnerCode = partnerCode;
         this.commodityCode = commodityCode;
-        this.tradeValue = tradeValue;
+        this.primaryValue = primaryValue;
     }
 
-    // initialize with data present in database columns and send to webpage
-    public TradeData(int period, String tradeFlowDesc, int reporterCode, int partnerCode, String commodityCode,
-                     String commodityDesc, long tradeValue) {
-        this.period = period;
-        this.tradeFlowDesc = tradeFlowDesc;
+    public TradeData(int refPeriodId,
+                     String flowDesc,
+                     int reporterCode,
+                     int partnerCode,
+                     String commodityCode,
+                     String commodityDesc,
+                     long primaryValue) {
+        this.refPeriodId = refPeriodId;
+        this.flowDesc = flowDesc;
         this.reporterCode = reporterCode;
         this.partnerCode = partnerCode;
         this.commodityCode = commodityCode;
         this.commodityDesc = commodityDesc;
-        this.tradeValue = tradeValue;
+        this.primaryValue = primaryValue;
     }
 
-    public TradeData(String pfCode, int year, int period, int periodDesc, int aggrLevel, int isLeaf, int tradeFlowCode,
-                     String tradeFlowDesc, int reporterCode, String reporterDesc, String rt3iso, int partnerCode,
-                     String partnerDesc, String pt3iso, int partnerCode2, String partnerDesc2, String pt3iso2,
-                     String commodityCode, String commodityDesc, int qtCode, String qtDesc, int qtAltCode,
-                     String qtAltDesc, int tradeQuantity, int altQuantity, long tradeValue, int cifValue, int fobValue,
-                     int estCode) {
-        this.pfCode = pfCode;
-        this.year = year;
+    public TradeData(char typeCode,
+                     char freqCode,
+
+                     int refPeriodId,
+                     short refYear,
+                     short refMonth,
+                     short period,
+
+                     String flowCode,
+                     String flowDesc,
+
+                     int reporterCode,
+                     String reporterDesc,
+                     String reporterIso,
+
+                     int partnerCode,
+                     String partnerDesc,
+                     String partnerIso,
+
+                     int partner2Code,
+                     String partner2Desc,
+                     String partner2Iso,
+
+                     String classificationCode,
+                     String classificationSearchCode,
+                     boolean isOriginalClassification,
+
+                     String commodityCode,
+                     String commodityDesc,
+
+                     int aggregationLevel,
+                     boolean isLeaf,
+
+                     String customsCode,
+                     String customsDesc,
+
+                     int modeOfSupplyCode,
+
+                     int modeOfTransportCode,
+                     String modeOfTransportDesc,
+
+                     int quantityUnitCode,
+                     String quantityUnitAbbreviation,
+                     int quantity,
+                     boolean isQuantityEstimated,
+
+                     int alternativeQuantityUnitCode,
+                     String alternativeQuantityUnitAbbreviation,
+                     int alternativeQuantity,
+                     boolean alternativeIsQuantityEstimated,
+
+                     int netWeight,
+                     boolean isNetWeightEstimated,
+
+                     int grossWeight,
+                     boolean isGrossWeightEstimated,
+
+                     int costInsuranceFreightValue,
+                     int freeOnBoardValue,
+                     long primaryValue,
+
+                     int legacyEstimationFlag,
+                     boolean isReported,
+                     boolean isAggregated) {
+        this.typeCode = typeCode;
+        this.freqCode = freqCode;
+
+        this.refPeriodId = refPeriodId;
+        this.refYear = refYear;
+        this.refMonth = refMonth;
         this.period = period;
-        this.periodDesc = periodDesc;
-        this.aggrLevel = aggrLevel;
-        this.isLeaf = isLeaf;
-        this.tradeFlowCode = tradeFlowCode;
-        this.tradeFlowDesc = tradeFlowDesc;
+
+        this.flowCode = flowCode;
+        this.flowDesc = flowDesc;
+
         this.reporterCode = reporterCode;
         this.reporterDesc = reporterDesc;
-        this.rt3iso = rt3iso;
+        this.reporterIso = reporterIso;
+
         this.partnerCode = partnerCode;
         this.partnerDesc = partnerDesc;
-        this.pt3iso = pt3iso;
-        this.partnerCode2 = partnerCode2;
-        this.partnerDesc2 = partnerDesc2;
-        this.pt3iso2 = pt3iso2;
+        this.partnerIso = partnerIso;
+
+        this.partner2Code = partner2Code;
+        this.partner2Desc = partner2Desc;
+        this.partner2Iso = partner2Iso;
+
+        this.classificationCode = classificationCode;
+        this.classificationSearchCode = classificationSearchCode;
+        this.isOriginalClassification = isOriginalClassification;
+
         this.commodityCode = commodityCode;
         this.commodityDesc = commodityDesc;
-        this.qtCode = qtCode;
-        this.qtDesc = qtDesc;
-        this.qtAltCode = qtAltCode;
-        this.qtAltDesc = qtAltDesc;
-        this.tradeQuantity = tradeQuantity;
-        this.altQuantity = altQuantity;
-        this.tradeValue = tradeValue;
-        this.cifValue = cifValue;
-        this.fobValue = fobValue;
-        this.estCode = estCode;
+
+        this.aggregationLevel = aggregationLevel;
+        this.isLeaf = isLeaf;
+
+        this.customsCode = customsCode;
+        this.customsDesc = customsDesc;
+
+        this.modeOfSupplyCode = modeOfSupplyCode;
+
+        this.modeOfTransportCode = modeOfTransportCode;
+        this.modeOfTransportDesc = modeOfTransportDesc;
+
+        this.quantityUnitCode = quantityUnitCode;
+        this.quantityUnitAbbreviation = quantityUnitAbbreviation;
+        this.quantity = quantity;
+        this.isQuantityEstimated = isQuantityEstimated;
+
+        this.alternativeQuantityUnitCode = alternativeQuantityUnitCode;
+        this.alternativeQuantityUnitAbbreviation = alternativeQuantityUnitAbbreviation;
+        this.alternativeQuantity = alternativeQuantity;
+        this.alternativeIsQuantityEstimated = alternativeIsQuantityEstimated;
+
+        this.netWeight = netWeight;
+        this.isNetWeightEstimated = isNetWeightEstimated;
+
+        this.grossWeight = grossWeight;
+        this.isGrossWeightEstimated = isGrossWeightEstimated;
+
+        this.costInsuranceFreightValue = costInsuranceFreightValue;
+        this.freeOnBoardValue = freeOnBoardValue;
+        this.primaryValue = primaryValue;
+
+        this.legacyEstimationFlag = legacyEstimationFlag;
+        this.isReported = isReported;
+        this.isAggregated = isAggregated;
+
     }
 
-    public String getPfCode() {
-        return pfCode;
+    public char getTypeCode() {
+        return typeCode;
     }
 
-    public void setPfCode(String pfCode) {
-        this.pfCode = pfCode;
+    public void setTypeCode(char typeCode) {
+        this.typeCode = typeCode;
     }
 
-    public int getYear() {
-        return year;
+    public char getFreqCode() {
+        return freqCode;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setFreqCode(char freqCode) {
+        this.freqCode = freqCode;
     }
 
-    public int getPeriod() {
+    public int getRefPeriodId() {
+        return refPeriodId;
+    }
+
+    public void setRefPeriodId(int refPeriodId) {
+        this.refPeriodId = refPeriodId;
+    }
+
+    public short getRefYear() {
+        return refYear;
+    }
+
+    public void setRefYear(short refYear) {
+        this.refYear = refYear;
+    }
+
+    public short getRefMonth() {
+        return refMonth;
+    }
+
+    public void setRefMonth(short refMonth) {
+        this.refMonth = refMonth;
+    }
+
+    public short getPeriod() {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(short period) {
         this.period = period;
     }
 
-    public int getPeriodDesc() {
-        return periodDesc;
+    public String getFlowCode() {
+        return flowCode;
     }
 
-    public void setPeriodDesc(int periodDesc) {
-        this.periodDesc = periodDesc;
+    public void setFlowCode(String flowCode) {
+        this.flowCode = flowCode;
     }
 
-    public int getAggrLevel() {
-        return aggrLevel;
+    public String getFlowDesc() {
+        return flowDesc;
     }
 
-    public void setAggrLevel(int aggrLevel) {
-        this.aggrLevel = aggrLevel;
-    }
-
-    public int getIsLeaf() {
-        return isLeaf;
-    }
-
-    public void setIsLeaf(int isLeaf) {
-        this.isLeaf = isLeaf;
-    }
-
-    public int getTradeFlowCode() {
-        return tradeFlowCode;
-    }
-
-    public void setTradeFlowCode(int tradeFlowCode) {
-        this.tradeFlowCode = tradeFlowCode;
-    }
-
-    public String getTradeFlowDesc() {
-        return tradeFlowDesc;
-    }
-
-    public void setTradeFlowDesc(String tradeFlowDesc) {
-        this.tradeFlowDesc = tradeFlowDesc;
+    public void setFlowDesc(String flowDesc) {
+        this.flowDesc = flowDesc;
     }
 
     public int getReporterCode() {
         return reporterCode;
     }
 
-    public void setReporterCode(int rtCode) {
-        this.reporterCode = rtCode;
+    public void setReporterCode(int reporterCode) {
+        this.reporterCode = reporterCode;
     }
 
     public String getReporterDesc() {
         return reporterDesc;
     }
 
-    public void setReporterDesc(String rtTitle) {
-        this.reporterDesc = rtTitle;
+    public void setReporterDesc(String reporterDesc) {
+        this.reporterDesc = reporterDesc;
     }
 
-    public String getRt3iso() {
-        return rt3iso;
+    public String getReporterIso() {
+        return reporterIso;
     }
 
-    public void setRt3iso(String rt3iso) {
-        this.rt3iso = rt3iso;
+    public void setReporterIso(String reporterIso) {
+        this.reporterIso = reporterIso;
     }
 
     public int getPartnerCode() {
         return partnerCode;
     }
 
-    public void setPartnerCode(int ptCode) {
-        this.partnerCode = ptCode;
+    public void setPartnerCode(int partnerCode) {
+        this.partnerCode = partnerCode;
     }
 
     public String getPartnerDesc() {
         return partnerDesc;
     }
 
-    public void setPartnerDesc(String ptTitle) {
-        this.partnerDesc = ptTitle;
+    public void setPartnerDesc(String partnerDesc) {
+        this.partnerDesc = partnerDesc;
     }
 
-    public String getPt3iso() {
-        return pt3iso;
+    public String getPartnerIso() {
+        return partnerIso;
     }
 
-    public void setPt3iso(String pt3iso) {
-        this.pt3iso = pt3iso;
+    public void setPartnerIso(String partnerIso) {
+        this.partnerIso = partnerIso;
     }
 
-    public int getPartnerCode2() {
-        return partnerCode2;
+    public int getPartner2Code() {
+        return partner2Code;
     }
 
-    public void setPartnerCode2(int ptCode2) {
-        this.partnerCode2 = ptCode2;
+    public void setPartner2Code(int partner2Code) {
+        this.partner2Code = partner2Code;
     }
 
-    public String getPartnerDesc2() {
-        return partnerDesc2;
+    public String getPartner2Desc() {
+        return partner2Desc;
     }
 
-    public void setPartnerDesc2(String ptTitle2) {
-        this.partnerDesc2 = ptTitle2;
+    public void setPartner2Desc(String partner2Desc) {
+        this.partner2Desc = partner2Desc;
     }
 
-    public String getPt3iso2() {
-        return pt3iso2;
+    public String getPartner2Iso() {
+        return partner2Iso;
     }
 
-    public void setPt3iso2(String pt3iso2) {
-        this.pt3iso2 = pt3iso2;
+    public void setPartner2Iso(String partner2Iso) {
+        this.partner2Iso = partner2Iso;
+    }
+
+    public String getClassificationCode() {
+        return classificationCode;
+    }
+
+    public void setClassificationCode(String classificationCode) {
+        this.classificationCode = classificationCode;
+    }
+
+    public String getClassificationSearchCode() {
+        return classificationSearchCode;
+    }
+
+    public void setClassificationSearchCode(String classificationSearchCode) {
+        this.classificationSearchCode = classificationSearchCode;
+    }
+
+    public boolean isOriginalClassification() {
+        return isOriginalClassification;
+    }
+
+    public void setOriginalClassification(boolean originalClassification) {
+        isOriginalClassification = originalClassification;
     }
 
     public String getCommodityCode() {
@@ -256,101 +424,221 @@ public class TradeData {
         this.commodityDesc = commodityDesc;
     }
 
-    public int getQtCode() {
-        return qtCode;
+    public int getAggregationLevel() {
+        return aggregationLevel;
     }
 
-    public void setQtCode(int qtCode) {
-        this.qtCode = qtCode;
+    public void setAggregationLevel(int aggregationLevel) {
+        this.aggregationLevel = aggregationLevel;
     }
 
-    public String getQtDesc() {
-        return qtDesc;
+    public boolean getIsLeaf() {
+        return isLeaf;
     }
 
-    public void setQtDesc(String qtDesc) {
-        this.qtDesc = qtDesc;
+    public void setIsLeaf(boolean isLeaf) {
+        this.isLeaf = isLeaf;
     }
 
-    public int getQtAltCode() {
-        return qtAltCode;
+    public String getCustomsCode() {
+        return customsCode;
     }
 
-    public void setQtAltCode(int qtAltCode) {
-        this.qtAltCode = qtAltCode;
+    public void setCustomsCode(String customsCode) {
+        this.customsCode = customsCode;
     }
 
-    public String getQtAltDesc() {
-        return qtAltDesc;
+    public String getCustomsDesc() {
+        return customsDesc;
     }
 
-    public void setQtAltDesc(String qtAltDesc) {
-        this.qtAltDesc = qtAltDesc;
+    public void setCustomsDesc(String customsDesc) {
+        this.customsDesc = customsDesc;
     }
 
-    public int getTradeQuantity() {
-        return tradeQuantity;
+    public int getModeOfSupplyCode() {
+        return modeOfSupplyCode;
     }
 
-    public void setTradeQuantity(int tradeQuantity) {
-        this.tradeQuantity = tradeQuantity;
+    public void setModeOfSupplyCode(int modeOfSupplyCode) {
+        this.modeOfSupplyCode = modeOfSupplyCode;
     }
 
-    public int getAltQuantity() {
-        return altQuantity;
+    public int getModeOfTransportCode() {
+        return modeOfTransportCode;
     }
 
-    public void setAltQuantity(int altQuantity) {
-        this.altQuantity = altQuantity;
+    public void setModeOfTransportCode(int modeOfTransportCode) {
+        this.modeOfTransportCode = modeOfTransportCode;
     }
 
-    public long getTradeValue() {
-        return tradeValue;
+    public String getModeOfTransportDesc() {
+        return modeOfTransportDesc;
     }
 
-    public void setTradeValue(long tradeValue) {
-        this.tradeValue = tradeValue;
+    public void setModeOfTransportDesc(String modeOfTransportDesc) {
+        this.modeOfTransportDesc = modeOfTransportDesc;
     }
 
-    public int getCifValue() {
-        return cifValue;
+    public int getQuantityUnitCode() {
+        return quantityUnitCode;
     }
 
-    public void setCifValue(int cifValue) {
-        this.cifValue = cifValue;
+    public void setQuantityUnitCode(int quantityUnitCode) {
+        this.quantityUnitCode = quantityUnitCode;
     }
 
-    public int getFobValue() {
-        return fobValue;
+    public String getQuantityUnitAbbreviation() {
+        return quantityUnitAbbreviation;
     }
 
-    public void setFobValue(int fobValue) {
-        this.fobValue = fobValue;
+    public void setQuantityUnitAbbreviation(String quantityUnitAbbrevation) {
+        this.quantityUnitAbbreviation = quantityUnitAbbrevation;
     }
 
-    public int getEstCode() {
-        return estCode;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setEstCode(int estCode) {
-        this.estCode = estCode;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isQuantityEstimated() {
+        return isQuantityEstimated;
+    }
+
+    public void setQuantityEstimated(boolean quantityEstimated) {
+        isQuantityEstimated = quantityEstimated;
+    }
+
+    public int getAlternativeQuantityUnitCode() {
+        return alternativeQuantityUnitCode;
+    }
+
+    public void setAlternativeQuantityUnitCode(int alternativeQuantityUnitCode) {
+        this.alternativeQuantityUnitCode = alternativeQuantityUnitCode;
+    }
+
+    public String getAlternativeQuantityUnitAbbreviation() {
+        return alternativeQuantityUnitAbbreviation;
+    }
+
+    public void setAlternativeQuantityUnitAbbreviation(String alternativeQuantityUnitAbbreviation) {
+        this.alternativeQuantityUnitAbbreviation = alternativeQuantityUnitAbbreviation;
+    }
+
+    public int getAlternativeQuantity() {
+        return alternativeQuantity;
+    }
+
+    public void setAlternativeQuantity(int alternativeQuantity) {
+        this.alternativeQuantity = alternativeQuantity;
+    }
+
+    public boolean isAlternativeIsQuantityEstimated() {
+        return alternativeIsQuantityEstimated;
+    }
+
+    public void setAlternativeIsQuantityEstimated(boolean alternativeIsQuantityEstimated) {
+        this.alternativeIsQuantityEstimated = alternativeIsQuantityEstimated;
+    }
+
+    public int getNetWeight() {
+        return netWeight;
+    }
+
+    public void setNetWeight(int netWeight) {
+        this.netWeight = netWeight;
+    }
+
+    public boolean isNetWeightEstimated() {
+        return isNetWeightEstimated;
+    }
+
+    public void setNetWeightEstimated(boolean netWeightEstimated) {
+        isNetWeightEstimated = netWeightEstimated;
+    }
+
+    public int getGrossWeight() {
+        return grossWeight;
+    }
+
+    public void setGrossWeight(int grossWeight) {
+        this.grossWeight = grossWeight;
+    }
+
+    public boolean isGrossWeightEstimated() {
+        return isGrossWeightEstimated;
+    }
+
+    public void setGrossWeightEstimated(boolean grossWeightEstimated) {
+        isGrossWeightEstimated = grossWeightEstimated;
+    }
+
+    public int getCostInsuranceFreightValue() {
+        return costInsuranceFreightValue;
+    }
+
+    public void setCostInsuranceFreightValue(int costInsuranceFreightValue) {
+        this.costInsuranceFreightValue = costInsuranceFreightValue;
+    }
+
+    public int getFreeOnBoardValue() {
+        return freeOnBoardValue;
+    }
+
+    public void setFreeOnBoardValue(int freeOnBoardValue) {
+        this.freeOnBoardValue = freeOnBoardValue;
+    }
+
+    public long getPrimaryValue() {
+        return primaryValue;
+    }
+
+    public void setPrimaryValue(long primaryValue) {
+        this.primaryValue = primaryValue;
+    }
+
+    public int getLegacyEstimationFlag() {
+        return legacyEstimationFlag;
+    }
+
+    public void setLegacyEstimationFlag(int legacyEstimationFlag) {
+        this.legacyEstimationFlag = legacyEstimationFlag;
+    }
+
+    public boolean isReported() {
+        return isReported;
+    }
+
+    public void setReported(boolean reported) {
+        isReported = reported;
+    }
+
+    public boolean isAggregated() {
+        return isAggregated;
+    }
+
+    public void setAggregated(boolean aggregated) {
+        isAggregated = aggregated;
     }
 
     @Override
     public String toString() {
-        return "[" + period + ", " + tradeFlowDesc + ", " + reporterDesc + ", " + partnerDesc + ", " + commodityCode +
-                ", " + commodityDesc + ", " + tradeValue + "]";
+        return "[" + refPeriodId + ", " + flowDesc + ", " + reporterDesc + ", " + partnerDesc + ", " + commodityCode +
+                ", " + commodityDesc + ", " + primaryValue + "]";
     }
 
     // only data also present in database columns is compared for hash
     @Override
     public int hashCode() {
-        return period + (tradeFlowDesc != null ? tradeFlowDesc.hashCode() : 0) + reporterCode + partnerCode +
-                (commodityCode != null ? commodityCode.hashCode() : 0) + (int) tradeValue;
+        return refPeriodId + (flowDesc != null ? flowDesc.hashCode() : 0) + reporterCode + partnerCode +
+                (commodityCode != null ? commodityCode.hashCode() : 0) + (int) primaryValue;
     }
 
     public String hashCodeString() {
-        return "[" + period + ", " + tradeFlowDesc + ", " + reporterCode + ", " + partnerCode + ", " + commodityCode +
-                ", " + tradeValue + "]";
+        return "[" + refPeriodId + ", " + flowDesc + ", " + reporterCode + ", " + partnerCode + ", " + commodityCode +
+                ", " + primaryValue + "]";
     }
 }

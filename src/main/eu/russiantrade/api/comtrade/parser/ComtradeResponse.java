@@ -3,49 +3,51 @@ package eu.russiantrade.api.comtrade.parser;
 import java.util.List;
 
 public class ComtradeResponse {
-    private Validation validation;
+    private String elapsedTime;
+    private int count;
     private List<TradeData> tradeData;
+    private String error;
 
-    public ComtradeResponse(Validation validation, List<TradeData> tradeData) {
-        this.validation = validation;
+    public ComtradeResponse(String elapsedTime, int count, List<TradeData> tradeData, String error) {
+        this.elapsedTime = elapsedTime;
+        this.count = count;
         this.tradeData = tradeData;
+        this.error = error;
     }
 
-    public Validation getValidation() {
-        return validation;
+    public String getElapsedTime() {
+        return elapsedTime;
     }
 
-    public void setValidation(Validation validation) {
-        this.validation = validation;
+    public int getCount() {
+        return count;
     }
 
     public List<TradeData> getDatasets() {
         return tradeData;
     }
 
-    public void setDatasets(List<TradeData> tradeData) {
-        this.tradeData = tradeData;
+    public String getError() {
+        return error;
     }
 
     public boolean isValid() {
-        if(validation != null) {
-            return validation.isValid();
-        }
-        return false;
+        return error == null;
     }
 
     @Override
     public String toString() {
-        if(validation.isValid()) {
-            return "[" + validation.toString() + ", " + tradeData.toString() + "]";
+        if(this.count > 0) {
+            return "[" + elapsedTime + ", " + count + ", " + tradeData.toString() + ", " + error + "]";
         }
-        return "[" + validation.toString() + ", [null]]";
+        return "[" + elapsedTime + ", " + count + ", " + ", [null]" + error + "] ";
     }
 
     @Override
     public int hashCode() {
-        return (validation != null ? validation.hashCode() * 7 : 0) +
-                (tradeData != null ? tradeData.hashCode() * 13 : 0);
+        return (count * 7) +
+                (tradeData != null ? tradeData.hashCode() * 13 : 0) +
+                (error != null ? error.hashCode() * 37 : 0);
     }
 
     @Override
