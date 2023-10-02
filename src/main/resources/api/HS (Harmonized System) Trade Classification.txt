@@ -1,0 +1,129 @@
+Chapter 1: Live Animals and Animal Products
+    Heading 01: Live Animals
+    Heading 02: Meat and Edible Meat Offal
+    Heading 03: Fish and Crustaceans, Molluscs, and Other Aquatic Invertebrates
+    Heading 04: Dairy Produce; Birds' Eggs; Natural Honey; Edible Products of Animal Origin, Not Elsewhere Specified or Included
+    Heading 05: Products of Animal Origin, Not Elsewhere Specified or Included
+
+Chapter 2: Vegetable Products
+    Heading 06: Live Trees and Other Plants; Bulbs, Roots, and the Like; Cut Flowers and Ornamental Foliage
+    Heading 07: Edible Vegetables and Certain Roots and Tubers
+    Heading 08: Edible Fruits and Nuts; Peel of Citrus Fruit or Melons
+    Heading 09: Coffee, Tea, Maté, and Spices
+    Heading 10: Cereals
+    Heading 11: Products of the Milling Industry; Malt; Starches; Inulin; Wheat Gluten
+    Heading 12: Oil Seeds and Oleaginous Fruits; Miscellaneous Grains, Seeds, and Fruit; Industrial or Medicinal Plants; Straw and Fodder
+
+Chapter 3: Animal or Vegetable Fats and Oils
+    Heading 15: Animal or Vegetable Fats and Oils and Their Cleavage Products; Prepared Edible Fats; Animal or Vegetable Waxes
+
+Chapter 4: Prepared Foodstuffs; Beverages, Spirits, and Vinegar; Tobacco and Manufactured Tobacco Substitutes
+
+    Heading 16: Preparations of Meat, of Fish, or of Crustaceans, Molluscs, or Other Aquatic Invertebrates
+    Heading 17: Sugars and Sugar Confectionery
+    Heading 18: Cocoa and Cocoa Preparations
+    Heading 19: Preparations of Cereals, Flour, Starch, or Milk; Pastrycooks' Products
+    Heading 20: Preparations of Vegetables, Fruit, Nuts, or Other Parts of Plants
+    Heading 21: Miscellaneous Edible Preparations
+    Heading 22: Beverages, Spirits, and Vinegar
+    Heading 23: Residues and Waste from the Food Industries; Prepared Animal Feed
+    Heading 24: Tobacco and Manufactured Tobacco Substitutes
+
+Chapter 5: Mineral Products
+    Heading 25: Salt; Sulfur; Earths and Stone; Plastering Materials, Lime, and Cement
+    Heading 26: Ores, Slag, and Ash
+    Heading 27: Mineral Fuels, Mineral Oils, and Products of Their Distillation; Bituminous Substances; Mineral Waxes
+
+Chapter 6: Products of the Chemical or Allied Industries
+    Heading 28: Inorganic Chemicals; Organic or Inorganic Compounds of Precious Metals, of Rare-Earth Metals, or of Radioactive Elements
+    Heading 29: Organic Chemicals
+    Heading 30: Pharmaceutical Products
+    Heading 31: Fertilizers
+    Heading 32: Tanning or Dyeing Extracts; Tannins and Their Derivatives; Dyes, Pigments, and Other Coloring Matter; Paints, Varnishes, Putty, Inks, and Similar Preparations
+    Heading 33: Essential Oils and Resinoids; Perfumery, Cosmetic, or Toilet Preparations
+    Heading 34: Soap, Organic Surface-Active Agents, Washing Preparations, Lubricating Preparations, Artificial Waxes, Prepared Waxes, Polishing or Scouring Preparations, Candles, and Similar Articles, Modeling Pastes, "Dental Waxes," and Dental Preparations with a Basis of Plaster
+    Heading 35: Albuminoidal Substances; Modified Starches; Glues; Enzymes
+    Heading 36: Explosives; Pyrotechnic Products; Matches; Pyrophoric Alloys; Certain Combustible Preparations
+
+Chapter 7: Plastics and Articles Thereof; Rubber and Articles Thereof
+    Heading 39: Plastics and Articles Thereof
+    Heading 40: Rubber and Articles Thereof
+
+Chapter 8: Raw Hides and Skins, Leather, Fur Skins, and Articles thereof; Saddlery and Harness; Travel Goods, Handbags, and Similar Containers; Articles of Animal Gut (Other than Silkworm Gut)
+    Heading 41: Raw Hides and Skins (Other than Furskins) and Leather
+    Heading 42: Articles of Leather; Saddlery and Harness; Travel Goods, Handbags, and Similar Containers; Articles of Animal Gut (Other than Silkworm Gut)
+
+Chapter 9: Wood and Articles of Wood; Wood Charcoal; Cork and Articles of Cork; Manufactures of Straw, of Esparto or of Other Plaiting Materials; Basketware and Wickerwork
+    Heading 44: Wood and Articles of Wood; Wood Charcoal
+    Heading 45: Cork and Articles of Cork
+    Heading 46: Manufactures of Straw, of Esparto, or of Other Plaiting Materials; Basketware and Wickerwork
+
+Chapter 10: Pulp of Wood or of Other Fibrous Cellulosic Material; Recovered (Waste and Scrap) Paper or Paperboard
+    Heading 47: Pulp of Wood or of Other Fibrous Cellulosic Material; Recovered (Waste and Scrap) Paper or Paperboard
+
+Chapter 11: Textiles and Textile Articles
+    Heading 50: Silk
+    Heading 51: Wool, Fine or Coarse Animal Hair; Horsehair Yarn and Woven Fabric
+    Heading 52: Cotton
+    Heading 53: Other Vegetable Textile Fibers; Paper Yarn and Woven Fabrics of Paper Yarn
+    Heading 54: Man-Made Filaments; Strip and the Like of Man-Made Textile Materials
+    Heading 55: Man-Made Staple Fibers
+    Heading 56: Wadding, Felt, Nonwovens, Yarns, Twine, Cordage, Ropes, Cables, and Plaited Bands; Articles of Yarn, Strip, or the Like of Heading 5404 or 5405; Twine, Cordage, Ropes, or Cables, Not Elsewhere Specified or Included
+
+Chapter 12: Footwear, Headgear, Umbrellas, Sun Umbrellas, Walking-Sticks, Seat-Sticks, Whips, Riding-Crops, and Parts Thereof; Prepared Feathers and Articles Made Therewith; Artificial Flowers; Articles of Human Hair
+    Heading 61: Articles of Apparel and Clothing Accessories, Knitted or Crocheted
+    Heading 62: Articles of Apparel and Clothing Accessories, Not Knitted or Crocheted
+    Heading 63: Other Made-Up Textile Articles; Sets; Worn Clothing and Worn Textile Articles; Rags
+    Heading 64: Footwear, Gaiters, and the Like; Parts of Such Articles
+    Heading 65: Headgear and Parts Thereof
+    Heading 66: Umbrellas, Sun Umbrellas, Walking-Sticks, Seat-Sticks, Whips, Riding-Crops, and Parts thereof; Prepared Feathers and Articles Made Therewith; Artificial Flowers; Articles of Human Hair
+
+Chapter 13: Articles of Stone, Plaster, Cement, Asbestos, Mica, or Similar Materials; Ceramic Products; Glass and Glassware
+    Heading 68: Articles of Stone, Plaster, Cement, Asbestos, Mica, or Similar Materials
+    Heading 69: Ceramic Products
+    Heading 70: Glass and Glassware
+
+Chapter 14: Natural or Cultured Pearls, Precious or Semi-Precious Stones, Precious Metals, Metals Clad with Precious Metal, and Articles Thereof; Imitation Jewelry; Coin
+    Heading 71: Natural or Cultured Pearls, Precious or Semi-Precious Stones, Precious Metals, Metals Clad with Precious Metal, and Articles Thereof; Imitation Jewelry; Coin
+
+Chapter 15: Base Metals and Articles of Base Metal
+    Heading 72: Iron and Steel
+    Heading 73: Articles of Iron or Steel
+    Heading 74: Copper and Articles Thereof
+    Heading 75: Nickel and Articles Thereof
+    Heading 76: Aluminum and Articles Thereof
+    Heading 77: (Reserved for Possible Future Use)
+    Heading 78: Lead and Articles Thereof
+    Heading 79: Zinc and Articles Thereof
+    Heading 80: Tin and Articles Thereof
+    Heading 81: Other Base Metals; Cermets; Articles Thereof
+    Heading 82: Tools, Implements, Cutlery, Spoons and Forks, of Base Metal; Parts Thereof of Base Metal
+    Heading 83: Miscellaneous Articles of Base Metal
+
+Chapter 16: Machinery and Mechanical Appliances; Electrical Equipment; Parts Thereof; Sound Recorders and Reproducers, Television Image and Sound Recorders and Reproducers, and Parts and Accessories of Such Articles
+    Heading 84: Nuclear Reactors, Boilers, Machinery, and Mechanical Appliances; Parts Thereof
+    Heading 85: Electrical Machinery and Equipment and Parts Thereof; Sound Recorders and Reproducers, Television Image and Sound Recorders and Reproducers, and Parts and Accessories of Such Articles
+
+Chapter 17: Vehicles, Aircraft, Vessels, and Associated Transport Equipment
+    Heading 86: Railway or Tramway Locomotives, Rolling-Stock, and Parts Thereof; Railway or Tramway Track Fixtures and Fittings and Parts Thereof; Mechanical Traffic Signaling Equipment of All Kinds
+    Heading 87: Vehicles Other than Railway or Tramway Rolling-Stock, and Parts and Accessories Thereof
+    Heading 88: Aircraft, Spacecraft, and Parts Thereof
+    Heading 89: Ships, Boats, and Floating Structures
+
+Chapter 18: Optical, Photographic, Cinematographic, Measuring, Checking, Precision, Medical or Surgical Instruments and Apparatus; Clocks and Watches; Musical Instruments; Parts and Accessories Thereof
+    Heading 90: Optical, Photographic, Cinematographic, Measuring, Checking, Precision, Medical or Surgical Instruments and Apparatus; Clocks and Watches; Musical Instruments; Parts and Accessories Thereof
+
+Chapter 19: Arms and Ammunition; Parts and Accessories Thereof
+    Heading 93: Arms and Ammunition; Parts and Accessories Thereof
+
+Chapter 20: Miscellaneous Manufactured Articles
+    Heading 94: Furniture; Bedding, Mattresses, Mattress Supports, Cushions, and Similar Stuffed Furnishings; Lamps and Lighting Fittings, Not Elsewhere Specified or Included; Illuminated Signs, Illuminated Name-Plates, and the Like; Prefabricated Buildings
+    Heading 95: Toys, Games, and Sports Equipment; Parts and Accessories Thereof
+    Heading 96: Miscellaneous Manufactured Articles
+
+Chapter 21: Works of Art, Collectors' Pieces, and Antiques
+    Heading 97: Works of Art, Collectors' Pieces, and Antiques
+
+Chapter 22: Special Provisions
+    Heading 98: Special Classification Provisions
+    Heading 99: Special Classification Provisions

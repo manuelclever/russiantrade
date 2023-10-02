@@ -138,8 +138,8 @@ public class DataGrabber {
 
         ComtradeAPIParametersRequest request = ComtradeAPIParametersRequest.allCommodities(
                 frequency,
-                country.getCountryID(),
                 period,
+                country.getCountryID(),
                 DataDesignations.RUSSIA,
                 null,
                 null);

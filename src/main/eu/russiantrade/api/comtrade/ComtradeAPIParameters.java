@@ -8,6 +8,7 @@ public abstract class ComtradeAPIParameters {
     private static final String REPORTER = "reporterCode=";
     private static final String PERIOD = "period="; // Years or Months, depends on chosen frequency
     private static final String PARTNER = "partnerCode=";
+    private static final String PARTNER2 = "partner2Code=";
     private static final String COMMODITY = "cmdCode=";
     private static final String TRADE_FLOW = "flowCode="; // -1 for all, Imports (M), Exports (X)
     private static final String CUSTOMS = "customsCode="; // -1 for all
@@ -20,6 +21,7 @@ public abstract class ComtradeAPIParameters {
     private String reporter;
     private String period;
     private String partner;
+    private String partner2;
     private String commodity;
     private String tradeFlow;
     private String customs;
@@ -34,10 +36,11 @@ public abstract class ComtradeAPIParameters {
      * Last updated: 2023/09
      * @param typeOfTrade C - Commodities, S - Services (default C)
      * @param frequency A - Annual, M - Monthly (default A)
-     * @param classification SITC S4 is used (S4)
-     * @param reporter Partner code (Possible values are M49 code of the countries, 0 for All)
+     * @param classification Harmonized System is used (HS)
+     * @param reporter Code of country reporting the data (Possible values are M49 code of the countries, 0 for All)
      * @param period now - most recent (year or month), YYYY - if Annual or Monthly, YYYYMM - if Monthly (default now)
      * @param partner Partner code (Possible values are M49 code of the countries, 0 for All)
+     * @param partner2 Partner2 code (Possible values are M49 code of the countries, 0 for All)
      * @param commodity Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,))
      * @param tradeFlow -1 - All, M - Import, X - Export
      * @param customs -1 All
@@ -52,6 +55,7 @@ public abstract class ComtradeAPIParameters {
                                  short reporter,
                                  long period,
                                  short partner,
+                                 short partner2,
                                  String[] commodity,
                                  String[] tradeFlow,
                                  String customs,
@@ -64,6 +68,7 @@ public abstract class ComtradeAPIParameters {
         setReporter(reporter);
         setPeriod(period);
         setPartner(partner);
+        setPartner2(partner2);
         setCommodity(commodity);
         setTradeFlow(tradeFlow);
         setCustoms(customs);
@@ -76,6 +81,7 @@ public abstract class ComtradeAPIParameters {
                                  short reporter,
                                  long period,
                                  short partner,
+                                 short partner2,
                                  String[] commodity,
                                  String[] tradeFlow,
                                  Boolean includeDesc,
@@ -84,6 +90,7 @@ public abstract class ComtradeAPIParameters {
         setReporter(reporter);
         setPeriod(period);
         setPartner(partner);
+        setPartner2(partner2);
         setCommodity(commodity);
         setTradeFlow(tradeFlow);
         setIncludeDesc(includeDesc);
@@ -120,6 +127,10 @@ public abstract class ComtradeAPIParameters {
 
     public void setPartner(short partner) {
         this.partner = PARTNER + partner;
+    }
+
+    public void setPartner2(short partner) {
+        this.partner2 = PARTNER2 + partner;
     }
 
     public void setCommodity(String[] commodityCodes) {
@@ -208,6 +219,7 @@ public abstract class ComtradeAPIParameters {
             add(reporter);
             add(period);
             add(partner);
+            add(partner2);
             add(commodity);
             add(tradeFlow);
             add(customs);

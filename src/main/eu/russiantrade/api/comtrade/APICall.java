@@ -6,23 +6,7 @@ import kong.unirest.Unirest;
 
 public class APICall {
     private static final String URL_BASE = "https://comtradeapi.un.org/data/v1/get";
-    private static final String URL_AVAILABILITY = "http://comtrade.un.org/api//refs/da/view?";
     private static final String URL_REQUEST = "http://comtrade.un.org/api/get?";
-
-    //New-API: https://comtradeapi.un.org/data/v1/get/{typeCode}/{freqCode}/{clCode}
-    // [?reporterCode]
-    // [&period]
-    // [&partnerCode]
-    // [&partner2Code]
-    // [&cmdCode]
-    // [&flowCode]
-    // [&customsCode]
-    // [&motCode]
-    // [&aggregateBy]
-    // [&breakdownMode]
-    // [&includeDesc]
-
-    // Beispiel: GET https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=8&period=2010&partnerCode=643&flowCode=-1&customsCode=-1&motCode=-1&aggregateBy=cmdCode&breakdownMode=classic&includeDesc=false
 
     ComtradeAPIParameters comtradeAPIParameters;
     private StringBuilder requestUrl;
@@ -34,7 +18,7 @@ public class APICall {
     public String call() {
         System.out.println(buildRequestUrl());
         HttpResponse<JsonNode> httpResponse = Unirest.get(buildRequestUrl())
-                .header("Ocp-Apim-Subscription-Key", "1468af1849604304a6328b7a70d7c4f5")
+                .header("Ocp-Apim-Subscription-Key", "0ad25fcd98ee4b6e9190d08bab604279")
                 .asJson();
         try {
             return httpResponse.getBody().toString();
